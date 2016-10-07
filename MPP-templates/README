@@ -1,0 +1,11 @@
+A few useful files for the MPI course.
+
+The file "cirrusmpi.pbs" should be used for submitting MPI jobs to the
+backend of Cirrus using the Portable Batch System PBS. Instructions
+are included as comments in the file itself.
+
+The file "archermpi.pbs" should be used for submitting MPI jobs to the
+backend of ARCHER using the Portable Batch System PBS. Instructions
+are included as comments in the file itself.
+
+The Makefiles should be easier to use than compiling by hand.

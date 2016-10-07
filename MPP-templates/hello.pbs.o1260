@@ -1,0 +1,18 @@
+--------------------------------------------------------------------------------
+Running MPI program hello on 4 processes
+Started at Tue Sep 27 11:39:07 BST 2016
+--------------------------------------------------------------------------------
+MPT Warning: MPT has detected that NUMA balancing is ON while
+	MPI_XPMEM_ENABLED is ON. NUMA balancing is not currently supported
+	with XPMEM. We suggest either disabling NUMA balancing, or
+	running your application with MPI_XPMEM_ENABLED=disabled.
+ Hello World!
+ Hello World!
+ Hello World!
+ Hello World!
+
+real	0m0.093s
+user	0m0.004s
+sys	0m0.037s
+--------------------------------------------------------------------------------
+Finished at Tue Sep 27 11:39:07 BST 2016

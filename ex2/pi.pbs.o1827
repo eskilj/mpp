@@ -1,0 +1,15 @@
+--------------------------------------------------------------------------------
+Running MPI program pi on 4 processes
+Started at Tue Oct 4 12:19:12 BST 2016
+--------------------------------------------------------------------------------
+MPT Warning: MPT has detected that NUMA balancing is ON while
+	MPI_XPMEM_ENABLED is ON. NUMA balancing is not currently supported
+	with XPMEM. We suggest either disabling NUMA balancing, or
+	running your application with MPI_XPMEM_ENABLED=disabled.
+  0.160511410096660     
+
+real	0m0.245s
+user	0m0.016s
+sys	0m0.032s
+--------------------------------------------------------------------------------
+Finished at Tue Oct 4 12:19:12 BST 2016
