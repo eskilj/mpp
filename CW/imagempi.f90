@@ -19,7 +19,7 @@ program casestudy
  
   implicit none
 
-  integer, parameter :: M, N, MP, NP
+  integer :: M, N, MP, NP
 
   integer, parameter :: P = 4
 
@@ -55,16 +55,16 @@ program casestudy
 
   if (rank .eq. 0) then
 
-	call pgmsize(filename, M, N)
-	MP = MP
-	NP = N/P
+    call pgmsize(filename, M, N)
+    MP = M
+    NP = N/P
 
-	allocate(new(0:MP+1, 0:NP+1))
-	allocate(edge(0:MP+1, 0:NP+1))
-	allocate(old(0:MP+1, 0:NP+1))
+    allocate(new(0:MP+1, 0:NP+1))
+    allocate(edge(0:MP+1, 0:NP+1))
+    allocate(old(0:MP+1, 0:NP+1))
 
-	allocate(buf(MP, NP))
-	allocate(masterbuf(M, N))
+    allocate(buf(MP, NP))
+    allocate(masterbuf(M, N))
 
     write(*,*) 'Processing ', M, ' x ' , N, ' image on ', P, ' processes'
     write(*,*) 'Number of iterations = ', MAXITER
@@ -188,11 +188,11 @@ program casestudy
     write(*,*) 'Writing ', filename
     call pgmwrite(filename, masterbuf)
 
-	deallocate(new)
-	deallocate(old)
-	deallocate(edge)
-	deallocate(buf)
-	deallocate(masterbuf)
+    deallocate(new)
+    deallocate(old)
+    deallocate(edge)
+    deallocate(buf)
+    deallocate(masterbuf)
 
   end if
 
