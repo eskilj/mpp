@@ -19,7 +19,7 @@ program casestudy
  
   implicit none
 
-  integer, parameter :: M=192, N=128
+  integer, parameter :: M=512, N=384
 
   integer, parameter :: P = 4
 
@@ -63,7 +63,7 @@ program casestudy
     write(*,*) 'Processing ', M, ' x ' , N, ' image on ', P, ' processes'
     write(*,*) 'Number of iterations = ', MAXITER
 
-    filename = 'edgenew256x192.pgm'
+    filename = 'edgenew512x384.pgm'
 
     write(*,*)
     write(*,*) 'Reading ', filename
@@ -177,7 +177,7 @@ program casestudy
 
   if (rank .eq. 0) then
 
-    filename='imagenew256x192.pgm'
+    filename='imagenew512x384.pgm'
     write(*,*)
     write(*,*) 'Writing ', filename
     call pgmwrite(filename, masterbuf)
