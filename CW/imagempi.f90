@@ -55,6 +55,8 @@ program casestudy
 
   if (rank .eq. 0) then
 
+   filename = 'edgenew512x384.pgm'
+
     call pgmsize(filename, M, N)
     MP = M
     NP = N/P
@@ -68,8 +70,6 @@ program casestudy
 
     write(*,*) 'Processing ', M, ' x ' , N, ' image on ', P, ' processes'
     write(*,*) 'Number of iterations = ', MAXITER
-
-    filename = 'edgenew512x384.pgm'
 
     write(*,*)
     write(*,*) 'Reading ', filename
