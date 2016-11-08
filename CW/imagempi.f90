@@ -33,6 +33,8 @@ program casestudy
   real, dimension(MP,NP) :: buf
   real, dimension(M, N ) :: masterbuf
 
+  real :: val, boundaryval
+
   integer, parameter :: maxlen = 32
 
   character*(maxlen) :: filename
