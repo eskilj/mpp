@@ -63,7 +63,7 @@ program casestudy
     write(*,*) 'Processing ', M, ' x ' , N, ' image on ', P, ' processes'
     write(*,*) 'Number of iterations = ', MAXITER
 
-    filename = 'edge192x128.pgm'
+    filename = 'edgenew256x192.pgm'
 
     write(*,*)
     write(*,*) 'Reading ', filename
@@ -177,7 +177,7 @@ program casestudy
 
   if (rank .eq. 0) then
 
-    filename='image192x128.pgm'
+    filename='imagenew256x192.pgm'
     write(*,*)
     write(*,*) 'Writing ', filename
     call pgmwrite(filename, masterbuf)
