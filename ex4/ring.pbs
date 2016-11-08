@@ -29,7 +29,7 @@
 # Each node has 36 physical cores so if NPROC=144 then use select=288  #
 #----------------------------------------------------------------------#
 
-NPROC=7
+NPROC=8
 
 #------------------------------------------------------------------------#
 # You should not have to edit below here for simple MPI jobs             #
