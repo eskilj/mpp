@@ -92,6 +92,19 @@ program casestudy
     end do
   end do
 
+! Set fixed boundary conditions on the left and right sides
+
+  do j = 1, NP
+
+! compute sawtooth value
+
+    val = boundaryval(j, NP)
+
+    old(0,   j) = 255.0*val
+    old(MP+1,j) = 255.0*(1.0-val)
+
+  end do
+
   uprank = rank + 1
   if (uprank .ge. P) uprank = MPI_PROC_NULL
 
@@ -99,12 +112,21 @@ program casestudy
   if (dnrank .lt. 0) dnrank = MPI_PROC_NULL
 
   do iter = 1, MAXITER
-    
+
     if (mod(iter,PRINTFREQ) .eq. 0)  then
 
       if (rank .eq. 0) write(*,*) 'Iteration ', iter
 
     end if
+
+! Implement periodic boundary conditions on top and bottom sides
+
+    do i = 1, MP
+
+      old(i,  0) = old(i,NP)
+      old(i,NP+1) = old(i,1)
+
+    end do
 
     call mpi_sendrecv(old(1,NP), MP, MPI_REAL, uprank, 1, &
                       old(1,0),  MP, MPI_REAL, dnrank, 1, &
@@ -163,3 +185,17 @@ program casestudy
   call mpi_finalize(ierr)
 
 end program casestudy
+
+real function boundaryval(i, m)
+
+  implicit none
+
+  integer :: i, m
+  real :: val
+
+  val = 2.0*float(i-1)/float(m-1)
+  if (i .ge. m/2+1) val = 2.0-val
+
+  boundaryval = val
+
+end function boundaryval
