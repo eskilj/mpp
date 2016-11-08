@@ -19,19 +19,14 @@ program casestudy
  
   implicit none
 
-  integer, parameter :: M=512, N=384
+  integer, parameter :: M, N, MP, NP
 
   integer, parameter :: P = 4
 
   integer, parameter :: MAXITER   = 1500
   integer, parameter :: PRINTFREQ =  200
 
-  integer, parameter :: MP=M, NP=N/P
-
-  real, dimension(0:MP+1, 0:NP+1) :: new, old, edge
-
-  real, dimension(MP,NP) :: buf
-  real, dimension(M, N ) :: masterbuf
+  real, dimension(:,:), allocatable :: new, old, edge, buf, masterbuf
 
   real :: val, boundaryval
 
@@ -59,6 +54,17 @@ program casestudy
   end if
 
   if (rank .eq. 0) then
+
+	call pgmsize(filename, M, N)
+	MP = MP
+	NP = N/P
+
+	allocate(new(0:MP+1, 0:NP+1))
+	allocate(edge(0:MP+1, 0:NP+1))
+	allocate(old(0:MP+1, 0:NP+1))
+
+	allocate(buf(MP, NP))
+	allocate(masterbuf(M, N))
 
     write(*,*) 'Processing ', M, ' x ' , N, ' image on ', P, ' processes'
     write(*,*) 'Number of iterations = ', MAXITER
@@ -181,6 +187,12 @@ program casestudy
     write(*,*)
     write(*,*) 'Writing ', filename
     call pgmwrite(filename, masterbuf)
+
+	deallocate(new)
+	deallocate(old)
+	deallocate(edge)
+	deallocate(buf)
+	deallocate(masterbuf)
 
   end if
 
