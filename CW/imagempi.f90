@@ -40,7 +40,7 @@ program casestudy
 
   integer, dimension(MPI_STATUS_SIZE) :: status
 
-  filename = 'edgenew512x384.pgm'
+  filename = 'edgenew768x768.pgm'
 
   call pgmsize(filename, M, N)
 
@@ -184,7 +184,7 @@ program casestudy
 
   if (rank .eq. 0) then
 
-    filename='imagenew512x384.pgm'
+    filename='imagenew768x768.pgm'
     write(*,*)
     write(*,*) 'Writing ', filename
     call pgmwrite(filename, masterbuf)
