@@ -159,7 +159,7 @@ program casestudy
         write(*,*) 'Diff ', maxdiff_all
       end if
 
-      if (maxdiff_all .lt. 0.1) then
+      if (maxdiff_all .lt. 0.05) then
         stop_proccessing = .False.
       end if
 
@@ -200,7 +200,7 @@ program casestudy
 
   if (rank .eq. 0) then
 
-    filename='imagenew768x768.pgm'
+    filename='imagenew2-768x768.pgm'
     write(*,*)
     write(*,*) 'Writing ', filename
     call pgmwrite(filename, masterbuf)
