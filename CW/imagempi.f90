@@ -21,10 +21,10 @@ program casestudy
 
   integer :: M, N, MP, NP
 
-  integer, parameter :: P = 4
+  integer, parameter :: P = 8
 
   integer, parameter :: MAXITER   = 10
-  integer, parameter :: PRINTFREQ =  2
+  integer, parameter :: PRINTFREQ =  100
 
   real, dimension(:,:), allocatable :: new, old, edge, buf, masterbuf
 
