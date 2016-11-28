@@ -36,9 +36,9 @@ program casestudy
 
   integer :: i, j, iter
 
-  integer :: comm, rank, size, ierr, uprank, dnrank
+  integer :: comm, rank, size, ierr, uprank, dnrank, request
 
-  integer, dimension(MPI_STATUS_SIZE) :: status
+  integer, dimension(MPI_STATUS_SIZE) :: status, send_status, recv_status
 
   logical ::  stop_proccessing = .True.
 
@@ -136,12 +136,16 @@ program casestudy
 
     end do
 
-    call mpi_sendrecv(old(1,NP), MP, MPI_REAL, uprank, 1, &
-                      old(1,0),  MP, MPI_REAL, dnrank, 1, &
-                      comm, status, ierr)
-    call mpi_sendrecv(old(1,1),    MP, MPI_REAL, dnrank, 1, &
-                      old(1,NP+1), MP, MPI_REAL, uprank, 1, &
-                      comm, status, ierr)
+    !call mpi_sendrecv(old(1,NP), MP, MPI_REAL, uprank, 1, &old(1,0),  MP, MPI_REAL, dnrank, 1, &comm, status, ierr)
+    !call mpi_sendrecv(old(1,1),    MP, MPI_REAL, dnrank, 1, & old(1,NP+1), MP, MPI_REAL, uprank, 1, & comm, status, ierr)
+
+    call MPI_ISSEND(old(1,NP), MP, MPI_REAL, uprank, 1, comm, request, ierr)
+    call MPI_RECV(old(1,0),  MP, MPI_REAL, dnrank, 1, comm, recv_status, ierr)
+    call MPI_WAIT(request, send_status, ierr)
+
+    call MPI_ISSEND(old(1,1), MP, MPI_REAL, dnrank, 1, comm, request, ierr)
+    call MPI_RECV(old(1,NP+1),  MP, MPI_REAL, uprank, 1, comm, recv_status, ierr)
+    call MPI_WAIT(request, send_status, ierr)
 
     do j = 1, NP
       do i = 1, MP
