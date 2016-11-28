@@ -1,6 +1,6 @@
-MF=	Makefile
+MF=		Makefile
 
-FC=	mpif90
+FC=		mpif90
 FFLAGS=	-O3
 
 LFLAGS=
@@ -24,16 +24,16 @@ SRC= \
 OBJ=	$(SRC:.f90=.o)
 
 .f90.o:
-$(FC) $(FFLAGS) -c $<
+		$(FC) $(FFLAGS) -c $<
 
 all:	$(EXE)
 
 $(EXE):	$(OBJ)
-$(FC) $(FFLAGS) -o $@ $(OBJ) $(LFLAGS)
+		$(FC) $(FFLAGS) -o $@ $(OBJ) $(LFLAGS)
 
 $(OBJ):	$(MF)
 
-imagempi.o:	pgmio.o
+imagempi.o:		pgmio.o
 
 clean:
-rm -f $(OBJ) $(EXE) core
+		rm -f $(OBJ) $(EXE) core
