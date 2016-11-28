@@ -42,7 +42,7 @@ program casestudy
 
   logical ::  stop_proccessing = .True.
 
-  filename = 'edgenew768x768.pgm'
+  filename = 'edgenew1152x1536.pgm'
 
   call pgmsize(filename, M, N)
 
@@ -204,7 +204,7 @@ program casestudy
 
   if (rank .eq. 0) then
 
-    filename='imagenew2-768x768.pgm'
+    filename='imagenew1152.pgm'
     write(*,*)
     write(*,*) 'Writing ', filename
     call pgmwrite(filename, masterbuf)
