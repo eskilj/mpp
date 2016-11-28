@@ -147,15 +147,14 @@ program casestudy
     do j = 1, NP
       do i = 1, MP
 
-        new(i,j) = 0.25*(old(i+1,j)+old(i-1,j)+old(i,j+1)+old(i,j-1) &
-                         - edge(i,j))
+        new(i,j) = 0.25*(old(i+1,j)+old(i-1,j)+old(i,j+1)+old(i,j-1) - edge(i,j))
 
       end do
     end do
 
     if (mod(iter,PRINTFREQ) .eq. 0)  then
 
-      maxdiff = maxval(abs(new-old))
+      maxdiff = maxval(abs(new(1:NP)-old(1:MP)))
       write(*,*) 'Diff ', maxdiff
 
     end if
