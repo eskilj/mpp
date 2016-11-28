@@ -8,10 +8,10 @@ LFLAGS=
 EXE=	imagempi
 
 SRC= \
+		precisiondef.f90 \
 		iempi.f90 \
 		ieserial.f90 \
 		invertedges.f90 \
-		precisiondef.f90 \
 		pgmio.f90
 
 #
