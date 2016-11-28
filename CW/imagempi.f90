@@ -23,8 +23,8 @@ program casestudy
 
   integer, parameter :: P = 4
 
-  integer, parameter :: MAXITER   = 1500
-  integer, parameter :: PRINTFREQ =  200
+  integer, parameter :: MAXITER   = 10
+  integer, parameter :: PRINTFREQ =  2
 
   real, dimension(:,:), allocatable :: new, old, edge, buf, masterbuf
 
