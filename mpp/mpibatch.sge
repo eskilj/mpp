@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#$ -cwd -V
+
+# to execute on morar:
+# qsub -pe mpi NUM_PROCESSORS mpibatch.sge
+# Comment out the desired test
+
+#mpiexec -n 4 ./bin/invertedges test/inputs/edge768x768.pgm 20 5
+
+./test/correctness/ctest.sh bin/invertedges test/inputs test/morarserial
+
+./test/performance/reductions.sh bin/invertedges test/inputs/edge768x768.pgm 8
+
+./test/performance/image_size.sh bin/invertedges 8 test/inputs/syntheticimages/synthetic
+
+./test/performance/scalability.sh bin/invertedges test/inputs/edge768x768.pgm
+
