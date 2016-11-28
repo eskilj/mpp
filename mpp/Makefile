@@ -5,8 +5,8 @@
 SFC=pgf90
 PFC=mpif90
 #PFC=vtfort -vt:f90 mpif90
-CFLAGS=-O3 -fastsse
-MPIEXEC=mpiexec
+CFLAGS=-O3
+MPIEXEC=mpirun
 INCF=-module
 
 #Preprocessing
@@ -46,7 +46,7 @@ binserial/invertedges.f90: src/invertedges.F90
 		$(CC) $(DEFINESERIAL) $< $(PREP) $@
 
 # compile other objects
-		bin/%.o: src/%.f90 Makefile
+bin/%.o: src/%.f90 Makefile
 		$(PFC) $(CFLAGS) $(INCF) $(INC) $< -c -o $@
 
 binserial/%.o: src/%.f90 Makefile
