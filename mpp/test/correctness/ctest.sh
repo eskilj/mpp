@@ -19,7 +19,7 @@ do
    for t in 1 2 3 4 8
    do
      echo "Testing $i with $t threads:"
-      mpiexec -n $t ./$BIN $PI/$i 0 100 $tmpf > $out
+      mpirun -n $t ./$BIN $PI/$i 0 100 $tmpf > $out
       cat $out | grep 'average' > $ave
       cmp $tmpf $PR/$i
       cmp $ave $PR/$i.averages
@@ -31,7 +31,7 @@ for i in ${inputs[@]}
 do
    t=9
    echo "Testing $i with $t threads:"
-   eval mpiexec -n $t ./$BIN $PI/$i 0 5 $tmpf &> /dev/null
+   eval mpirun -n $t ./$BIN $PI/$i 0 5 $tmpf &> /dev/null
    ret_code=$?
    if [ $ret_code != 0 ]; then
      echo "Test ok!"   

@@ -23,7 +23,7 @@ do
     echo " " > $output
     for re in $(seq $NUM_REP)
     do
-        mpiexec -n $NUM_TH ./$BIN $ir${s}x${s}.pgm 200 200 $tmpf  >> $output
+        mpirun -n $NUM_TH ./$BIN $ir${s}x${s}.pgm 200 200 $tmpf  >> $output
     done
     # Get the average of iteration time
     red=$(cat $output | grep "Data readed" | awk 'BEGIN{acc=0;n=0}{acc+=$6;n+=1}END{print acc/n}')

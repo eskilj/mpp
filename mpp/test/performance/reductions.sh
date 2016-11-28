@@ -22,7 +22,7 @@ do
     echo " " > $output
     for re in $(seq $NUM_REP)
     do
-        mpiexec -n $NUM_TH ./$BIN $input 10000 $it $tmpf  >> $output
+        mpirun -n $NUM_TH ./$BIN $input 10000 $it $tmpf  >> $output
     done
     # Get the average of iteration time
     res=$(cat $output | grep "Executed" | awk 'BEGIN{acc=0;n=0}{acc+=$5;n+=1}END{print acc/n}')

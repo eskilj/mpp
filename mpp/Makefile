@@ -61,7 +61,7 @@ mpiversion: bin/invertedges.f90 bin/precisiondef.o $(PARALLELOBJ) Makefile
 
 
 # OTHER ACTIONS (WITHOUT DEPENDENCIES)
-.PHONY: test mpiexec run clean
+.PHONY: test mpirun run clean
 
 test:
 		./test/correctness/ctest.sh bin/invertedges test/inputs test/morarserial

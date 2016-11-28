@@ -103,7 +103,7 @@ A build system was created to facilitate the compilation process of the applicat
 Finally, to execute the application we must use the following statement:
 \emph{./binary input\_file \#iterations \#it\_btw\_reductions [output\_file]}
 where the output file is an optional argument (if not specified it will be output.pgm) and the number of iterations must be set to 0 if we want to use the stopping criterion explained above. 
-Note that in the MPI case, it must be preceded by \emph{mpiexec -n \#threads}.
+Note that in the MPI case, it must be preceded by \emph{mpirun -n \#threads}.
 
 \section{Implementation details}
 The serial implementation only contains dummy routines, or local calculations without the messaging phases. Therefore, in this section we focus in the details of the MPI implementation.
