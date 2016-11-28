@@ -154,13 +154,15 @@ program casestudy
     if (mod(iter,PRINTFREQ) .eq. 0)  then
 
       maxdiff = maxval(abs(new(1:MP, 1:NP)-old(1:MP, 1:NP)))
-      call MPI_REDUCE(maxdiff, maxdiff_all, 1, MPI_INTEGER, MPI_MAX, 0, comm, ierr)
+      call MPI_ALLREDUCE(maxdiff, maxdiff_all, 1, MPI_INTEGER, MPI_MAX, comm, ierr)
       if (rank .eq. 0) then
         write(*,*) 'Diff ', maxdiff_all
-        if (maxdiff_all .lt. 0.1) then
-          stop_proccessing = .False.
-		end if
       end if
+
+      if (maxdiff_all .lt. 0.1) then
+        stop_proccessing = .False.
+      end if
+
     end if
 
 
