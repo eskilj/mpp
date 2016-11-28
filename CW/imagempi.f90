@@ -28,7 +28,7 @@ program casestudy
 
   real, dimension(:,:), allocatable :: new, old, edge, buf, masterbuf
 
-  real :: val, boundaryval, maxdiff
+  real :: val, boundaryval, maxdiff, maxdiff_all
 
   integer, parameter :: maxlen = 32
 
@@ -155,7 +155,8 @@ program casestudy
     if (mod(iter,PRINTFREQ) .eq. 0)  then
 
       maxdiff = maxval(abs(new(1:NP)-old(1:MP)))
-      write(*,*) 'Diff ', maxdiff
+      call MPI_REDUCE(maxdiff, maxdiff_all, 1, MPI_INTEGER, MPI_MAX, 0, comm, ierr)
+      if (rank .eq. 0) write(*,*) 'Diff ', maxdiff_all
 
     end if
 
