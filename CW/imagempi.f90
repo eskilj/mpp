@@ -28,7 +28,7 @@ program casestudy
 
   real, dimension(:,:), allocatable :: new, old, edge, buf, masterbuf
 
-  real :: val, boundaryval
+  real :: val, boundaryval, maxdiff
 
   integer, parameter :: maxlen = 32
 
@@ -152,6 +152,15 @@ program casestudy
 
       end do
     end do
+
+    if (mod(iter,PRINTFREQ) .eq. 0)  then
+
+      maxdiff = maxval(abs(new-old))
+      write(*,*) 'Diff ', maxdiff
+
+    end if
+
+
 
     do j = 1, NP
       do i = 1, MP
