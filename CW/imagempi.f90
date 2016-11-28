@@ -40,6 +40,8 @@ program casestudy
 
   integer, dimension(MPI_STATUS_SIZE) :: status
 
+  logical ::  stop_proccessing = .True.
+
   filename = 'edgenew768x768.pgm'
 
   call pgmsize(filename, M, N)
@@ -120,13 +122,10 @@ program casestudy
   dnrank = rank - 1
   if (dnrank .lt. 0) dnrank = MPI_PROC_NULL
 
-  do iter = 1, MAXITER
+  iter = 1
 
-    if (mod(iter,PRINTFREQ) .eq. 0)  then
+  do while (stop_proccessing)
 
-      if (rank .eq. 0) write(*,*) 'Iteration ', iter
-
-    end if
 
 ! Implement periodic boundary conditions on top and bottom sides
 
@@ -156,8 +155,12 @@ program casestudy
 
       maxdiff = maxval(abs(new(1:MP, 1:NP)-old(1:MP, 1:NP)))
       call MPI_REDUCE(maxdiff, maxdiff_all, 1, MPI_INTEGER, MPI_MAX, 0, comm, ierr)
-      if (rank .eq. 0) write(*,*) 'Diff ', maxdiff_all
-
+      if (rank .eq. 0) then
+        write(*,*) 'Diff ', maxdiff_all
+        if (maxdiff_all .lt. 0.1) then
+          stop_proccessing = .False.
+		end if
+      end if
     end if
 
 
@@ -169,6 +172,8 @@ program casestudy
 
       end do
     end do
+
+  iter = iter + 1
 
   end do
 
