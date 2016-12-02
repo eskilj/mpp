@@ -11,12 +11,11 @@ MODULE parallel
   end type timetype
   
   ! Constants
-  ! IT DOESN'T WORK FOR DIFERENT CONSTANTS, defined to improve readability
   integer, parameter :: root = 0
   integer, parameter :: D = 2 !Num of dimentions
 
   ! MPI VARIABLES
-  integer :: comm, cartcomm, myrank, commsize, ierr, errorcode
+  integer :: comm, size, cartcomm, myrank, ierr, errorcode
   integer :: n_left, n_right, n_up, n_down !process neighbours
   integer, dimension(8) :: request
   
@@ -30,20 +29,20 @@ MODULE parallel
 
 contains
 
-  logical function MP_ISROOT()
+  logical function par_ISROOT()
     ! Return true when executen in the root process
-    MP_ISROOT = myrank == root
+    par_ISROOT = myrank == root
     return
-  end function MP_ISROOT
+  end function par_ISROOT
 
-  subroutine MP_init()
+  subroutine par_init()
     ! Initialize the MPI structures
     call MPI_INIT(ierr)
     comm = MPI_COMM_WORLD
-    call MPI_COMM_SIZE(comm, commsize, ierr)
-  end subroutine MP_init
+    call MPI_COMM_SIZE(comm, size, ierr)
+  end subroutine par_init
 
-  subroutine MP_domain_decomposition_2D(nx,ny,npx,npy)
+  subroutine par_domain_decomposition_2D(nx,ny,npx,npy)
     ! Creates a 2D cartesian communicator with the appropriate dimensions,
     ! compute the neighbours for each process and computes the MP and NP
     ! At the end calls the routine to create the derived datatypes
@@ -53,9 +52,26 @@ contains
     logical, dimension(D) :: periods
     
     ! Create cartesian topology 2D
+
+
+    ! Cartesian topology
+ndims = 1
+dims(1) = 0
+periods(1) = .true.       ! Cyclic
+reorder = .false.
+direction = 0             ! Shift along the first index
+disp = 1                  ! Shift by 1
+
+call MPI_DIMS_CREATE(size,1,dims,ierr)
+call MPI_CART_CREATE(comm,ndims,dims,periods,reorder,comm1d,ierr)
+call MPI_COMM_RANK(comm1d,rank,ierr)
+call MPI_CART_SHIFT(comm1d,direction,disp,left,right,ierr)
+
+
+
     dims = (/ 0,0 /)
     periods = (/ .False., .False. /)
-    call MPI_DIMS_CREATE(commsize, D, dims, ierr)
+    call MPI_DIMS_CREATE(size, D, dims, ierr)
     ! dimensions shifted to be consisten with fortran array order
     call MPI_CART_CREATE(comm, D, (/dims(2), dims(1) /), periods, .True., cartcomm, ierr)
     call MPI_COMM_RANK(cartcomm, myrank, ierr)
@@ -119,13 +135,13 @@ contains
     call MPI_TYPE_CREATE_RESIZED(LONG_BLOCK_T, start, extent, &
              MASTER_BLOCK_T,ierr)
   
-    allocate(counts(commsize), STAT=AllocateStatus)
+    allocate(counts(size), STAT=AllocateStatus)
     if(allocateStatus /= 0) call exit_all("*** NOT enough memory ***")
-    allocate(displs(commsize), STAT=AllocateStatus)
+    allocate(displs(size), STAT=AllocateStatus)
     if(allocateStatus /= 0) call exit_all("*** NOT enough memory ***")
     
     base = 1
-    do i= 1, commsize
+    do i= 1, size
         counts(i) = 1
         displs(i) = (base-1) + mod(i-1,dims(1))
         if(mod(i,dims(1))==0) base = base + Np * dims(1)
@@ -144,14 +160,14 @@ contains
     call MPI_TYPE_COMMIT(H_HALO_T, ierr)
   end subroutine
 
-  subroutine MP_Scatter(source, dest)
+  subroutine par_Scatter(source, dest)
     real(kind=REALNUMBER), dimension(:,:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
     call MPI_Scatterv(source, counts, displs, MASTER_BLOCK_T, &
                       dest, Mp*Np, MPI_REALNUMBER, 0, cartcomm,ierr)
   end subroutine
 
-  subroutine MP_Gather(source, dest)
+  subroutine par_Gather(source, dest)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
     call MPI_GATHERV(source, 1, BLOCK_T, dest, counts, displs, &
@@ -159,9 +175,9 @@ contains
   end subroutine
 
 
-  subroutine MP_HalosSwap(old)
+  subroutine par_HalosSwap(old)
     ! Non-blocking send and reveive of all the halos, afterwards the
-    ! MP_WaitHalos() routine should be called to ensure these communications
+    ! par_WaitHalos() routine should be called to ensure these communications
     ! are completed.
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: old
    
@@ -175,14 +191,14 @@ contains
     call MPI_Irecv(old(1,0),1, H_HALO_T, n_down, 0,cartcomm,request(6),ierr)
     call MPI_Irecv(old(1,Np+1)   ,1, H_HALO_T, n_up ,0,cartcomm,request(8),ierr)
     
-  end subroutine MP_HalosSwap
+  end subroutine par_HalosSwap
 
-  subroutine MP_WaitHalos()
+  subroutine par_WaitHalos()
     integer, dimension(MPI_STATUS_SIZE,8) :: stats
     call MPI_Waitall(8,request,stats,ierr)
-  end subroutine MP_WaitHalos
+  end subroutine par_WaitHalos
 
-  subroutine MP_GetMaxChange(new,old,maxchange)
+  subroutine par_GetMaxChange(new,old,maxchange)
     ! Compute the local max change and execute a reduce operation to get the
     ! global one.
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
@@ -192,9 +208,9 @@ contains
     localmaxchange = maxval(abs(new(1:MP,1:NP)-old(1:MP,1:NP)))
     call MPI_ALLREDUCE(localmaxchange,maxchange,1,MPI_REALNUMBER, &
                        MPI_MAX, cartcomm, ierr)
-  end subroutine MP_GetMaxChange
+  end subroutine par_GetMaxChange
 
-  subroutine MP_GetAverage(new, average)
+  subroutine par_GetAverage(new, average)
     ! Compute the local sumation of the pixels,
     ! reduce the summation of all processes and
     ! divide by the total number of pixels to get the average
@@ -208,16 +224,16 @@ contains
                        MPI_SUM, cartcomm, ierr)
     
     average = totalsum / (GM*GN)
-  end subroutine MP_GetAverage
+  end subroutine par_GetAverage
 
-  subroutine MP_Finalize()
+  subroutine par_Finalize()
     ! Free the used resources
     call MPI_TYPE_FREE(MASTER_BLOCK_T,ierr)
     call MPI_TYPE_FREE(BLOCK_T,ierr)
     call MPI_TYPE_FREE(H_HALO_T,ierr)
     call MPI_TYPE_FREE(V_HALO_T,ierr)
     call MPI_Finalize(ierr)
-  end subroutine MP_Finalize
+  end subroutine par_Finalize
 
 
   ! -----------------------------------------------------!
@@ -231,9 +247,9 @@ contains
     return
   end function get_time
 
-  real function time_diff(tstart,tend)
-    type(timetype), intent(in) :: tstart, tend
-    time_diff = real(tend%value - tstart%value)
+  real function time_diff(time_start,time_finish)
+    type(timetype), intent(in) :: time_start, time_finish
+    time_diff = real(time_finish%value - time_start%value)
     return
   end function time_diff
 
@@ -245,7 +261,7 @@ contains
   
   subroutine print_once(message)
     character(*), intent(in) :: message
-    if (MP_ISROOT()) then
+    if (par_ISROOT()) then
       write(*,*) message
     end if
   end subroutine print_once

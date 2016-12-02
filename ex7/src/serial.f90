@@ -10,15 +10,15 @@ MODULE serial
 
   contains
 
-  logical function MP_ISROOT()
-    MP_ISROOT = .True.
+  logical function par_ISROOT()
+    par_ISROOT = .True.
     return
-  end function MP_ISROOT
+  end function par_ISROOT
 
-  subroutine MP_init()
-  end subroutine MP_init
+  subroutine par_init()
+  end subroutine par_init
 
-  subroutine MP_domain_decomposition_2D(nx,ny,npx,npy)
+  subroutine par_domain_decomposition_2D(nx,ny,npx,npy)
     integer, intent(in) :: nx, ny
     integer, intent(out) :: npx, npy
     npx = nx
@@ -27,43 +27,43 @@ MODULE serial
     N = ny
   end subroutine
 
-  subroutine MP_Scatter(source, destination)
+  subroutine par_Scatter(source, destination)
     real(kind=REALNUMBER), dimension(:,:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: destination
     destination = source
   end subroutine
 
-  subroutine MP_Gather(source, destination)
+  subroutine par_Gather(source, destination)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: destination
     destination = source(1:M,1:N)
   end subroutine
  
-  subroutine MP_HalosSwap(old)
+  subroutine par_HalosSwap(old)
     real(kind=REALNUMBER), dimension(:,:), intent(inout) :: old
     old = old   !to avoid unused warnings
   end subroutine
   
-  subroutine MP_WaitHalos()
+  subroutine par_WaitHalos()
   end subroutine
 
-  subroutine MP_GetMaxChange(new, old, maxchange)
+  subroutine par_GetMaxChange(new, old, maxchange)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: old
     real(kind=REALNUMBER), intent(inout) :: maxchange
     maxchange = maxval(abs(new(1:M,1:N)-old(1:M,1:N)))
-  end subroutine MP_GetMaxChange
+  end subroutine par_GetMaxChange
   
-  subroutine MP_GetAverage(new, average)
+  subroutine par_GetAverage(new, average)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
     real(kind=REALNUMBER), intent(inout) :: average
     real(kind=8) :: accumulate
     
     accumulate = sum(real(new(1:M,1:N),kind=8))
     average = real(accumulate,kind=REALNUMBER) / (M*N)
-  end subroutine MP_GetAverage
+  end subroutine par_GetAverage
 
-  subroutine MP_Finalize()
+  subroutine par_Finalize()
   end subroutine
 
 
@@ -78,11 +78,11 @@ MODULE serial
     return
   end function get_time
   
-  real function time_diff(tstart,tend)
-    type(timetype), intent(in) :: tstart, tend
+  real function time_diff(time_start,time_finish)
+    type(timetype), intent(in) :: time_start, time_finish
     integer :: clockrate
     call system_clock(count_rate=clockrate)
-    time_diff = real(tend%value - tstart%value) / clockrate
+    time_diff = real(time_finish%value - time_start%value) / clockrate
     return
   end function time_diff
 

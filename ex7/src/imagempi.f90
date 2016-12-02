@@ -9,24 +9,25 @@ program imagempi
 #endif
 
   implicit none
-  
-  real(kind=REALNUMBER), parameter :: STOP_CHANGE = 0.1
+
   integer :: PROGRESS_INTERVAL
   integer :: numiter, AllocateStatus
   integer :: i, j, nx, ny, npx, npy, it
-  character(len=100) :: infile, outfile, message
+  integer, parameter :: maxlen = 32
+  character*(maxlen) :: filename, message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: image, edge, old, new
+  real(kind=REALNUMBER), parameter :: MAX_CHANGE = 0.1
   real(kind=REALNUMBER) :: average, maxchange = 1
-  type(timetype) :: tstart, tend
+  type(timetype) :: time_start, time_finish
   
   !  --------------- INITIALIZATION  -------------------------! 
   ! Read parameters
-  call getParameters(infile, outfile, numiter, PROGRESS_INTERVAL)
-  call pgmsize(infile, nx, ny)
+  call getParameters(filename, outfile, numiter, PROGRESS_INTERVAL)
+  call pgmsize(filename, nx, ny)
 
   ! Initialize MessagePassing Library
-  call MP_Init()
-  call MP_domain_decomposition_2D(nx,ny,npx,npy) 
+  call par_Init()
+  call par_domain_decomposition_2D(nx,ny,npx,npy)
 
   ! Allocate arrays memory
   allocate(image(nx,ny) , STAT = AllocateStatus )
@@ -41,24 +42,24 @@ program imagempi
 
 
   ! Read image and distribute between processes
-  tstart = get_time()
+  time_start = get_time()
 
-  if (MP_ISROOT()) call pgmread(infile,image)
-  call MP_Scatter(image,edge)
+  if (par_ISROOT()) call pgmread(filename,image)
+  call par_Scatter(image,edge)
   old(:,:) = 255
 
-  tend = get_time()
+  time_finish = get_time()
   write(message,*) "Data readed and distributed in ",  &
-                   time_diff(tstart,tend), " sec."
+                   time_diff(time_start,time_finish), " sec."
   call print_once(message)
  
   ! EXECUTE INVERT EDGES ALGORITHM
-  tstart = get_time()
+  time_start = get_time()
   it = 0
   do while (.not. condition(it, maxchange, numiter))
     ! Cange the halos between surrounding processors if such exist
-    call MP_HalosSwap(old)
-    call MP_WaitHalos()
+    call par_HalosSwap(old)
+    call par_WaitHalos()
     
     ! Compute the local new values not dependent to halos
     do j = 1,npy
@@ -72,9 +73,9 @@ program imagempi
     it = it + 1
     if (mod(it,PROGRESS_INTERVAL) == 0) then
       if (numiter == 0 ) then ! Only when a fixed number of iterations is not set
-        call MP_GetMaxChange(new, old, maxchange)
+        call par_GetMaxChange(new, old, maxchange)
       end if
-      call MP_GetAverage(new, average)
+      call par_GetAverage(new, average)
       
       write(message,'(A10,I5,A17,F6.1)') "Iteration ",it,", pixel average: ", average
       call print_once(message)
@@ -84,23 +85,23 @@ program imagempi
     old(1:npx,1:npy) = new(1:npx,1:npy)
   end do
   
-  tend = get_time()
+  time_finish = get_time()
   write(message,'(A9,I5,A15,F8.3,A8)')"Executed ", it," iterations in ", &
-                                       time_diff(tstart,tend)," seconds."
+                                       time_diff(time_start,time_finish)," seconds."
   call print_once(message)
   
   ! Gather the data again to the root proces and write it to the output file
-  tstart = get_time()
+  time_start = get_time()
 
-  call MP_Gather(old,image)
-  if (MP_ISROOT()) call pgmwrite(outfile,image)
+  call par_Gather(old,image)
+  if (par_ISROOT()) call pgmwrite(outfile,image)
   
-  tend = get_time()
-  write(message,*) "Data gathered and writed in ", time_diff(tstart,tend), " sec"
+  time_finish = get_time()
+  write(message,*) "Data gathered and writed in ", time_diff(time_start,time_finish), " sec"
   call print_once(message)
   
   !FINALIZE MessagePassing
-  call MP_Finalize()
+  call par_Finalize()
   
   deallocate(image)
   deallocate(edge)
@@ -109,8 +110,8 @@ program imagempi
 
 contains
 
-  subroutine getParameters(infile, outfile, numiter, it_btw_red)
-    character(len=100), intent(out) :: infile, outfile
+  subroutine getParameters(filename, outfile, numiter, it_btw_red)
+    character(len=100), intent(out) :: filename, outfile
     integer, intent(out) :: numiter, it_btw_red
     integer :: num_args
     character(len=100) :: numit_s, it_btw_red_s
@@ -123,7 +124,7 @@ contains
     else
       call exit_all("WRONG ARGUMENTS!")
     end if
-    call get_command_argument(1, infile)
+    call get_command_argument(1, filename)
     call get_command_argument(2, numit_s)
     call get_command_argument(3, it_btw_red_s)
     read(numit_s,*) numiter
@@ -135,7 +136,7 @@ contains
     real(kind=REALNUMBER), intent(in) :: maxchange
 
     if (numiter == 0) then !if num iteration not fixed
-      condition = maxchange < STOP_CHANGE !Stopping criterion
+      condition = maxchange < MAX_CHANGE !Stopping criterion
     else
       condition = numiter <= it
     end if
