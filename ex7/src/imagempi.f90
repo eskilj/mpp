@@ -14,7 +14,7 @@ program imagempi
   integer :: i, j, nx, ny, npx, npy, it
   integer, parameter :: maxlen = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 100
   character(maxlen) :: filename, outfile,  message
-  real(kind=REALNUMBER), dimension(:,:), allocatable :: image, edge, old, new
+  real(kind=REALNUMBER), dimension(:,:), allocatable :: masterbuf, edge, old, new
   real(kind=REALNUMBER), parameter :: MAX_CHANGE = 0.1
   real(kind=REALNUMBER) :: average, maxchange = 1
   type(timetype) :: time_start, time_finish
@@ -28,31 +28,22 @@ program imagempi
 
   ! Initialize MessagePassing Library
   call par_Init()
-  call par_domain_decomposition_2D(nx,ny,npx,npy)
+  call par_domain_decomposition_2D(nx, ny, npx, npy)
 
-  allocate(image(nx, ny))
+  allocate(masterbuf(nx, ny))
   allocate(edge(npx, npy))
   allocate(old(0:npx+1, 0:npy+1))
   allocate(new(0:npx+1, 0:npy+1))
 
-  call print_all("All arrays allocated successfully!")
-
-  ! Read image and distribute between processes
-  time_start = get_time()
-
-  if (par_ISROOT()) call pgmread(filename,image)
-  call par_Scatter(image,edge)
+  if (par_ISROOT()) call pgmread(filename, masterbuf)
+  call par_Scatter(masterbuf, edge)
   old(:,:) = 255
-
-  time_finish = get_time()
-  write(message,*) "Data readed and distributed in ",  &
-                   time_diff(time_start,time_finish), " sec."
-  call print_once(message)
  
   ! EXECUTE INVERT EDGES ALGORITHM
   time_start = get_time()
   it = 0
-  do while (.not. condition(it, maxchange, MAX_ITER))
+
+  do while ((it .lt. MAX_ITER) .and. (maxchange .gt. MAX_CHANGE))
     ! Cange the halos between surrounding processors if such exist
     call par_HalosSwap(old)
     call par_WaitHalos()
@@ -60,25 +51,25 @@ program imagempi
     ! Compute the local new values not dependent to halos
     do j = 1,npy
       do i = 1,npx
-        new(i,j) = ( old(i-1,j) + old(i+1,j) + old(i,j-1) &
-                    + old(i,j+1) - edge(i,j) ) * 0.25
+        new(i,j) = 0.25 * ( old(i-1,j) + old(i+1,j) + old(i,j-1) &
+                    + old(i,j+1) - edge(i,j) )
       end do
-    enddo
+    end do
 
     ! Perform the necessary reductions every PROGRESS_INTERVAL
     it = it + 1
     if (mod(it,PROGRESS_INTERVAL) == 0) then
-      if (MAX_ITER == 0 ) then ! Only when a fixed number of iterations is not set
-        call par_GetMaxChange(new, old, maxchange)
-      end if
+
+      call par_GetMaxChange(new, old, maxchange)
       call par_GetAverage(new, average)
       
       write(message,'(A10,I5,A17,F6.1)') "Iteration ",it,", pixel average: ", average
       call print_once(message)
     end if
 
-    ! Loop updates
+    !Re-assign new to old
     old(1:npx,1:npy) = new(1:npx,1:npy)
+
   end do
   
   time_finish = get_time()
@@ -89,8 +80,8 @@ program imagempi
   ! Gather the data again to the root proces and write it to the output file
   time_start = get_time()
 
-  call par_Gather(old,image)
-  if (par_ISROOT()) call pgmwrite(outfile,image)
+  call par_Gather(old,masterbuf)
+  if (par_ISROOT()) call pgmwrite(outfile,masterbuf)
   
   time_finish = get_time()
   write(message,*) "Data gathered and writed in ", time_diff(time_start,time_finish), " sec"
@@ -99,10 +90,7 @@ program imagempi
   !FINALIZE MessagePassing
   call par_Finalize()
   
-  deallocate(image)
-  deallocate(edge)
-  deallocate(new)
-  deallocate(old)
+  deallocate(masterbuf, edge, new, old)
 
 contains
 
@@ -113,17 +101,5 @@ contains
     num_args = command_argument_count()
     call get_command_argument(1, filename)
   end subroutine getParameters
-
-  logical function condition(it,maxchange,MAX_ITER)
-    integer, intent(in) :: it, MAX_ITER
-    real(kind=REALNUMBER), intent(in) :: maxchange
-
-    if (MAX_ITER == 0) then !if num iteration not fixed
-      condition = maxchange < MAX_CHANGE !Stopping criterion
-    else
-      condition = MAX_ITER <= it
-    end if
-    return
-  end function condition
 
 end program imagempi

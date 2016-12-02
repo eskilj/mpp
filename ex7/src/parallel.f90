@@ -107,7 +107,7 @@ contains
     ! Block type: space in local arrays, inside halos
     sizes    = (/ MP+2, NP+2 /)
     subsizes = (/ MP , NP /)
-    starts   = (/  1 ,  1 /)
+    starts(:)   = 1
     call MPI_TYPE_CREATE_SUBARRAY(N_DIMS, sizes, subsizes, starts, &
              MPI_ORDER_FORTRAN, MPI_REALNUMBER, BLOCK_T, ierr)
     
@@ -116,10 +116,11 @@ contains
     ! displacements in order to be accessed iteratively.
     sizes    = (/ MP*dims(1), NP*dims(2) /)
     subsizes = (/ MP, NP /)
-    starts   = (/  0,  0 /)
+    starts(:)   = 0
     call MPI_TYPE_CREATE_SUBARRAY(N_DIMS, sizes, subsizes, starts, &
              MPI_ORDER_FORTRAN, MPI_REALNUMBER, LONG_BLOCK_T, ierr)
     call MPI_TYPE_GET_EXTENT(MPI_REALNUMBER, lb, realextent, ierr)
+
     start = 0
     extent = Mp*realextent
     call MPI_TYPE_CREATE_RESIZED(LONG_BLOCK_T, start, extent, &
@@ -188,16 +189,16 @@ contains
     call MPI_Waitall(8,request,stats,ierr)
   end subroutine par_WaitHalos
 
-  subroutine par_GetMaxChange(new,old,maxchange)
-    ! Compute the local max change and execute a reduce operation to get the
-    ! global one.
-    real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
-    real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: old
+  !Calculate maximum change across the image
+  subroutine par_GetMaxChange(new, old, maxchange)
+
+    real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new, old
     real(kind=REALNUMBER), intent(out) :: maxchange
     real(kind=REALNUMBER) :: localmaxchange
-    localmaxchange = maxval(abs(new(1:MP,1:NP)-old(1:MP,1:NP)))
-    call MPI_ALLREDUCE(localmaxchange,maxchange,1,MPI_REALNUMBER, &
-                       MPI_MAX, cartcomm, ierr)
+
+    localmaxchange = maxval(abs( new(1:MP, 1:NP) - old(1:MP, 1:NP) ))
+    call MPI_ALLREDUCE(localmaxchange, maxchange, 1, MPI_REALNUMBER, MPI_MAX, cartcomm, ierr)
+
   end subroutine par_GetMaxChange
 
   subroutine par_GetAverage(new, average)
