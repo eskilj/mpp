@@ -10,8 +10,7 @@ program imagempi
 
   implicit none
 
-  integer :: AllocateStatus
-  integer :: i, j, nx, ny, npx, npy, iter = 0
+  integer :: i, j, nx, ny, npx, npy, array_status, iter = 0
   integer, parameter :: MAXLEN = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 100
   character(MAXLEN) :: filename, outfile,  message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: master, edge, old, new
@@ -32,7 +31,8 @@ program imagempi
   call par_decompose(nx, ny, npx, npy)
 
   ! allocate arrays used for the image processing
-  allocate(master(nx, ny), edge(npx, npy), old(0:npx+1, 0:npy+1), new(0:npx+1, 0:npy+1), STAT = check_allocation)
+  allocate(master(nx, ny), edge(npx, npy), old(0:npx+1, 0:npy+1), new(0:npx+1, 0:npy+1), STAT=array_status)
+  call check_allocation(array_status)
 
   ! read image data into master and distribute
   if (par_isroot()) call pgmread(filename, master)
@@ -99,9 +99,9 @@ contains
     call get_command_argument(1, filename)
   end subroutine getParameters
 
-  integer function check_allocation(allocation_status)
+  subroutine check_allocation(allocation_status)
     integer, intent(in) :: allocation_status
     print *, allocation_status
-  end function
+  end subroutine
 
 end program imagempi
