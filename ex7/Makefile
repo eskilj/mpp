@@ -31,7 +31,7 @@ all: mpiversion
 # when changing between serialversion and mpiversion
 .PHONY: bin/precision.o binserial/precision.o
 
-bin/precisiondef.o: src/precision.f90
+bin/precision.o: src/precision.f90
 		$(CC) $< $(PREP) bin/precision.f90
 		$(PFC) bin/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
 

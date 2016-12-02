@@ -1,7 +1,7 @@
 MODULE parallel
 
   use mpi
-  use prec
+  use precision
 
   implicit none
 
