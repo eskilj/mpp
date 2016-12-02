@@ -57,7 +57,7 @@ contains
     reorder = .true.
 
     call MPI_DIMS_CREATE(size, N_DIMS, dims, ierr)
-    call MPI_CART_CREATE(comm, N_DIMS, dims, periods, reorder, cartcomm, ierr)
+    call MPI_CART_CREATE(comm, N_DIMS, (/dims(2), dims(1) /), periods, reorder, cartcomm, ierr)
     call MPI_COMM_RANK(cartcomm, rank, ierr)
 
     y_dir = 0
