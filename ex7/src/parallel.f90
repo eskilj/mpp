@@ -92,7 +92,14 @@ contains
     MP = npx
     NP = npy
 
-    print *, "Grid size :", dims(1), " by ", dims(2)
+    if (par_isroot()) then
+      ! Print out the information about the domain decomposition
+      write(message,'(I2,A3,I2,A19,I4,A3,I4)') &
+        dims(1), " x ", dims(2), "with each block of", MP, " x ", NP
+      call par_print("Domain decomposed in:")
+      call par_print(" ->  Grid of size: "//message)
+
+    end if
 
     ! Create the derived datatypes
     call create_types()
