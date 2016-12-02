@@ -91,8 +91,8 @@ contains
     npy = ny/dims(2)
     MP = npx
     NP = npy
-    
-    write *, "Grid size :", dims(1), " by ", dims(2)
+
+    print *, "Grid size :", dims(1), " by ", dims(2)
 
     ! Create the derived datatypes
     call create_types()
@@ -236,10 +236,10 @@ contains
     call MPI_ABORT(comm, 2, ierr)
   end subroutine exit_all
 
-  function par_print(message)
+  subroutine par_print(message)
     character(*), intent(in) :: message
     write(*,*) message
-  end function par_print
+  end subroutine par_print
 
 END MODULE parallel
 
