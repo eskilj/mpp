@@ -4,7 +4,6 @@
 #CIRRUS
 SFC=pgf90
 PFC=mpif90
-#PFC=vtfort -vt:f90 mpif90
 CFLAGS=-O3
 MPIEXEC=mpirun
 INCF=-module
@@ -24,7 +23,7 @@ INC=include
 
 # COMPILATION RULES
 # by default create mpi version
-all: mpiversion
+all: mpiversion 
 
 # Files which needs preprocessing (C-style preprocessor used)
 # precisiondef must be always compiled to create the correct .mod

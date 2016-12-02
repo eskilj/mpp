@@ -11,7 +11,7 @@ program imagempi
   implicit none
   
   real(kind=REALNUMBER), parameter :: STOP_CHANGE = 0.1
-  integer :: IT_BTW_REDUCTIONS
+  integer :: PROGRESS_INTERVAL
   integer :: numiter, AllocateStatus
   integer :: i, j, nx, ny, npx, npy, it
   character(len=100) :: infile, outfile, message
@@ -21,7 +21,7 @@ program imagempi
   
   !  --------------- INITIALIZATION  -------------------------! 
   ! Read parameters
-  call getParameters(infile, outfile, numiter, IT_BTW_REDUCTIONS)
+  call getParameters(infile, outfile, numiter, PROGRESS_INTERVAL)
   call pgmsize(infile, nx, ny)
 
   ! Initialize MessagePassing Library
@@ -68,9 +68,9 @@ program imagempi
       end do
     enddo
 
-    ! Perform the necessary reductions every IT_BTW_REDUCTIONS
+    ! Perform the necessary reductions every PROGRESS_INTERVAL
     it = it + 1
-    if (mod(it,IT_BTW_REDUCTIONS) == 0) then
+    if (mod(it,PROGRESS_INTERVAL) == 0) then
       if (numiter == 0 ) then ! Only when a fixed number of iterations is not set
         call MP_GetMaxChange(new, old, maxchange)
       end if
