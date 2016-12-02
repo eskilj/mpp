@@ -53,14 +53,14 @@ MODULE serial
     maxchange = maxval(abs(new(1:M,1:N)-old(1:M,1:N)))
   end subroutine par_GetMaxChange
   
-  subroutine par_GetAverage(new, average)
+  subroutine par_calc_ave(new, average)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
     real(kind=REALNUMBER), intent(inout) :: average
     real(kind=8) :: accumulate
     
     accumulate = sum(real(new(1:M,1:N),kind=8))
     average = real(accumulate,kind=REALNUMBER) / (M*N)
-  end subroutine par_GetAverage
+  end subroutine par_calc_ave
 
   subroutine par_Finalize()
   end subroutine

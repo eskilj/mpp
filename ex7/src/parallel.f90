@@ -193,21 +193,20 @@ contains
 
   end subroutine par_GetMaxChange
 
-  subroutine par_GetAverage(new, average)
+  integer function par_calc_ave(new)
     ! Compute the local sumation of the pixels,
     ! reduce the summation of all processes and
     ! divide by the total number of pixels to get the average
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
-    real(kind=REALNUMBER), intent(out) :: average
     real(kind=REALNUMBER) :: localsum, totalsum
-    
-    ! The the sum is not make in 8 bytes reals, it differs from serial version
+    integer :: num_pixels
+
     localsum = real(sum(real(new(1:MP,1:NP),kind=8)),kind=REALNUMBER)
     call MPI_ALLREDUCE(localsum,totalsum,1,MPI_REALNUMBER, &
                        MPI_SUM, cartcomm, ierr)
-    
-    average = totalsum / (GM*GN)
-  end subroutine par_GetAverage
+    num_pixels = size(new, 1) * size(new, 2)
+    par_calc_ave = totalsum / num_pixels
+  end function par_calc_ave
 
   subroutine par_Finalize()
     ! Free the used resources
