@@ -15,7 +15,7 @@ DEFINESERIAL= -D SERIAL
 PREP=-cpp -E -P -o
 
 # PROJECT VARIABLES
-EXECUTABLE=image
+EXECUTABLE=imagempi
 SERIALSRC=src/pgmio.f90 src/serial.f90
 PARALLELSRC= src/pgmio.f90 src/parallel.f90
 SERIALOBJ=$(patsubst src/%.f90,binserial/%.o,$(SERIALSRC))
@@ -35,14 +35,14 @@ bin/precision.o: src/precision.f90
 		$(CC) $< $(PREP) bin/precision.f90
 		$(PFC) bin/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
 
-bin/image.f90: src/image.f90
+bin/imagempi.f90: src/imagempi.f90
 		$(CC) $< $(PREP) $@
 
 binserial/precision.o: src/precision.f90
 		$(CC) $(DEFINESERIAL) $< $(PREP) binserial/precision.f90
 		$(SFC)  binserial/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
 
-binserial/image.f90: src/image.f90
+binserial/imagempi.f90: src/imagempi.f90
 		$(CC) $(DEFINESERIAL) $< $(PREP) $@
 
 # compile other objects
@@ -53,10 +53,10 @@ binserial/%.o: src/%.f90 Makefile
 		$(SFC) $(CFLAGS) $(INCF) $(INC) $< -c -o $@
 
 # create executables
-serialversion: binserial/image.f90 binserial/precision.o $(SERIALOBJ) Makefile
+serialversion: binserial/imagempi.f90 binserial/precision.o $(SERIALOBJ) Makefile
 		$(SFC) binserial/precision.o $(SERIALOBJ) $< $(CFLAGS) $(INCF) $(INC) -o binserial/$(EXECUTABLE)
 
-mpiversion: bin/image.f90 bin/precision.o $(PARALLELOBJ) Makefile
+mpiversion: bin/imagempi.f90 bin/precision.o $(PARALLELOBJ) Makefile
 		$(PFC) bin/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o bin/$(EXECUTABLE)
 
 
@@ -64,7 +64,7 @@ mpiversion: bin/image.f90 bin/precision.o $(PARALLELOBJ) Makefile
 .PHONY: test mpirun run clean
 
 test:
-		./test/correctness/ctest.sh bin/image test/inputs test/morarserial
+		./test/correctness/ctest.sh bin/imagempi test/inputs test/morarserial
 
 runmpi:
 		$(MPIEXEC) -n 8 ./bin/$(EXECUTABLE) test/inputs/edge768x768.pgm 100 10

@@ -1,4 +1,4 @@
-program image
+program imagempi
   use precision
   use pgmio
 
@@ -142,4 +142,4 @@ contains
     return
   end function condition
 
-end program image
+end program imagempi
