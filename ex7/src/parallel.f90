@@ -69,7 +69,7 @@ contains
     logical, dimension(N_DIMS) :: periods
     logical :: reorder
     
-    ! Create cartesian topology 2D
+    ! Create virtual topology
     dims(:) = 0
     periods(:) = .false.
     reorder = .true.
@@ -78,15 +78,15 @@ contains
     call MPI_CART_CREATE(comm, N_DIMS, (/dims(2), dims(1) /), periods, reorder, cartcomm, ierr)
     call MPI_COMM_RANK(cartcomm, rank, ierr)
 
+    ! Get neighbours using shift in x and y direction
     y_dir = 0
     x_dir = 1
     disp = 1
 
-    ! Get neighbours
     call MPI_CART_SHIFT(cartcomm, y_dir, disp, n_down, n_up, ierr)
     call MPI_CART_SHIFT(cartcomm, x_dir, disp, n_left, n_right, ierr)
 
-    ! Compute the new array dimensions
+    ! Check if decomposition is valid, and calculate new dimentions
     if ((mod(nx, dims(1)) .ne. 0) .or. (mod(ny, dims(2)) .ne. 0)) then
         write(message,*) nx," is not divisible in ",dims(1)," parts"
         call par_abort("Could not decompose domain!"//message)
@@ -111,6 +111,12 @@ contains
   end subroutine par_decompose
 
   subroutine create_types()
+
+    ! X X X X   = = = =
+    ! X X X X   | - - |
+    ! X X X X   | - - |
+    ! X X X X   = = = =
+
     ! Create all the derived datatypes used in the program, they are:
     ! Block type, master block type, vertical halo and horitzontal halo
     integer, dimension(N_DIMS) :: sizes, subsizes, starts
