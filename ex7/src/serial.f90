@@ -27,7 +27,7 @@ MODULE serial
     N = ny
   end subroutine
 
-  subroutine par_Scatter(source, destination)
+  subroutine par_scatter(source, destination)
     real(kind=REALNUMBER), dimension(:,:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: destination
     destination = source

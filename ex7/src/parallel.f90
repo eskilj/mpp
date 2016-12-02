@@ -11,7 +11,7 @@ MODULE parallel
   end type timetype
   
   ! Constants
-  integer, parameter :: root = 0
+  integer, parameter :: ROOT = 0
   integer, parameter :: N_DIMS = 2 !Num of dimentions
 
   ! MPI VARIABLES
@@ -25,13 +25,13 @@ MODULE parallel
 
   ! MPI NEW DATATYPES
   integer :: MASTER_BLOCK_T, BLOCK_T, V_HALO_T, H_HALO_T
-  integer, dimension(:), allocatable :: counts, displs
+  integer, dimension(:), allocatable :: send_counts, displacements
 
 contains
 
   logical function par_ISROOT()
-    ! Return true when executen in the root process
-    par_ISROOT = rank == root
+    ! Return true when executen in the ROOT process
+    par_ISROOT = rank == ROOT
     return
   end function par_ISROOT
 
@@ -104,7 +104,7 @@ contains
              MPI_ORDER_FORTRAN, MPI_REALNUMBER, BLOCK_T, ierr)
     
     ! Master block type: distribution unit from master to working
-    ! processes, needs a extent resize and the proper counts and
+    ! processes, needs a extent resize and the proper send_counts and
     ! displacements in order to be accessed iteratively.
     sizes    = (/ MP*dims(1), NP*dims(2) /)
     subsizes = (/ MP, NP /)
@@ -118,13 +118,13 @@ contains
     call MPI_TYPE_CREATE_RESIZED(LONG_BLOCK_T, start, extent, &
              MASTER_BLOCK_T,ierr)
   
-    allocate(counts(size), displs(size), STAT=AllocateStatus)
+    allocate(send_counts(size), displacements(size), STAT=AllocateStatus)
     if(allocateStatus .ne. 0) call exit_all("*** NOT enough memory ***")
     
     base = 1
     do i= 1, size
-        counts(i) = 1
-        displs(i) = (base-1) + mod(i-1,dims(1))
+        send_counts(i) = 1
+        displacements(i) = (base-1) + mod(i-1,dims(1))
         if(mod(i,dims(1))==0) base = base + NP * dims(1)
     end do
 
@@ -141,17 +141,17 @@ contains
     call MPI_TYPE_COMMIT(H_HALO_T, ierr)
   end subroutine
 
-  subroutine par_Scatter(source, dest)
+  subroutine par_scatter(source, dest)
     real(kind=REALNUMBER), dimension(:,:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
-    call MPI_Scatterv(source, counts, displs, MASTER_BLOCK_T, &
+    call MPI_Scatterv(source, send_counts, displacements, MASTER_BLOCK_T, &
                       dest, MP*NP, MPI_REALNUMBER, 0, cartcomm,ierr)
-  end subroutine
+  end subroutine par_scatter
 
   subroutine par_Gather(source, dest)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
-    call MPI_GATHERV(source, 1, BLOCK_T, dest, counts, displs, &
+    call MPI_GATHERV(source, 1, BLOCK_T, dest, send_counts, displacements, &
                      MASTER_BLOCK_T, 0, cartcomm, ierr)
   end subroutine
 
