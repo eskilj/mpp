@@ -60,7 +60,7 @@ contains
 
   !  --------------- MPI V.TOPOLOGY METHODS -------------------------!
 
-  subroutine par_domain_decomposition_2D(nx,ny,npx,npy)
+  subroutine par_decompose(nx,ny,npx,npy)
 
     integer, intent(in) :: nx, ny
     integer, intent(out) :: npx, npy
@@ -108,7 +108,7 @@ contains
 
     ! Create the derived datatypes
     call create_types()
-  end subroutine
+  end subroutine par_decompose
 
   subroutine create_types()
     ! Create all the derived datatypes used in the program, they are:
@@ -160,7 +160,7 @@ contains
     call MPI_TYPE_COMMIT(INNER_WINDOW,  ierr)
     call MPI_TYPE_COMMIT(HALO_V, ierr)
     call MPI_TYPE_COMMIT(HALO_H, ierr)
-  end subroutine
+  end subroutine create_types
 
   !  --------------- MPI COMM METHODS -------------------------!
 
@@ -171,17 +171,17 @@ contains
                       dest, MP*NP, MPI_REALNUMBER, 0, cartcomm,ierr)
   end subroutine par_scatter
 
-  subroutine par_Gather(source, dest)
+  subroutine par_gather(source, dest)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
     call MPI_GATHERV(source, 1, INNER_WINDOW, dest, send_counts, displacements, &
                      FULL_WINDOW, 0, cartcomm, ierr)
-  end subroutine
+  end subroutine par_gather
 
 
-  subroutine par_HalosSwap(old)
+  subroutine par_swap_halos(old)
     ! Non-blocking send and reveive of all the halos, afterwards the
-    ! par_WaitHalos() routine should be called to ensure these communications
+    ! par_wait_halos() routine should be called to ensure these communications
     ! are completed.
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: old
    
@@ -195,12 +195,12 @@ contains
     call MPI_Irecv(old(1,0),1, HALO_H, n_down, 0,cartcomm,request(6),ierr)
     call MPI_Irecv(old(1,NP+1)   ,1, HALO_H, n_up ,0,cartcomm,request(8),ierr)
     
-  end subroutine par_HalosSwap
+  end subroutine par_swap_halos
 
-  subroutine par_WaitHalos()
+  subroutine par_wait_halos()
     integer, dimension(MPI_STATUS_SIZE,8) :: status
     call MPI_Waitall(8,request,status,ierr)
-  end subroutine par_WaitHalos
+  end subroutine par_wait_halos
 
   !  --------------- PROGRESS METHODS -------------------------!
 

@@ -79,7 +79,7 @@ program imagempi
     call par_print(message)
   end if
 
-  call par_Gather(old, master)
+  call par_gather(old, master)
   if (par_isroot()) call pgmwrite(outfile,master)
 
   !FINALIZE MessagePassing

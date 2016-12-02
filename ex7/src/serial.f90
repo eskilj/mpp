@@ -18,7 +18,7 @@ MODULE serial
   subroutine par_init()
   end subroutine par_init
 
-  subroutine par_domain_decomposition_2D(nx,ny,npx,npy)
+  subroutine par_decompose(nx,ny,npx,npy)
     integer, intent(in) :: nx, ny
     integer, intent(out) :: npx, npy
     npx = nx
@@ -85,11 +85,11 @@ MODULE serial
     return
   end function time_diff
 
-  subroutine exit_all(message)
+  subroutine par_abort(message)
     character(*), intent(in) :: message
     write(*,*) "Error in process 0 (serial code) :", message
     stop -1
-  end subroutine exit_all
+  end subroutine par_abort
 
   subroutine print_once(message)
     character(*), intent(in) :: message

@@ -28,7 +28,7 @@ program imagempi
 
   ! Initialize MessagePassing Library
   call par_init()
-  call par_domain_decomposition_2D(nx, ny, npx, npy)
+  call par_decompose(nx, ny, npx, npy)
 
   allocate(master(nx, ny), edge(npx, npy), old(0:npx+1, 0:npy+1), new(0:npx+1, 0:npy+1))
 
@@ -41,8 +41,8 @@ program imagempi
 
   do while ((iter .lt. MAX_ITER) .and. (max_diff .gt. DIFF_THRESHOLD))
     ! Cange the halos between surrounding processors if such exist
-    call par_HalosSwap(old)
-    call par_WaitHalos()
+    call par_swap_halos(old)
+    call par_wait_halos()
     
     ! Compute the local new values not dependent to halos
     do j = 1,npy
@@ -77,7 +77,7 @@ program imagempi
     call par_print(message)
   end if
 
-  call par_Gather(old, master)
+  call par_gather(old, master)
   if (par_isroot()) call pgmwrite(outfile,master)
 
   !FINALIZE MessagePassing
