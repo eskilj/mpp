@@ -40,20 +40,25 @@ contains
 
   subroutine par_finalize()
     ! Free the used resources, finalize MPI
-    call MPI_TYPE_FREE(FULL_WINDOW,ierr)
-    call MPI_TYPE_FREE(INNER_WINDOW,ierr)
-    call MPI_TYPE_FREE(HALO_H,ierr)
-    call MPI_TYPE_FREE(HALO_V,ierr)
+    call MPI_TYPE_FREE(FULL_WINDOW, ierr)
+    call MPI_TYPE_FREE(INNER_WINDOW, ierr)
+    call MPI_TYPE_FREE(HALO_H, ierr)
+    call MPI_TYPE_FREE(HALO_V, ierr)
     call MPI_Finalize(ierr)
   end subroutine par_finalize
+
+  subroutine par_abort(message)
+    character(*), intent(in) :: message
+    write(*,*) "Error in process", rank, ":", message
+    call MPI_ABORT(comm, 2, ierr)
+  end subroutine par_abort
 
   logical function par_isroot()
     ! Return true when executen in the ROOT process
     par_isroot = rank == ROOT
-    return
   end function par_isroot
 
-  !  --------------- GLOBAL MPI METHODS -------------------------!
+  !  --------------- MPI V.TOPOLOGY METHODS -------------------------!
 
   subroutine par_domain_decomposition_2D(nx,ny,npx,npy)
 
@@ -84,7 +89,7 @@ contains
     ! Compute the new array dimensions
     if ((mod(nx, dims(1)) .ne. 0) .or. (mod(ny, dims(2)) .ne. 0)) then
         write(message,*) nx," is not divisible in ",dims(1)," parts"
-        call exit_all("Could not decompose domain!"//message)
+        call par_abort("Could not decompose domain!"//message)
     end if
 
     npx = nx/dims(1)
@@ -135,7 +140,7 @@ contains
              FULL_WINDOW,ierr)
   
     allocate(send_counts(size), displacements(size), STAT=AllocateStatus)
-    if(allocateStatus .ne. 0) call exit_all("*** NOT enough memory ***")
+    if(allocateStatus .ne. 0) call par_abort("*** NOT enough memory ***")
     
     base = 1
     do i= 1, size
@@ -156,6 +161,8 @@ contains
     call MPI_TYPE_COMMIT(HALO_V, ierr)
     call MPI_TYPE_COMMIT(HALO_H, ierr)
   end subroutine
+
+  !  --------------- MPI COMM METHODS -------------------------!
 
   subroutine par_scatter(source, dest)
     real(kind=REALNUMBER), dimension(:,:), intent(in) :: source
@@ -194,6 +201,8 @@ contains
     integer, dimension(MPI_STATUS_SIZE,8) :: status
     call MPI_Waitall(8,request,status,ierr)
   end subroutine par_WaitHalos
+
+  !  --------------- PROGRESS METHODS -------------------------!
 
   real(kind=REALNUMBER) function par_calc_max_diff(new, old)
 
@@ -236,12 +245,6 @@ contains
     time_diff = real(time_finish%value - time_start%value)
     return
   end function time_diff
-
-  subroutine exit_all(message)
-    character(*), intent(in) :: message
-    write(*,*) "Error in process", rank, ":", message
-    call MPI_ABORT(comm, 2, ierr)
-  end subroutine exit_all
 
   subroutine par_print(message)
     character(*), intent(in) :: message

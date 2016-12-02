@@ -70,7 +70,7 @@ program imagempi
   end do
   
   time_finish = get_time()
-  
+
   if (par_isroot()) then 
     write(message,'(A9,I5,A15,F8.3,A8)')"Executed ", iter," iterations in ", &
                                        time_diff(time_start,time_finish)," seconds."
@@ -88,7 +88,7 @@ program imagempi
 contains
 
   subroutine getParameters(filename)
-    character(len=100), intent(out) :: filename
+    character(maxlen), intent(out) :: filename
     integer :: num_args
 
     num_args = command_argument_count()
