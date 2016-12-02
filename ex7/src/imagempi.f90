@@ -10,10 +10,9 @@ program imagempi
 
   implicit none
 
-  integer :: PROGRESS_INTERVAL
-  integer :: numiter, AllocateStatus
+  integer :: AllocateStatus
   integer :: i, j, nx, ny, npx, npy, it
-  integer, parameter :: maxlen = 100
+  integer, parameter :: maxlen = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 100
   character(maxlen) :: filename, outfile,  message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: image, edge, old, new
   real(kind=REALNUMBER), parameter :: MAX_CHANGE = 0.1
@@ -22,8 +21,10 @@ program imagempi
   
   !  --------------- INITIALIZATION  -------------------------! 
   ! Read parameters
-  call getParameters(filename, outfile, numiter, PROGRESS_INTERVAL)
+  call getParameters(filename)
   call pgmsize(filename, nx, ny)
+
+  outfile = 'out.pgm'
 
   ! Initialize MessagePassing Library
   call par_Init()
@@ -56,7 +57,7 @@ program imagempi
   ! EXECUTE INVERT EDGES ALGORITHM
   time_start = get_time()
   it = 0
-  do while (.not. condition(it, maxchange, numiter))
+  do while (.not. condition(it, maxchange, MAX_ITER))
     ! Cange the halos between surrounding processors if such exist
     call par_HalosSwap(old)
     call par_WaitHalos()
@@ -72,7 +73,7 @@ program imagempi
     ! Perform the necessary reductions every PROGRESS_INTERVAL
     it = it + 1
     if (mod(it,PROGRESS_INTERVAL) == 0) then
-      if (numiter == 0 ) then ! Only when a fixed number of iterations is not set
+      if (MAX_ITER == 0 ) then ! Only when a fixed number of iterations is not set
         call par_GetMaxChange(new, old, maxchange)
       end if
       call par_GetAverage(new, average)
@@ -110,35 +111,22 @@ program imagempi
 
 contains
 
-  subroutine getParameters(filename, outfile, numiter, it_btw_red)
-    character(len=100), intent(out) :: filename, outfile
-    integer, intent(out) :: numiter, it_btw_red
+  subroutine getParameters(filename)
+    character(len=100), intent(out) :: filename
     integer :: num_args
-    character(len=100) :: numit_s, it_btw_red_s
 
     num_args = command_argument_count()
-    if (num_args == 3)  then
-      outfile = 'output.pgm'
-    elseif (num_args == 4) then
-      call get_command_argument(4, outfile)
-    else
-      call exit_all("WRONG ARGUMENTS!")
-    end if
     call get_command_argument(1, filename)
-    call get_command_argument(2, numit_s)
-    call get_command_argument(3, it_btw_red_s)
-    read(numit_s,*) numiter
-    read(it_btw_red_s,*) it_btw_red
   end subroutine getParameters
 
-  logical function condition(it,maxchange,numiter)
-    integer, intent(in) :: it, numiter
+  logical function condition(it,maxchange,MAX_ITER)
+    integer, intent(in) :: it, MAX_ITER
     real(kind=REALNUMBER), intent(in) :: maxchange
 
-    if (numiter == 0) then !if num iteration not fixed
+    if (MAX_ITER == 0) then !if num iteration not fixed
       condition = maxchange < MAX_CHANGE !Stopping criterion
     else
-      condition = numiter <= it
+      condition = MAX_ITER <= it
     end if
     return
   end function condition
