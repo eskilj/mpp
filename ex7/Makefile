@@ -1,12 +1,19 @@
 # MODIFICABLE VARIABLES
 
 
-#CIRRUS
-SFC=pgf90
+#macOS
+SFC=gfortran
 PFC=mpif90
 CFLAGS=-O3
 MPIEXEC=mpirun
-INCF=-module
+INCF=-J
+
+#CIRRUS
+#SFC=pgf90
+#PFC=mpif90
+#CFLAGS=-O3
+#MPIEXEC=mpirun
+#NCF=-module
 
 #Preprocessing
 CC=gcc
