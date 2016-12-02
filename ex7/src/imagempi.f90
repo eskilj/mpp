@@ -53,7 +53,7 @@ program imagempi
 
     ! Perform the necessary reductions every PROGRESS_INTERVAL
     iter = iter + 1
-    if (mod(it,PROGRESS_INTERVAL) == 0) then
+    if (mod(iter,PROGRESS_INTERVAL) == 0) then
 
       max_diff = par_calc_max_diff(new, old)
       average = par_calc_ave(new, nx*ny)
