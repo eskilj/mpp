@@ -54,7 +54,6 @@ contains
     logical :: reorder
     
     ! Create cartesian topology 2D
-
     dims(:) = 0
     periods(:) = .false.
     reorder = .true.
@@ -72,14 +71,11 @@ contains
     call MPI_CART_SHIFT(cartcomm, x_dir, disp, n_left, n_right, ierr)
 
     ! Compute the new array dimensions
-    if(mod(nx,dims(1))/=0) then
+    if ((mod(nx, dims(1)) .ne. 0) .or. (mod(ny, dims(2)) .ne. 0)) then
         write(message,*) nx," is not divisible in ",dims(1)," parts"
         call exit_all("Could not decompose domain!"//message)
     end if
-    if(mod(ny,dims(2))/=0) then
-        write(message,*) ny," is not divisible in ",dims(2)," parts"
-        call exit_all("Could not decompose domain!"//message)
-    end if
+
     npx = nx/dims(1)
     npy = ny/dims(2)
     Mp = npx
@@ -126,10 +122,8 @@ contains
     call MPI_TYPE_CREATE_RESIZED(LONG_BLOCK_T, start, extent, &
              MASTER_BLOCK_T,ierr)
   
-    allocate(counts(size), STAT=AllocateStatus)
-    if(allocateStatus /= 0) call exit_all("*** NOT enough memory ***")
-    allocate(displs(size), STAT=AllocateStatus)
-    if(allocateStatus /= 0) call exit_all("*** NOT enough memory ***")
+    allocate(counts(size), displs(size), STAT=AllocateStatus)
+    if(allocateStatus .ne. 0) call exit_all("*** NOT enough memory ***")
     
     base = 1
     do i= 1, size
