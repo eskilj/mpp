@@ -193,18 +193,18 @@ contains
 
   end subroutine par_GetMaxChange
 
-  integer function par_calc_ave(new)
+  integer function par_calc_ave(new, num_pixels)
     ! Compute the local sumation of the pixels,
     ! reduce the summation of all processes and
     ! divide by the total number of pixels to get the average
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
     real(kind=REALNUMBER) :: localsum, totalsum
-    integer :: num_pixels
+    integer, intent(in) :: num_pixels
 
     localsum = real(sum(real(new(1:MP,1:NP),kind=8)),kind=REALNUMBER)
     call MPI_ALLREDUCE(localsum,totalsum,1,MPI_REALNUMBER, &
                        MPI_SUM, cartcomm, ierr)
-    num_pixels = size(new, 1) * size(new, 2)
+    if(num_pixels .ne. GM*GN) call exit_all("*** NOT enough memory ***")
     par_calc_ave = totalsum / num_pixels
   end function par_calc_ave
 
