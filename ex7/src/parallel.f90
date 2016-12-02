@@ -20,7 +20,6 @@ MODULE parallel
   integer, dimension(8) :: request
   
   ! Problem parameters
-  integer, dimension(N_DIMS) :: dims
   integer :: Mp, Np, GM, GN ! Local and global array sizes
 
   ! MPI NEW DATATYPES
@@ -43,13 +42,11 @@ contains
   end subroutine par_init
 
   subroutine par_domain_decomposition_2D(nx,ny,npx,npy)
-    ! Creates a 2D cartesian communicator with the appropriate dimensions,
-    ! compute the neighbours for each process and computes the MP and NP
-    ! At the end calls the routine to create the derived datatypes
     integer, intent(in) :: nx, ny
     integer, intent(out) :: npx, npy
     integer :: y_dir, x_dir, disp
     character(len=100) :: message
+    integer, dimension(N_DIMS) :: dims
     logical, dimension(N_DIMS) :: periods
     logical :: reorder
     
@@ -90,12 +87,13 @@ contains
     call print_once(" ->  Grid of size: "//message)
 
     ! Create the derived datatypes
-    call create_types()
+    call create_types(dims)
   end subroutine
 
-  subroutine create_types()
+  subroutine create_types(dims)
     ! Create all the derived datatypes used in the program, they are:
     ! Block type, master block type, vertical halo and horitzontal halo
+    integer, intent(in), dimension(N_DIMS) :: dims
     integer, dimension(N_DIMS) :: sizes, subsizes, starts
     integer(kind=mpi_address_kind) :: start, extent, lb, realextent
     integer :: AllocateStatus, i, base, LONG_BLOCK_T

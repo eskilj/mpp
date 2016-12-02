@@ -48,8 +48,7 @@ MODULE serial
   end subroutine
 
   subroutine par_GetMaxChange(new, old, maxchange)
-    real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
-    real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: old
+    real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new, old
     real(kind=REALNUMBER), intent(inout) :: maxchange
     maxchange = maxval(abs(new(1:M,1:N)-old(1:M,1:N)))
   end subroutine par_GetMaxChange
