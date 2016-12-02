@@ -11,7 +11,7 @@ program imagempi
   implicit none
 
   integer :: AllocateStatus
-  integer :: i, j, nx, ny, npx, npy, it
+  integer :: i, j, nx, ny, npx, npy, it = 0
   integer, parameter :: maxlen = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 100
   character(maxlen) :: filename, outfile,  message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: masterbuf, edge, old, new
@@ -30,10 +30,7 @@ program imagempi
   call par_Init()
   call par_domain_decomposition_2D(nx, ny, npx, npy)
 
-  allocate(masterbuf(nx, ny))
-  allocate(edge(npx, npy))
-  allocate(old(0:npx+1, 0:npy+1))
-  allocate(new(0:npx+1, 0:npy+1))
+  allocate(masterbuf(nx, ny), edge(npx, npy), old(0:npx+1, 0:npy+1), new(0:npx+1, 0:npy+1))
 
   if (par_ISROOT()) call pgmread(filename, masterbuf)
   call par_Scatter(masterbuf, edge)
@@ -41,7 +38,6 @@ program imagempi
  
   ! EXECUTE INVERT EDGES ALGORITHM
   time_start = get_time()
-  it = 0
 
   do while ((it .lt. MAX_ITER) .and. (maxchange .gt. MAX_CHANGE))
     ! Cange the halos between surrounding processors if such exist
@@ -76,17 +72,10 @@ program imagempi
   write(message,'(A9,I5,A15,F8.3,A8)')"Executed ", it," iterations in ", &
                                        time_diff(time_start,time_finish)," seconds."
   call print_once(message)
-  
-  ! Gather the data again to the root proces and write it to the output file
-  time_start = get_time()
 
-  call par_Gather(old,masterbuf)
+  call par_Gather(old, masterbuf)
   if (par_ISROOT()) call pgmwrite(outfile,masterbuf)
-  
-  time_finish = get_time()
-  write(message,*) "Data gathered and writed in ", time_diff(time_start,time_finish), " sec"
-  call print_once(message)
-  
+
   !FINALIZE MessagePassing
   call par_Finalize()
   
