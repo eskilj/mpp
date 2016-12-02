@@ -16,8 +16,8 @@ PREP=-cpp -E -P -o
 
 # PROJECT VARIABLES
 EXECUTABLE=image
-SERIALSRC=src/pgmio.f90 src/serial
-PARALLELSRC= src/pgmio.f90 src/parallel
+SERIALSRC=src/pgmio.f90 src/serial.f90
+PARALLELSRC= src/pgmio.f90 src/parallel.f90
 SERIALOBJ=$(patsubst src/%.f90,binserial/%.o,$(SERIALSRC))
 PARALLELOBJ=$(patsubst src/%.f90,bin/%.o,$(PARALLELSRC))
 INC=include
@@ -56,7 +56,7 @@ binserial/%.o: src/%.f90 Makefile
 serialversion: binserial/image.f90 binserial/precision.o $(SERIALOBJ) Makefile
 		$(SFC) binserial/precision.o $(SERIALOBJ) $< $(CFLAGS) $(INCF) $(INC) -o binserial/$(EXECUTABLE)
 
-mpiversion: bin/invertedges.f90 bin/precision.o $(PARALLELOBJ) Makefile
+mpiversion: bin/image.f90 bin/precision.o $(PARALLELOBJ) Makefile
 		$(PFC) bin/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o bin/$(EXECUTABLE)
 
 

@@ -1,10 +1,10 @@
 MODULE precision
-#ifndef SERIALVERSION
+#ifndef SERIAL
   use mpi
 #endif
   implicit none
   integer, parameter :: REALNUMBER = kind(1.0e0)
-#ifndef SERIALVERSION
+#ifndef SERIAL
   integer, parameter :: MPI_REALNUMBER = MPI_REAL
 #endif
 
