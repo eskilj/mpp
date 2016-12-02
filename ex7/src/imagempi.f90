@@ -30,17 +30,12 @@ program imagempi
   call par_Init()
   call par_domain_decomposition_2D(nx,ny,npx,npy)
 
-  ! Allocate arrays memory
-  allocate(image(nx,ny) , STAT = AllocateStatus )
-  if (allocateStatus /= 0) call exit_all(" *** NOT enough memory ***")
-  allocate(edge(npx,npy) , STAT = AllocateStatus )
-  if (allocateStatus /= 0) call exit_all(" *** NOT enough memory ***")
-  allocate(old(0:npx+1,0:npy+1) , STAT = AllocateStatus )
-  if (allocateStatus /= 0) call exit_all(" *** NOT enough memory ***")
-  allocate(new(0:npx+1,0:npy+1) , STAT = AllocateStatus )
-  if (allocateStatus /= 0) call exit_all(" *** NOT enough memory ***")
-  call print_all("All arrays allocated successfully!")
+  allocate(image(nx, ny))
+  allocate(edge(npx, npy))
+  allocate(old(0:npx+1, 0:npy+1))
+  allocate(new(0:npx+1, 0:npy+1))
 
+  call print_all("All arrays allocated successfully!")
 
   ! Read image and distribute between processes
   time_start = get_time()

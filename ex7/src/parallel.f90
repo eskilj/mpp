@@ -15,7 +15,7 @@ MODULE parallel
   integer, parameter :: N_DIMS = 2 !Num of dimentions
 
   ! MPI VARIABLES
-  integer :: comm, size, cartcomm, myrank, ierr, errorcode
+  integer :: comm, size, cartcomm, rank, ierr, errorcode
   integer :: n_left, n_right, n_up, n_down !process neighbours
   integer, dimension(8) :: request
   
@@ -31,12 +31,12 @@ contains
 
   logical function par_ISROOT()
     ! Return true when executen in the root process
-    par_ISROOT = myrank == root
+    par_ISROOT = rank == root
     return
   end function par_ISROOT
 
+  !Init MPI Variables
   subroutine par_init()
-    ! Initialize the MPI structures
     call MPI_INIT(ierr)
     comm = MPI_COMM_WORLD
     call MPI_COMM_SIZE(comm, size, ierr)
@@ -48,27 +48,28 @@ contains
     ! At the end calls the routine to create the derived datatypes
     integer, intent(in) :: nx, ny
     integer, intent(out) :: npx, npy
+    integer :: y_dir, x_dir, disp
     character(len=100) :: message
     logical, dimension(N_DIMS) :: periods
     logical :: reorder
     
     ! Create cartesian topology 2D
 
-
-    ! Cartesian topology
-
     dims(:) = 0
     periods(:) = .false.
     reorder = .true.
-    ! Shift along the first index Shift by 1
 
     call MPI_DIMS_CREATE(size, N_DIMS, dims, ierr)
     call MPI_CART_CREATE(comm, N_DIMS, dims, periods, reorder, cartcomm, ierr)
-    call MPI_COMM_RANK(cartcomm, myrank, ierr)
+    call MPI_COMM_RANK(cartcomm, rank, ierr)
+
+    y_dir = 0
+    x_dir = 1
+    disp = 1
 
     ! Get neighbours
-    call MPI_CART_SHIFT(cartcomm,0,1,n_down,n_up,ierr)
-    call MPI_CART_SHIFT(cartcomm,1,1,n_left,n_right,ierr)
+    call MPI_CART_SHIFT(cartcomm, y_dir, disp, n_down, n_up, ierr)
+    call MPI_CART_SHIFT(cartcomm, x_dir, disp, n_left, n_right, ierr)
 
     ! Compute the new array dimensions
     if(mod(nx,dims(1))/=0) then
@@ -244,7 +245,7 @@ contains
 
   subroutine exit_all(message)
     character(*), intent(in) :: message
-    write(*,*) "Error in process", myrank, ":", message
+    write(*,*) "Error in process", rank, ":", message
     call MPI_ABORT(comm, 2, ierr)
   end subroutine exit_all
   
@@ -258,7 +259,7 @@ contains
   subroutine print_all(message)
     character(*), intent(in) :: message
     character(len=12) :: pn
-    write(pn,'(A7,I4)') "Process ",myrank
+    write(pn,'(A7,I4)') "Process ",rank
     write(*,*) pn,": ", message
   end subroutine print_all
 
