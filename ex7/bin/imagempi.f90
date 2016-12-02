@@ -16,7 +16,7 @@ program imagempi
   integer :: i, j, nx, ny, npx, npy, it = 0
   integer, parameter :: maxlen = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 100
   character(maxlen) :: filename, outfile,  message
-  real(kind=REALNUMBER), dimension(:,:), allocatable :: masterbuf, edge, old, new
+  real(kind=REALNUMBER), dimension(:,:), allocatable :: master, edge, old, new
   real(kind=REALNUMBER), parameter :: DIFF_THRESHOLD = 0.1
   real(kind=REALNUMBER) :: average, max_diff = 1
   type(timetype) :: time_start, time_finish
@@ -29,13 +29,13 @@ program imagempi
   outfile = 'out.pgm'
 
   ! Initialize MessagePassing Library
-  call par_Init()
+  call par_init()
   call par_domain_decomposition_2D(nx, ny, npx, npy)
 
-  allocate(masterbuf(nx, ny), edge(npx, npy), old(0:npx+1, 0:npy+1), new(0:npx+1, 0:npy+1))
+  allocate(master(nx, ny), edge(npx, npy), old(0:npx+1, 0:npy+1), new(0:npx+1, 0:npy+1))
 
-  if (par_ISROOT()) call pgmread(filename, masterbuf)
-  call par_Scatter(masterbuf, edge)
+  if (par_isroot()) call pgmread(filename, master)
+  call par_scatter(master, edge)
   old(:,:) = 255
  
   ! EXECUTE INVERT EDGES ALGORITHM
@@ -49,8 +49,7 @@ program imagempi
     ! Compute the local new values not dependent to halos
     do j = 1,npy
       do i = 1,npx
-        new(i,j) = 0.25 * ( old(i-1,j) + old(i+1,j) + old(i,j-1) &
-                    + old(i,j+1) - edge(i,j) )
+        new(i,j) = 0.25 * (old(i-1,j) + old(i+1,j) + old(i,j-1) + old(i,j+1) - edge(i,j))
       end do
     end do
 
@@ -75,13 +74,13 @@ program imagempi
                                        time_diff(time_start,time_finish)," seconds."
   call print_once(message)
 
-  call par_Gather(old, masterbuf)
-  if (par_ISROOT()) call pgmwrite(outfile,masterbuf)
+  call par_Gather(old, master)
+  if (par_isroot()) call pgmwrite(outfile,master)
 
   !FINALIZE MessagePassing
-  call par_Finalize()
+  call par_finalize()
   
-  deallocate(masterbuf, edge, new, old)
+  deallocate(master, edge, new, old)
 
 contains
 
