@@ -190,7 +190,7 @@ contains
 
   end function par_calc_max_diff
 
-  integer function par_calc_ave(new, num_pixels)
+  real(kind=REALNUMBER) function par_calc_ave(new, num_pixels)
     ! Compute the local sumation of the pixels,
     ! reduce the summation of all processes and
     ! divide by the total number of pixels to get the average
