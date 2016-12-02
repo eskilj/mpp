@@ -17,8 +17,8 @@ program imagempi
   integer, parameter :: maxlen = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 100
   character(maxlen) :: filename, outfile,  message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: masterbuf, edge, old, new
-  real(kind=REALNUMBER), parameter :: MAX_CHANGE = 0.1
-  real(kind=REALNUMBER) :: average, maxchange = 1
+  real(kind=REALNUMBER), parameter :: DIFF_THRESHOLD = 0.1
+  real(kind=REALNUMBER) :: average, max_diff = 1
   type(timetype) :: time_start, time_finish
   
   !  --------------- INITIALIZATION  -------------------------! 
@@ -41,7 +41,7 @@ program imagempi
   ! EXECUTE INVERT EDGES ALGORITHM
   time_start = get_time()
 
-  do while ((it .lt. MAX_ITER) .and. (maxchange .gt. MAX_CHANGE))
+  do while ((it .lt. MAX_ITER) .and. (max_diff .gt. DIFF_THRESHOLD))
     ! Cange the halos between surrounding processors if such exist
     call par_HalosSwap(old)
     call par_WaitHalos()
@@ -58,7 +58,7 @@ program imagempi
     it = it + 1
     if (mod(it,PROGRESS_INTERVAL) == 0) then
 
-      call par_GetMaxChange(new, old, maxchange)
+      max_diff = par_calc_max_diff(new, old)
       average = par_calc_ave(new, nx*ny)
       
       write(message,'(A10,I5,A17,F6.1)') "Iteration ",it,", pixel average: ", average
