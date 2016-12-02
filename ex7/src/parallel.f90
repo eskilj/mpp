@@ -24,7 +24,7 @@ MODULE parallel
   integer :: MP, NP ! Local array sizes
 
   ! MPI NEW DATATYPES
-  integer :: MASTER_BLOCK_T, BLOCK_T, V_HALO_T, H_HALO_T
+  integer :: FULL_WINDOW, INNER_WINDOW, HALO_V, HALO_H
   integer, dimension(:), allocatable :: send_counts, displacements
 
 contains
@@ -40,10 +40,10 @@ contains
 
   subroutine par_finalize()
     ! Free the used resources, finalize MPI
-    call MPI_TYPE_FREE(MASTER_BLOCK_T,ierr)
-    call MPI_TYPE_FREE(BLOCK_T,ierr)
-    call MPI_TYPE_FREE(H_HALO_T,ierr)
-    call MPI_TYPE_FREE(V_HALO_T,ierr)
+    call MPI_TYPE_FREE(FULL_WINDOW,ierr)
+    call MPI_TYPE_FREE(INNER_WINDOW,ierr)
+    call MPI_TYPE_FREE(HALO_H,ierr)
+    call MPI_TYPE_FREE(HALO_V,ierr)
     call MPI_Finalize(ierr)
   end subroutine par_finalize
 
@@ -107,14 +107,14 @@ contains
     ! Block type, master block type, vertical halo and horitzontal halo
     integer, dimension(N_DIMS) :: sizes, subsizes, starts
     integer(kind=mpi_address_kind) :: start, extent, lb, realextent
-    integer :: AllocateStatus, i, base, LONG_BLOCK_T
+    integer :: AllocateStatus, i, base, LONG_INNER_WINDOW
     
     ! Block type: space in local arrays, inside halos
     sizes    = (/ MP+2, NP+2 /)
     subsizes = (/ MP , NP /)
     starts(:)   = 1
     call MPI_TYPE_CREATE_SUBARRAY(N_DIMS, sizes, subsizes, starts, &
-             MPI_ORDER_FORTRAN, MPI_REALNUMBER, BLOCK_T, ierr)
+             MPI_ORDER_FORTRAN, MPI_REALNUMBER, INNER_WINDOW, ierr)
     
     ! Master block type: distribution unit from master to working
     ! processes, needs a extent resize and the proper send_counts and
@@ -123,13 +123,13 @@ contains
     subsizes = (/ MP, NP /)
     starts(:)   = 0
     call MPI_TYPE_CREATE_SUBARRAY(N_DIMS, sizes, subsizes, starts, &
-             MPI_ORDER_FORTRAN, MPI_REALNUMBER, LONG_BLOCK_T, ierr)
+             MPI_ORDER_FORTRAN, MPI_REALNUMBER, LONG_INNER_WINDOW, ierr)
     call MPI_TYPE_GET_EXTENT(MPI_REALNUMBER, lb, realextent, ierr)
 
     start = 0
     extent = MP*realextent
-    call MPI_TYPE_CREATE_RESIZED(LONG_BLOCK_T, start, extent, &
-             MASTER_BLOCK_T,ierr)
+    call MPI_TYPE_CREATE_RESIZED(LONG_INNER_WINDOW, start, extent, &
+             FULL_WINDOW,ierr)
   
     allocate(send_counts(size), displacements(size), STAT=AllocateStatus)
     if(allocateStatus .ne. 0) call exit_all("*** NOT enough memory ***")
@@ -144,28 +144,28 @@ contains
     ! HALO VECTORS (HALO-HALO INTERSECTIONS ARE NOT NEDDED)
     ! Horitzontal halo data is contiguous, defined to maintain
     ! code cohesion in all halo swaps.
-    call MPI_TYPE_VECTOR(NP, 1 , MP+2, MPI_REALNUMBER, V_HALO_T, ierr)
-    call MPI_TYPE_VECTOR(1 , MP, MP  , MPI_REALNUMBER, H_HALO_T, ierr)
+    call MPI_TYPE_VECTOR(NP, 1 , MP+2, MPI_REALNUMBER, HALO_V, ierr)
+    call MPI_TYPE_VECTOR(1 , MP, MP  , MPI_REALNUMBER, HALO_H, ierr)
     
     ! COMMIT NEW MPI DATATYPES
-    call MPI_TYPE_COMMIT(MASTER_BLOCK_T, ierr)
-    call MPI_TYPE_COMMIT(BLOCK_T,  ierr)
-    call MPI_TYPE_COMMIT(V_HALO_T, ierr)
-    call MPI_TYPE_COMMIT(H_HALO_T, ierr)
+    call MPI_TYPE_COMMIT(FULL_WINDOW, ierr)
+    call MPI_TYPE_COMMIT(INNER_WINDOW,  ierr)
+    call MPI_TYPE_COMMIT(HALO_V, ierr)
+    call MPI_TYPE_COMMIT(HALO_H, ierr)
   end subroutine
 
   subroutine par_scatter(source, dest)
     real(kind=REALNUMBER), dimension(:,:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
-    call MPI_Scatterv(source, send_counts, displacements, MASTER_BLOCK_T, &
+    call MPI_Scatterv(source, send_counts, displacements, FULL_WINDOW, &
                       dest, MP*NP, MPI_REALNUMBER, 0, cartcomm,ierr)
   end subroutine par_scatter
 
   subroutine par_Gather(source, dest)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
-    call MPI_GATHERV(source, 1, BLOCK_T, dest, send_counts, displacements, &
-                     MASTER_BLOCK_T, 0, cartcomm, ierr)
+    call MPI_GATHERV(source, 1, INNER_WINDOW, dest, send_counts, displacements, &
+                     FULL_WINDOW, 0, cartcomm, ierr)
   end subroutine
 
 
@@ -175,15 +175,15 @@ contains
     ! are completed.
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: old
    
-    call MPI_Issend(old(MP,1),1, V_HALO_T, n_right ,0,cartcomm,request(1),ierr)
-    call MPI_Issend(old(1,1) ,1, V_HALO_T, n_left   ,0,cartcomm,request(3),ierr)
-    call MPI_Issend(old(1,1),1, H_HALO_T, n_down,0,cartcomm,request(7),ierr)
-    call MPI_Issend(old(1,NP) ,1, H_HALO_T, n_up ,0,cartcomm,request(5),ierr)
+    call MPI_Issend(old(MP,1),1, HALO_V, n_right ,0,cartcomm,request(1),ierr)
+    call MPI_Issend(old(1,1) ,1, HALO_V, n_left   ,0,cartcomm,request(3),ierr)
+    call MPI_Issend(old(1,1),1, HALO_H, n_down,0,cartcomm,request(7),ierr)
+    call MPI_Issend(old(1,NP) ,1, HALO_H, n_up ,0,cartcomm,request(5),ierr)
     
-    call MPI_Irecv(old(MP+1,1),1, V_HALO_T, n_right ,0,cartcomm,request(4),ierr)
-    call MPI_Irecv(old(0,1)   ,1, V_HALO_T, n_left ,0,cartcomm,request(2),ierr)
-    call MPI_Irecv(old(1,0),1, H_HALO_T, n_down, 0,cartcomm,request(6),ierr)
-    call MPI_Irecv(old(1,NP+1)   ,1, H_HALO_T, n_up ,0,cartcomm,request(8),ierr)
+    call MPI_Irecv(old(MP+1,1),1, HALO_V, n_right ,0,cartcomm,request(4),ierr)
+    call MPI_Irecv(old(0,1)   ,1, HALO_V, n_left ,0,cartcomm,request(2),ierr)
+    call MPI_Irecv(old(1,0),1, HALO_H, n_down, 0,cartcomm,request(6),ierr)
+    call MPI_Irecv(old(1,NP+1)   ,1, HALO_H, n_up ,0,cartcomm,request(8),ierr)
     
   end subroutine par_HalosSwap
 
@@ -192,9 +192,9 @@ contains
     call MPI_Waitall(8,request,status,ierr)
   end subroutine par_WaitHalos
 
-  !Calculate maximum change across the image
   real(kind=REALNUMBER) function par_calc_max_diff(new, old)
 
+    ! Calculate maximum change across the image
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new, old
     real(kind=REALNUMBER) :: max_diff
 
@@ -204,6 +204,7 @@ contains
   end function par_calc_max_diff
 
   real(kind=REALNUMBER) function par_calc_ave(new, num_pixels)
+
     ! Calculate average the average pixel value by finding the local sum and ALLREDUCE
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
     real(kind=REALNUMBER) :: localsum, totalsum

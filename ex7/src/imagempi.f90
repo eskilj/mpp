@@ -27,13 +27,12 @@ program imagempi
   outfile = 'out.pgm'
 
   ! Initialize MessagePassing Library
-  call par_Init()
+  call par_init()
   call par_domain_decomposition_2D(nx, ny, npx, npy)
 
   allocate(master(nx, ny), edge(npx, npy), old(0:npx+1, 0:npy+1), new(0:npx+1, 0:npy+1))
 
   if (par_isroot()) call pgmread(filename, master)
-  if (par_isroot()) print *, rank
   call par_scatter(master, edge)
   old(:,:) = 255
  
