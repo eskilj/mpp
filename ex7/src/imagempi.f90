@@ -53,13 +53,15 @@ program imagempi
 
     ! Perform the necessary reductions every PROGRESS_INTERVAL
     iter = iter + 1
-    if (mod(iter,PROGRESS_INTERVAL) == 0) then
+    if (mod(iter, PROGRESS_INTERVAL) == 0) then
 
       max_diff = par_calc_max_diff(new, old)
       average = par_calc_ave(new, nx*ny)
       
-      write(message,'(A10,I5,A17,F6.1)') "Iteration ",iter,", pixel average: ", average
-      call par_print(message)
+      if (par_isroot()) then 
+        write(message,'(A10,I5,A17,F6.1)') "Iteration ",iter,", pixel average: ", average
+        call par_print(message)
+      end if
     end if
 
     !Re-assign new to old
@@ -68,9 +70,12 @@ program imagempi
   end do
   
   time_finish = get_time()
-  write(message,'(A9,I5,A15,F8.3,A8)')"Executed ", iter," iterations in ", &
+  
+  if (par_isroot()) then 
+    write(message,'(A9,I5,A15,F8.3,A8)')"Executed ", iter," iterations in ", &
                                        time_diff(time_start,time_finish)," seconds."
-  call par_print(message)
+    call par_print(message)
+  end if
 
   call par_Gather(old, master)
   if (par_isroot()) call pgmwrite(outfile,master)
