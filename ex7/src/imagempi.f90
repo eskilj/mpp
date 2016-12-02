@@ -32,7 +32,7 @@ program imagempi
   call par_decompose(nx, ny, npx, npy)
 
   ! allocate arrays used for the image processing
-  allocate(master(nx, ny), edge(npx, npy), old(0:npx+1, 0:npy+1), new(0:npx+1, 0:npy+1))
+  allocate(master(nx, ny), edge(npx, npy), old(0:npx+1, 0:npy+1), new(0:npx+1, 0:npy+1), STAT = check_allocation)
 
   ! read image data into master and distribute
   if (par_isroot()) call pgmread(filename, master)
@@ -98,5 +98,10 @@ contains
     num_args = command_argument_count()
     call get_command_argument(1, filename)
   end subroutine getParameters
+
+  integer function check_allocation(allocation_status)
+    integer, intent(in) :: allocation_status
+    print *, allocation_status
+  end function
 
 end program imagempi
