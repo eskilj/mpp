@@ -50,17 +50,17 @@ contains
     integer, intent(out) :: npx, npy
     character(len=100) :: message
     logical, dimension(N_DIMS) :: periods
+    logical :: reorder
     
     ! Create cartesian topology 2D
 
 
     ! Cartesian topology
 
-    dims = 0
-    periods = .false.
+    dims(:) = 0
+    periods(:) = .false.
     reorder = .true.
-    direction = 0             ! Shift along the first index
-    disp = 1                  ! Shift by 1
+    ! Shift along the first index Shift by 1
 
     call MPI_DIMS_CREATE(size, N_DIMS, dims, ierr)
     call MPI_CART_CREATE(comm, N_DIMS, dims, periods, reorder, cartcomm, ierr)

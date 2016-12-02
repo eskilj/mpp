@@ -13,8 +13,8 @@ program imagempi
   integer :: PROGRESS_INTERVAL
   integer :: numiter, AllocateStatus
   integer :: i, j, nx, ny, npx, npy, it
-  integer, parameter :: maxlen = 32
-  character*(maxlen) :: filename, message
+  integer, parameter :: maxlen = 100
+  character(maxlen) :: filename, outfile,  message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: image, edge, old, new
   real(kind=REALNUMBER), parameter :: MAX_CHANGE = 0.1
   real(kind=REALNUMBER) :: average, maxchange = 1
