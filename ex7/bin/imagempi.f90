@@ -13,7 +13,7 @@ program imagempi
   implicit none
 
   integer :: AllocateStatus
-  integer :: i, j, nx, ny, npx, npy, it = 0
+  integer :: i, j, nx, ny, npx, npy, iter = 0
   integer, parameter :: maxlen = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 100
   character(maxlen) :: filename, outfile,  message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: master, edge, old, new
@@ -41,7 +41,7 @@ program imagempi
   ! EXECUTE INVERT EDGES ALGORITHM
   time_start = get_time()
 
-  do while ((it .lt. MAX_ITER) .and. (max_diff .gt. DIFF_THRESHOLD))
+  do while ((iter .lt. MAX_ITER) .and. (max_diff .gt. DIFF_THRESHOLD))
     ! Cange the halos between surrounding processors if such exist
     call par_HalosSwap(old)
     call par_WaitHalos()
@@ -54,14 +54,16 @@ program imagempi
     end do
 
     ! Perform the necessary reductions every PROGRESS_INTERVAL
-    it = it + 1
-    if (mod(it,PROGRESS_INTERVAL) == 0) then
+    iter = iter + 1
+    if (mod(iter, PROGRESS_INTERVAL) == 0) then
 
       max_diff = par_calc_max_diff(new, old)
       average = par_calc_ave(new, nx*ny)
       
-      write(message,'(A10,I5,A17,F6.1)') "Iteration ",it,", pixel average: ", average
-      call print_once(message)
+      if (par_isroot()) then 
+        write(message,'(A10,I5,A17,F6.1)') "Iteration ",iter,", pixel average: ", average
+        call par_print(message)
+      end if
     end if
 
     !Re-assign new to old
@@ -70,9 +72,12 @@ program imagempi
   end do
   
   time_finish = get_time()
-  write(message,'(A9,I5,A15,F8.3,A8)')"Executed ", it," iterations in ", &
+  
+  if (par_isroot()) then 
+    write(message,'(A9,I5,A15,F8.3,A8)')"Executed ", iter," iterations in ", &
                                        time_diff(time_start,time_finish)," seconds."
-  call print_once(message)
+    call par_print(message)
+  end if
 
   call par_Gather(old, master)
   if (par_isroot()) call pgmwrite(outfile,master)
