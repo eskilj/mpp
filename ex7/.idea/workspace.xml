@@ -28,8 +28,8 @@
       <file leaf-file-name="parallel.f90" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/parallel.f90">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state relative-caret-position="652">
+              <caret line="250" column="32" lean-forward="true" selection-start-line="250" selection-start-column="32" selection-end-line="250" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -60,6 +60,8 @@
       <find>infile</find>
       <find>get_command_argument</find>
       <find>image</find>
+      <find>dims</find>
+      <find>D</find>
     </findStrings>
     <replaceStrings>
       <replace>PROGRESS_INTERVAL</replace>
@@ -220,8 +222,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/parallel.f90">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        <state relative-caret-position="652">
+          <caret line="250" column="32" lean-forward="true" selection-start-line="250" selection-start-column="32" selection-end-line="250" selection-end-column="32" />
           <folding />
         </state>
       </provider>

@@ -12,7 +12,7 @@ MODULE parallel
   
   ! Constants
   integer, parameter :: root = 0
-  integer, parameter :: D = 2 !Num of dimentions
+  integer, parameter :: N_DIMS = 2 !Num of dimentions
 
   ! MPI VARIABLES
   integer :: comm, size, cartcomm, myrank, ierr, errorcode
@@ -20,7 +20,7 @@ MODULE parallel
   integer, dimension(8) :: request
   
   ! Problem parameters
-  integer, dimension(D) :: dims
+  integer, dimension(N_DIMS) :: dims
   integer :: Mp, Np, GM, GN ! Local and global array sizes
 
   ! MPI NEW DATATYPES
@@ -49,34 +49,23 @@ contains
     integer, intent(in) :: nx, ny
     integer, intent(out) :: npx, npy
     character(len=100) :: message
-    logical, dimension(D) :: periods
+    logical, dimension(N_DIMS) :: periods
     
     ! Create cartesian topology 2D
 
 
     ! Cartesian topology
-ndims = 1
-dims(1) = 0
-periods(1) = .true.       ! Cyclic
-reorder = .false.
-direction = 0             ! Shift along the first index
-disp = 1                  ! Shift by 1
 
-call MPI_DIMS_CREATE(size,1,dims,ierr)
-call MPI_CART_CREATE(comm,ndims,dims,periods,reorder,comm1d,ierr)
-call MPI_COMM_RANK(comm1d,rank,ierr)
-call MPI_CART_SHIFT(comm1d,direction,disp,left,right,ierr)
+    dims = 0
+    periods = .false.
+    reorder = .true.
+    direction = 0             ! Shift along the first index
+    disp = 1                  ! Shift by 1
 
-
-
-    dims = (/ 0,0 /)
-    periods = (/ .False., .False. /)
-    call MPI_DIMS_CREATE(size, D, dims, ierr)
-    ! dimensions shifted to be consisten with fortran array order
-    call MPI_CART_CREATE(comm, D, (/dims(2), dims(1) /), periods, .True., cartcomm, ierr)
+    call MPI_DIMS_CREATE(size, N_DIMS, dims, ierr)
+    call MPI_CART_CREATE(comm, N_DIMS, dims, periods, reorder, cartcomm, ierr)
     call MPI_COMM_RANK(cartcomm, myrank, ierr)
- 
-    
+
     ! Get neighbours
     call MPI_CART_SHIFT(cartcomm,0,1,n_down,n_up,ierr)
     call MPI_CART_SHIFT(cartcomm,1,1,n_left,n_right,ierr)
@@ -110,7 +99,7 @@ call MPI_CART_SHIFT(comm1d,direction,disp,left,right,ierr)
   subroutine create_types()
     ! Create all the derived datatypes used in the program, they are:
     ! Block type, master block type, vertical halo and horitzontal halo
-    integer, dimension(D) :: sizes, subsizes, starts
+    integer, dimension(N_DIMS) :: sizes, subsizes, starts
     integer(kind=mpi_address_kind) :: start, extent, lb, realextent
     integer :: AllocateStatus, i, base, LONG_BLOCK_T
     
@@ -118,7 +107,7 @@ call MPI_CART_SHIFT(comm1d,direction,disp,left,right,ierr)
     sizes    = (/ MP+2, NP+2 /)
     subsizes = (/ MP , NP /)
     starts   = (/  1 ,  1 /)
-    call MPI_TYPE_CREATE_SUBARRAY(D, sizes, subsizes, starts, &
+    call MPI_TYPE_CREATE_SUBARRAY(N_DIMS, sizes, subsizes, starts, &
              MPI_ORDER_FORTRAN, MPI_REALNUMBER, BLOCK_T, ierr)
     
     ! Master block type: distribution unit from master to working
@@ -127,7 +116,7 @@ call MPI_CART_SHIFT(comm1d,direction,disp,left,right,ierr)
     sizes    = (/ MP*dims(1), NP*dims(2) /)
     subsizes = (/ MP, NP /)
     starts   = (/  0,  0 /)
-    call MPI_TYPE_CREATE_SUBARRAY(D, sizes, subsizes, starts, &
+    call MPI_TYPE_CREATE_SUBARRAY(N_DIMS, sizes, subsizes, starts, &
              MPI_ORDER_FORTRAN, MPI_REALNUMBER, LONG_BLOCK_T, ierr)
     call MPI_TYPE_GET_EXTENT(MPI_REALNUMBER, lb, realextent, ierr)
     start = 0
