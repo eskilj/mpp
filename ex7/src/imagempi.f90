@@ -57,7 +57,7 @@ program imagempi
     if (mod(it,PROGRESS_INTERVAL) == 0) then
 
       call par_GetMaxChange(new, old, maxchange)
-      call par_calc_ave(new, nx*ny)
+      average = par_calc_ave(new, nx*ny)
       
       write(message,'(A10,I5,A17,F6.1)') "Iteration ",it,", pixel average: ", average
       call print_once(message)
