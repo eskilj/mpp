@@ -239,20 +239,11 @@ contains
     write(*,*) "Error in process", rank, ":", message
     call MPI_ABORT(comm, 2, ierr)
   end subroutine exit_all
-  
-  subroutine print_once(message)
-    character(*), intent(in) :: message
-    if (par_isroot()) then
-      write(*,*) message
-    end if
-  end subroutine print_once
 
-  subroutine print_all(message)
+  function par_print(message)
     character(*), intent(in) :: message
-    character(len=12) :: pn
-    write(pn,'(A7,I4)') "Process ",rank
-    write(*,*) pn,": ", message
-  end subroutine print_all
+    write(*,*) message
+  end function par_print
 
 END MODULE parallel
 
