@@ -29,18 +29,31 @@ MODULE parallel
 
 contains
 
-  logical function par_ISROOT()
-    ! Return true when executen in the ROOT process
-    par_ISROOT = rank == ROOT
-    return
-  end function par_ISROOT
+  !  --------------- GLOBAL MPI -------------------------!
 
-  !Init MPI Variables
   subroutine par_init()
+    ! Initialise MPI
     call MPI_INIT(ierr)
     comm = MPI_COMM_WORLD
     call MPI_COMM_SIZE(comm, size, ierr)
   end subroutine par_init
+
+  subroutine par_finalize()
+    ! Free the used resources, finalize MPI
+    call MPI_TYPE_FREE(MASTER_BLOCK_T,ierr)
+    call MPI_TYPE_FREE(BLOCK_T,ierr)
+    call MPI_TYPE_FREE(H_HALO_T,ierr)
+    call MPI_TYPE_FREE(V_HALO_T,ierr)
+    call MPI_Finalize(ierr)
+  end subroutine par_finalize
+
+  logical function par_isroot()
+    ! Return true when executen in the ROOT process
+    par_isroot = rank == ROOT
+    return
+  end function par_isroot
+
+  !  --------------- GLOBAL MPI METHODS -------------------------!
 
   subroutine par_domain_decomposition_2D(nx,ny,npx,npy)
 
@@ -191,28 +204,16 @@ contains
   end function par_calc_max_diff
 
   real(kind=REALNUMBER) function par_calc_ave(new, num_pixels)
-    ! Compute the local sumation of the pixels,
-    ! reduce the summation of all processes and
-    ! divide by the total number of pixels to get the average
+    ! Calculate average the average pixel value by finding the local sum and ALLREDUCE
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
     real(kind=REALNUMBER) :: localsum, totalsum
     integer, intent(in) :: num_pixels
 
-    localsum = real(sum(real(new(1:MP,1:NP),kind=8)),kind=REALNUMBER)
-    call MPI_ALLREDUCE(localsum,totalsum,1,MPI_REALNUMBER, &
-                       MPI_SUM, cartcomm, ierr)
+    localsum = real(sum(real(new(1:MP,1:NP),kind=8)), kind=REALNUMBER)
+    call MPI_ALLREDUCE(localsum, totalsum, 1, MPI_REALNUMBER, MPI_SUM, cartcomm, ierr)
 
     par_calc_ave = totalsum / num_pixels
   end function par_calc_ave
-
-  subroutine par_Finalize()
-    ! Free the used resources
-    call MPI_TYPE_FREE(MASTER_BLOCK_T,ierr)
-    call MPI_TYPE_FREE(BLOCK_T,ierr)
-    call MPI_TYPE_FREE(H_HALO_T,ierr)
-    call MPI_TYPE_FREE(V_HALO_T,ierr)
-    call MPI_Finalize(ierr)
-  end subroutine par_Finalize
 
 
   ! -----------------------------------------------------!
@@ -240,7 +241,7 @@ contains
   
   subroutine print_once(message)
     character(*), intent(in) :: message
-    if (par_ISROOT()) then
+    if (par_isroot()) then
       write(*,*) message
     end if
   end subroutine print_once

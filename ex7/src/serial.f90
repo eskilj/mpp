@@ -10,10 +10,10 @@ MODULE serial
 
   contains
 
-  logical function par_ISROOT()
-    par_ISROOT = .True.
+  logical function par_isroot()
+    par_isroot = .True.
     return
-  end function par_ISROOT
+  end function par_isroot
 
   subroutine par_init()
   end subroutine par_init
@@ -62,7 +62,7 @@ MODULE serial
     average = real(accumulate,kind=REALNUMBER) / (M*N)
   end subroutine par_calc_ave
 
-  subroutine par_Finalize()
+  subroutine par_finalize()
   end subroutine
 
 

@@ -20,8 +20,8 @@
           <file leaf-file-name="imagempi.f90" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/imagempi.f90">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="705">
-                  <caret line="47" column="16" lean-forward="true" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
+                <state relative-caret-position="487">
+                  <caret line="36" column="32" lean-forward="true" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
                   <folding />
                 </state>
               </provider>
@@ -54,8 +54,8 @@
           <file leaf-file-name="parallel.f90" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/parallel.f90">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="465">
-                  <caret line="192" column="62" lean-forward="true" selection-start-line="192" selection-start-column="62" selection-end-line="192" selection-end-column="62" />
+                <state relative-caret-position="525">
+                  <caret line="50" column="51" lean-forward="true" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
                   <folding />
                 </state>
               </provider>
@@ -67,7 +67,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tstart</find>
       <find>tend</find>
       <find>infile</find>
       <find>get_command_argument</find>
@@ -78,7 +77,6 @@
       <find>timetype</find>
       <find>myrank</find>
       <find>image</find>
-      <find>par_ISROOT</find>
       <find>edge</find>
       <find>condition</find>
       <find>dims</find>
@@ -97,6 +95,8 @@
       <find>counts</find>
       <find>displs</find>
       <find>root</find>
+      <find>par_Finalize</find>
+      <find>par_ISROOT</find>
     </findStrings>
     <replaceStrings>
       <replace>PROGRESS_INTERVAL</replace>
@@ -121,6 +121,8 @@
       <replace>displacements</replace>
       <replace>ROOT</replace>
       <replace>DIFF_THRESHOLD</replace>
+      <replace>par_finalize</replace>
+      <replace>par_isroot</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -130,8 +132,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/serial.f90" />
-        <option value="$PROJECT_DIR$/src/imagempi.f90" />
         <option value="$PROJECT_DIR$/src/parallel.f90" />
+        <option value="$PROJECT_DIR$/src/imagempi.f90" />
       </list>
     </option>
   </component>
@@ -509,18 +511,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/imagempi.f90">
+    <entry file="file://$PROJECT_DIR$/src/parallel.f90">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="16" lean-forward="true" selection-start-line="47" selection-start-column="16" selection-end-line="47" selection-end-column="16" />
+        <state relative-caret-position="525">
+          <caret line="50" column="51" lean-forward="true" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parallel.f90">
+    <entry file="file://$PROJECT_DIR$/src/imagempi.f90">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="192" column="62" lean-forward="true" selection-start-line="192" selection-start-column="62" selection-end-line="192" selection-end-column="62" />
+        <state relative-caret-position="487">
+          <caret line="36" column="32" lean-forward="true" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
           <folding />
         </state>
       </provider>

@@ -32,7 +32,8 @@ program imagempi
 
   allocate(master(nx, ny), edge(npx, npy), old(0:npx+1, 0:npy+1), new(0:npx+1, 0:npy+1))
 
-  if (par_ISROOT()) call pgmread(filename, master)
+  if (par_isroot()) call pgmread(filename, master)
+  if (par_isroot()) print *, rank
   call par_scatter(master, edge)
   old(:,:) = 255
  
@@ -73,10 +74,10 @@ program imagempi
   call print_once(message)
 
   call par_Gather(old, master)
-  if (par_ISROOT()) call pgmwrite(outfile,master)
+  if (par_isroot()) call pgmwrite(outfile,master)
 
   !FINALIZE MessagePassing
-  call par_Finalize()
+  call par_finalize()
   
   deallocate(master, edge, new, old)
 
