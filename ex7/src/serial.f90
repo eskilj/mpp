@@ -33,19 +33,19 @@ MODULE serial
     destination = source
   end subroutine
 
-  subroutine par_Gather(source, destination)
+  subroutine par_gather(source, destination)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: destination
     destination = source(1:M,1:N)
   end subroutine
  
-  subroutine par_HalosSwap(old)
+  subroutine par_swap_halos(old)
     real(kind=REALNUMBER), dimension(:,:), intent(inout) :: old
     old = old   !to avoid unused warnings
-  end subroutine
+  end subroutine par_swap_halos
   
-  subroutine par_WaitHalos()
-  end subroutine
+  subroutine par_wait_halos()
+  end subroutine par_wait_halos
 
   subroutine par_calc_max_diff(new, old, maxchange)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new, old

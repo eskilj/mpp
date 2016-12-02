@@ -12,31 +12,35 @@ program imagempi
 
   integer :: AllocateStatus
   integer :: i, j, nx, ny, npx, npy, iter = 0
-  integer, parameter :: maxlen = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 100
-  character(maxlen) :: filename, outfile,  message
+  integer, parameter :: MAXLEN = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 100
+  character(MAXLEN) :: filename, outfile,  message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: master, edge, old, new
   real(kind=REALNUMBER), parameter :: DIFF_THRESHOLD = 0.1
   real(kind=REALNUMBER) :: average, max_diff = 1
   type(timetype) :: time_start, time_finish
   
   !  --------------- INITIALIZATION  -------------------------! 
-  ! Read parameters
+  
+  ! Get program parameter and load image
   call getParameters(filename)
   call pgmsize(filename, nx, ny)
 
   outfile = 'out.pgm'
 
-  ! Initialize MessagePassing Library
+  ! Initialize MPI and virtual topologies
   call par_init()
   call par_decompose(nx, ny, npx, npy)
 
+  ! allocate arrays used for the image processing
   allocate(master(nx, ny), edge(npx, npy), old(0:npx+1, 0:npy+1), new(0:npx+1, 0:npy+1))
 
+  ! read image data into master and distribute
   if (par_isroot()) call pgmread(filename, master)
   call par_scatter(master, edge)
   old(:,:) = 255
  
-  ! EXECUTE INVERT EDGES ALGORITHM
+  !  --------------- IMAGE PROCESSING  -------------------------!
+
   time_start = get_time()
 
   do while ((iter .lt. MAX_ITER) .and. (max_diff .gt. DIFF_THRESHOLD))
@@ -64,7 +68,7 @@ program imagempi
       end if
     end if
 
-    !Re-assign new to old
+    ! Set update old
     old(1:npx,1:npy) = new(1:npx,1:npy)
 
   end do
@@ -77,18 +81,18 @@ program imagempi
     call par_print(message)
   end if
 
+  !  --------------- GATHER DATA and COMPLETE PROGRAM -------------------------!
+
   call par_gather(old, master)
   if (par_isroot()) call pgmwrite(outfile,master)
 
-  !FINALIZE MessagePassing
   call par_finalize()
-  
   deallocate(master, edge, new, old)
 
 contains
 
   subroutine getParameters(filename)
-    character(maxlen), intent(out) :: filename
+    character(MAXLEN), intent(out) :: filename
     integer :: num_args
 
     num_args = command_argument_count()
