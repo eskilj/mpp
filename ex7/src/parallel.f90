@@ -91,12 +91,8 @@ contains
     npy = ny/dims(2)
     MP = npx
     NP = npy
-
-    ! Print out the information about the domain decomposition
-    write(message,'(I2,A3,I2,A19,I4,A3,I4)') &
-        dims(1), " x ", dims(2), "with each block of", MP, " x ", NP
-    call print_once("Domain decomposed in:")
-    call print_once(" ->  Grid of size: "//message)
+    
+    write *, "Grid size :", dims(1), " by ", dims(2)
 
     ! Create the derived datatypes
     call create_types()
