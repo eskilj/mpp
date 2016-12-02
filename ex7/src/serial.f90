@@ -47,11 +47,11 @@ MODULE serial
   subroutine par_WaitHalos()
   end subroutine
 
-  subroutine par_GetMaxChange(new, old, maxchange)
+  subroutine par_calc_max_diff(new, old, maxchange)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new, old
     real(kind=REALNUMBER), intent(inout) :: maxchange
     maxchange = maxval(abs(new(1:M,1:N)-old(1:M,1:N)))
-  end subroutine par_GetMaxChange
+  end subroutine par_calc_max_diff
   
   subroutine par_calc_ave(new, average)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new

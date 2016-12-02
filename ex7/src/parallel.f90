@@ -21,7 +21,7 @@ MODULE parallel
   
   ! Problem parameters
   integer, dimension(N_DIMS) :: dims
-  integer :: Mp, Np, GM, GN ! Local and global array sizes
+  integer :: MP, NP ! Local array sizes
 
   ! MPI NEW DATATYPES
   integer :: MASTER_BLOCK_T, BLOCK_T, V_HALO_T, H_HALO_T
@@ -76,14 +76,12 @@ contains
 
     npx = nx/dims(1)
     npy = ny/dims(2)
-    Mp = npx
-    Np = npy
-    GM = nx
-    GN = ny
+    MP = npx
+    NP = npy
 
     ! Print out the information about the domain decomposition
     write(message,'(I2,A3,I2,A19,I4,A3,I4)') &
-        dims(1), " x ", dims(2), "with each block of", Mp, " x ", Np
+        dims(1), " x ", dims(2), "with each block of", MP, " x ", NP
     call print_once("Domain decomposed in:")
     call print_once(" ->  Grid of size: "//message)
 
@@ -116,7 +114,7 @@ contains
     call MPI_TYPE_GET_EXTENT(MPI_REALNUMBER, lb, realextent, ierr)
 
     start = 0
-    extent = Mp*realextent
+    extent = MP*realextent
     call MPI_TYPE_CREATE_RESIZED(LONG_BLOCK_T, start, extent, &
              MASTER_BLOCK_T,ierr)
   
@@ -127,14 +125,14 @@ contains
     do i= 1, size
         counts(i) = 1
         displs(i) = (base-1) + mod(i-1,dims(1))
-        if(mod(i,dims(1))==0) base = base + Np * dims(1)
+        if(mod(i,dims(1))==0) base = base + NP * dims(1)
     end do
 
     ! HALO VECTORS (HALO-HALO INTERSECTIONS ARE NOT NEDDED)
     ! Horitzontal halo data is contiguous, defined to maintain
     ! code cohesion in all halo swaps.
-    call MPI_TYPE_VECTOR(Np, 1 , Mp+2, MPI_REALNUMBER, V_HALO_T, ierr)
-    call MPI_TYPE_VECTOR(1 , Mp, Mp  , MPI_REALNUMBER, H_HALO_T, ierr)
+    call MPI_TYPE_VECTOR(NP, 1 , MP+2, MPI_REALNUMBER, V_HALO_T, ierr)
+    call MPI_TYPE_VECTOR(1 , MP, MP  , MPI_REALNUMBER, H_HALO_T, ierr)
     
     ! COMMIT NEW MPI DATATYPES
     call MPI_TYPE_COMMIT(MASTER_BLOCK_T, ierr)
@@ -147,7 +145,7 @@ contains
     real(kind=REALNUMBER), dimension(:,:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
     call MPI_Scatterv(source, counts, displs, MASTER_BLOCK_T, &
-                      dest, Mp*Np, MPI_REALNUMBER, 0, cartcomm,ierr)
+                      dest, MP*NP, MPI_REALNUMBER, 0, cartcomm,ierr)
   end subroutine
 
   subroutine par_Gather(source, dest)
@@ -164,34 +162,33 @@ contains
     ! are completed.
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: old
    
-    call MPI_Issend(old(Mp,1),1, V_HALO_T, n_right ,0,cartcomm,request(1),ierr)
+    call MPI_Issend(old(MP,1),1, V_HALO_T, n_right ,0,cartcomm,request(1),ierr)
     call MPI_Issend(old(1,1) ,1, V_HALO_T, n_left   ,0,cartcomm,request(3),ierr)
     call MPI_Issend(old(1,1),1, H_HALO_T, n_down,0,cartcomm,request(7),ierr)
-    call MPI_Issend(old(1,Np) ,1, H_HALO_T, n_up ,0,cartcomm,request(5),ierr)
+    call MPI_Issend(old(1,NP) ,1, H_HALO_T, n_up ,0,cartcomm,request(5),ierr)
     
-    call MPI_Irecv(old(Mp+1,1),1, V_HALO_T, n_right ,0,cartcomm,request(4),ierr)
+    call MPI_Irecv(old(MP+1,1),1, V_HALO_T, n_right ,0,cartcomm,request(4),ierr)
     call MPI_Irecv(old(0,1)   ,1, V_HALO_T, n_left ,0,cartcomm,request(2),ierr)
     call MPI_Irecv(old(1,0),1, H_HALO_T, n_down, 0,cartcomm,request(6),ierr)
-    call MPI_Irecv(old(1,Np+1)   ,1, H_HALO_T, n_up ,0,cartcomm,request(8),ierr)
+    call MPI_Irecv(old(1,NP+1)   ,1, H_HALO_T, n_up ,0,cartcomm,request(8),ierr)
     
   end subroutine par_HalosSwap
 
   subroutine par_WaitHalos()
-    integer, dimension(MPI_STATUS_SIZE,8) :: stats
-    call MPI_Waitall(8,request,stats,ierr)
+    integer, dimension(MPI_STATUS_SIZE,8) :: status
+    call MPI_Waitall(8,request,status,ierr)
   end subroutine par_WaitHalos
 
   !Calculate maximum change across the image
-  subroutine par_GetMaxChange(new, old, maxchange)
+  real(kind=REALNUMBER) function par_calc_max_diff(new, old)
 
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new, old
-    real(kind=REALNUMBER), intent(out) :: maxchange
-    real(kind=REALNUMBER) :: localmaxchange
+    real(kind=REALNUMBER) :: max_diff
 
-    localmaxchange = maxval(abs( new(1:MP, 1:NP) - old(1:MP, 1:NP) ))
-    call MPI_ALLREDUCE(localmaxchange, maxchange, 1, MPI_REALNUMBER, MPI_MAX, cartcomm, ierr)
+    max_diff = maxval(abs( new(1:MP, 1:NP) - old(1:MP, 1:NP) ))
+    call MPI_ALLREDUCE(max_diff, par_calc_max_diff, 1, MPI_REALNUMBER, MPI_MAX, cartcomm, ierr)
 
-  end subroutine par_GetMaxChange
+  end function par_calc_max_diff
 
   integer function par_calc_ave(new, num_pixels)
     ! Compute the local sumation of the pixels,
@@ -204,7 +201,7 @@ contains
     localsum = real(sum(real(new(1:MP,1:NP),kind=8)),kind=REALNUMBER)
     call MPI_ALLREDUCE(localsum,totalsum,1,MPI_REALNUMBER, &
                        MPI_SUM, cartcomm, ierr)
-    if(num_pixels .ne. GM*GN) call exit_all("*** NOT enough memory ***")
+
     par_calc_ave = totalsum / num_pixels
   end function par_calc_ave
 
