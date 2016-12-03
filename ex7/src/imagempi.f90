@@ -61,6 +61,8 @@ program imagempi
       max_diff = par_calc_max_diff(new, old)
       average = par_calc_ave(new, nx*ny)
       
+      write(*,*)'(A10,I5,A17,F6.1)') "Iteration ",iter,", pixel average: ", average
+
       if (par_isroot()) then 
         write(message,'(A10,I5,A17,F6.1)') "Iteration ",iter,", pixel average: ", average
         call par_print(message)
