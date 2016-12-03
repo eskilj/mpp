@@ -21,6 +21,7 @@ program imagempi
   !  --------------- INITIALIZATION  -------------------------! 
   
   ! Get program parameter and load image
+  write(*,*) "Loading edge file: ", filename
   call get_params(filename)
   call pgmsize(filename, nx, ny)
 
@@ -44,6 +45,7 @@ program imagempi
   time_start = get_time()
 
   do while ((iter .lt. MAX_ITER) .and. (max_diff .gt. DIFF_THRESHOLD))
+    
     ! Cange the halos between surrounding processors if such exist
     call par_swap_halos(old)
     
@@ -61,15 +63,13 @@ program imagempi
       max_diff = par_calc_max_diff(new, old)
       average = par_calc_ave(new, nx*ny)
       
-      write(*,*)'(A10,I5,A17,F6.1)') "Iteration ",iter,", pixel average: ", average
-
       if (par_isroot()) then 
-        write(message,'(A10,I5,A17,F6.1)') "Iteration ",iter,", pixel average: ", average
+        write(message,'(A10,I5,A17,F6.1)') "Iter: ", iter, " ==> Average Pixel Value: ", average
         call par_print(message)
       end if
     end if
 
-    ! Set update old
+    ! Set old = new
     old(1:npx,1:npy) = new(1:npx,1:npy)
 
   end do
@@ -77,8 +77,7 @@ program imagempi
   time_finish = get_time()
 
   if (par_isroot()) then 
-    write(message,'(A9,I5,A15,F8.3,A8)')"Executed ", iter," iterations in ", &
-                                       time_diff(time_start,time_finish)," seconds."
+    write(message,'(A9,I5,A15,F8.3,A8)') "Finished image processing in", iter, " iterations. Execution time: ", time_diff(time_start,time_finish)," seconds."
     call par_print(message)
   end if
 
