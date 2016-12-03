@@ -46,7 +46,6 @@ program imagempi
   do while ((iter .lt. MAX_ITER) .and. (max_diff .gt. DIFF_THRESHOLD))
     ! Cange the halos between surrounding processors if such exist
     call par_swap_halos(old)
-    call par_wait_halos()
     
     ! Compute the local new values not dependent to halos
     do j = 1,npy
@@ -91,6 +90,11 @@ program imagempi
 
 contains
 
+  subroutine check_allocation(allocation_status)
+    integer, intent(in) :: allocation_status
+    if (allocation_status .ne. 0) call par_abort("Memory Allocation unsuccessful.")
+  end subroutine
+
   subroutine get_params(filename)
     character(MAXLEN), intent(out) :: filename
     integer :: num_args
@@ -98,10 +102,5 @@ contains
     num_args = command_argument_count()
     call get_command_argument(1, filename)
   end subroutine get_params
-
-  subroutine check_allocation(allocation_status)
-    integer, intent(in) :: allocation_status
-    if (allocation_status .ne. 0) call par_abort("Memory Allocation unsuccessful.")
-  end subroutine
 
 end program imagempi

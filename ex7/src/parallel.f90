@@ -17,7 +17,6 @@ MODULE parallel
   ! MPI VARIABLES
   integer :: comm, size, cartcomm, rank, ierr, errorcode
   integer :: n_left, n_right, n_up, n_down !process neighbours
-  integer, dimension(8) :: request
   
   ! Problem parameters
   integer, dimension(N_DIMS) :: dims
@@ -187,23 +186,27 @@ contains
     ! par_wait_halos() routine should be called to ensure these communications
     ! are completed.
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: old
+    integer ::  request, recv_status send_status
    
-    call MPI_Issend(old(MP,1),1, HALO_V, n_right ,0,cartcomm,request(1),ierr)
-    call MPI_Issend(old(1,1) ,1, HALO_V, n_left   ,0,cartcomm,request(3),ierr)
-    call MPI_Issend(old(1,1),1, HALO_H, n_down,0,cartcomm,request(7),ierr)
-    call MPI_Issend(old(1,NP) ,1, HALO_H, n_up ,0,cartcomm,request(5),ierr)
-    
-    call MPI_Irecv(old(MP+1,1),1, HALO_V, n_right ,0,cartcomm,request(4),ierr)
-    call MPI_Irecv(old(0,1)   ,1, HALO_V, n_left ,0,cartcomm,request(2),ierr)
-    call MPI_Irecv(old(1,0),1, HALO_H, n_down, 0,cartcomm,request(6),ierr)
-    call MPI_Irecv(old(1,NP+1)   ,1, HALO_H, n_up ,0,cartcomm,request(8),ierr)
+    call MPI_Issend(old(MP,1), 1, HALO_V, n_right, 0, cartcomm, request, ierr)
+    call MPI_Irecv(old(0,1), 1, HALO_V, n_left, 0, cartcomm, recv_status, ierr)
+    call MPI_Wait(request, send_status, ierr)
+
+
+    call MPI_Issend(old(1,1), 1, HALO_V, n_left, 0, cartcomm, request, ierr)
+    call MPI_Irecv(old(MP+1,1), 1, HALO_V, n_right, 0, cartcomm, recv_status, ierr)
+    call MPI_Wait(request, send_status, ierr)
+
+    call MPI_Issend(old(1,1), 1, HALO_H, n_down, 0, cartcomm, request, ierr)
+    call MPI_Irecv(old(1,NP+1), 1, HALO_H, n_up , 0, cartcomm, recv_status, ierr)  
+    call MPI_Wait(request, send_status, ierr)
+
+
+    call MPI_Issend(old(1,NP), 1, HALO_H, n_up, 0, cartcomm, request, ierr)
+    call MPI_Irecv(old(1,0),1, HALO_H, n_down, 0, cartcomm, recv_status, ierr)
+    call MPI_Wait(request, send_status, ierr)
     
   end subroutine par_swap_halos
-
-  subroutine par_wait_halos()
-    integer, dimension(MPI_STATUS_SIZE,8) :: status
-    call MPI_Waitall(8,request,status,ierr)
-  end subroutine par_wait_halos
 
   !  --------------- PROGRESS METHODS -------------------------!
 

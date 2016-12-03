@@ -50,9 +50,6 @@ MODULE serial
     old = old   !to avoid unused warnings
   end subroutine par_swap_halos
   
-  subroutine par_wait_halos()
-  end subroutine par_wait_halos
-
   subroutine par_calc_max_diff(new, old, maxchange)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new, old
     real(kind=REALNUMBER), intent(inout) :: maxchange
