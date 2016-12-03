@@ -28,7 +28,7 @@ MODULE parallel
 
 contains
 
-  !  --------------- GLOBAL MPI -------------------------!
+  !--------------- GLOBAL MPI -------------------------!
 
   subroutine par_init()
     ! Initialise MPI
@@ -57,7 +57,7 @@ contains
     par_isroot = rank == ROOT
   end function par_isroot
 
-  !  --------------- MPI V.TOPOLOGY METHODS -------------------------!
+  !--------------- MPI V.TOPOLOGY METHODS -------------------------!
 
   subroutine par_decompose(nx,ny,npx,npy)
 
@@ -167,12 +167,12 @@ contains
 
   end subroutine par_create_derived
 
-  !  --------------- MPI COMM METHODS -------------------------!
+  !--------------- MPI COMM METHODS -------------------------!
 
   subroutine par_scatter(source, dest)
     real(kind=REALNUMBER), dimension(:,:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
-    call MPI_Scatterv(source, send_counts, displacements, FULL_WINDOW, dest, MP*NP, MPI_REALNUMBER, 0, cartcomm,ierr)
+    call MPI_Scatterv(source, send_counts, displacements, FULL_WINDOW, dest, MP*NP, MPI_REALNUMBER, 0, cartcomm, ierr)
   end subroutine par_scatter
 
   subroutine par_gather(source, dest)
@@ -183,9 +183,7 @@ contains
 
 
   subroutine par_swap_halos(old)
-    ! Non-blocking send and reveive of all the halos, afterwards the
-    ! par_wait_halos() routine should be called to ensure these communications
-    ! are completed.
+    ! Use non-blocking point-to-point communication 
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: old
     integer, dimension(MPI_STATUS_SIZE) :: recv_status, send_status
     integer :: request
@@ -193,7 +191,6 @@ contains
     call MPI_ISSEND(old(MP,1), 1, HALO_V, n_right, 0, cartcomm, request, ierr)
     call MPI_RECV(old(0,1), 1, HALO_V, n_left, 0, cartcomm, recv_status, ierr)
     call MPI_WAIT(request, send_status, ierr)
-
 
     call MPI_ISSEND(old(1,1), 1, HALO_V, n_left, 0, cartcomm, request, ierr)
     call MPI_RECV(old(MP+1,1), 1, HALO_V, n_right, 0, cartcomm, recv_status, ierr)
@@ -203,14 +200,13 @@ contains
     call MPI_RECV(old(1,NP+1), 1, HALO_H, n_up , 0, cartcomm, recv_status, ierr)  
     call MPI_WAIT(request, send_status, ierr)
 
-
     call MPI_ISSEND(old(1,NP), 1, HALO_H, n_up, 0, cartcomm, request, ierr)
     call MPI_RECV(old(1,0),1, HALO_H, n_down, 0, cartcomm, recv_status, ierr)
     call MPI_WAIT(request, send_status, ierr)
     
   end subroutine par_swap_halos
 
-  !  --------------- PROGRESS METHODS -------------------------!
+  !--------------- PROGRESS METHODS -------------------------!
 
     real(kind=REALNUMBER) function par_calc_max_diff(new, old)
 
@@ -236,7 +232,7 @@ contains
     par_calc_ave = totalsum / num_pixels
   end function par_calc_ave
 
-  !  --------------- ADDITIONAL METHODS -------------------------!
+  !--------------- ADDITIONAL METHODS -------------------------!
 
   type(timetype) function get_time()
     get_time%value = MPI_WTIME()
