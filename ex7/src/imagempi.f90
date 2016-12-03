@@ -101,7 +101,7 @@ contains
 
   subroutine check_allocation(allocation_status)
     integer, intent(in) :: allocation_status
-    print *, allocation_status
+    if (allocation_status .ne. 0) call par_abort("Memory Allocation unsuccessful.")
   end subroutine
 
 end program imagempi
