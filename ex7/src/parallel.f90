@@ -212,7 +212,7 @@ contains
 
   !  --------------- PROGRESS METHODS -------------------------!
 
-  real(kind=REALNUMBER) function par_calc_max_diff(new, old)
+    real(kind=REALNUMBER) function par_calc_max_diff(new, old)
 
     ! Calculate maximum change across the image
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new, old
