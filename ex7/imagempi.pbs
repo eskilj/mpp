@@ -1,0 +1,31 @@
+#!/bin/bash --login                                                             
+
+#PBS -A d136                                                                    
+#PBS -N traffic                                                                 
+#PBS -l place=excl                                                              
+#PBS -l select=288                                                              
+#PBS -l walltime=00:05:00                                                       
+
+# Change to the directory that the job was submitted from                       
+
+cd $PBS_O_WORKDIR
+
+# Load SGI MPI and Intel compilers                                              
+
+module load mpt
+module load intel-compilers-16
+
+# Launch the parallel jobs                                                      
+
+mpiexec_mpt -n  32 ./traffic
+mpiexec_mpt -n  64 -ppn 32 ./traffic
+mpiexec_mpt -n 128 -ppn 32 ./traffic
+
+
+#./test/correctness/ctest.sh bin/invertedges test/inputs test/morarserial
+
+#./test/performance/reductions.sh bin/invertedges test/inputs/edge768x768.pgm 8
+
+#./test/performance/image_size.sh bin/invertedges 8 test/inputs/syntheticimages/synthetic
+
+#./test/performance/scalability.sh bin/invertedges test/inputs/edge768x768.pgm
