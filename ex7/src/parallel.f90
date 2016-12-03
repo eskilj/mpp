@@ -186,7 +186,7 @@ contains
     ! par_wait_halos() routine should be called to ensure these communications
     ! are completed.
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: old
-    integer ::  request, recv_status send_status
+    integer ::  request, recv_status, send_status
    
     call MPI_Issend(old(MP,1), 1, HALO_V, n_right, 0, cartcomm, request, ierr)
     call MPI_Irecv(old(0,1), 1, HALO_V, n_left, 0, cartcomm, recv_status, ierr)
