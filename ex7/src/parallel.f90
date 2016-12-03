@@ -98,11 +98,11 @@ contains
     end if
 
     ! Create the derived datatypes
-    call get_neighbours()
-    call create_types()
+    call par_get_neighbours()
+    call par_create_derived()
   end subroutine par_decompose
 
-  subroutine get_neighbours()
+  subroutine par_get_neighbours()
     ! Get neighbours using cart_shift in x and y
     integer :: y_dir, x_dir, disp
     y_dir = 0
@@ -111,9 +111,9 @@ contains
 
     call MPI_CART_SHIFT(cartcomm, y_dir, disp, n_down, n_up, ierr)
     call MPI_CART_SHIFT(cartcomm, x_dir, disp, n_left, n_right, ierr)
-  end subroutine get_neighbours
+  end subroutine par_get_neighbours
 
-  subroutine create_types()
+  subroutine par_create_derived()
 
     ! Create all the derived datatypes used in the program, they are:
     ! Block type, master block type, vertical halo and horitzontal halo
@@ -146,6 +146,9 @@ contains
     allocate(send_counts(size), displacements(size), STAT=allocateStatus)
     if(allocateStatus .ne. 0) call par_abort("*** NOT enough memory ***")
     
+    call MPI_TYPE_COMMIT(FULL_WINDOW, ierr)
+    call MPI_TYPE_COMMIT(INNER_WINDOW,  ierr)
+    
     base = 1
     do i= 1, size
         send_counts(i) = 1
@@ -159,12 +162,10 @@ contains
     call MPI_TYPE_VECTOR(NP, 1 , MP+2, MPI_REALNUMBER, HALO_V, ierr)
     call MPI_TYPE_VECTOR(1 , MP, MP  , MPI_REALNUMBER, HALO_H, ierr)
     
-    ! COMMIT NEW MPI DATATYPES
-    call MPI_TYPE_COMMIT(FULL_WINDOW, ierr)
-    call MPI_TYPE_COMMIT(INNER_WINDOW,  ierr)
     call MPI_TYPE_COMMIT(HALO_V, ierr)
     call MPI_TYPE_COMMIT(HALO_H, ierr)
-  end subroutine create_types
+
+  end subroutine par_create_derived
 
   !  --------------- MPI COMM METHODS -------------------------!
 
@@ -189,23 +190,23 @@ contains
     integer, dimension(MPI_STATUS_SIZE) :: recv_status, send_status
     integer :: request
    
-    call MPI_Issend(old(MP,1), 1, HALO_V, n_right, 0, cartcomm, request, ierr)
-    call MPI_recv(old(0,1), 1, HALO_V, n_left, 0, cartcomm, recv_status, ierr)
-    call MPI_Wait(request, send_status, ierr)
+    call MPI_ISSEND(old(MP,1), 1, HALO_V, n_right, 0, cartcomm, request, ierr)
+    call MPI_RECV(old(0,1), 1, HALO_V, n_left, 0, cartcomm, recv_status, ierr)
+    call MPI_WAIT(request, send_status, ierr)
 
 
-    call MPI_Issend(old(1,1), 1, HALO_V, n_left, 0, cartcomm, request, ierr)
-    call MPI_recv(old(MP+1,1), 1, HALO_V, n_right, 0, cartcomm, recv_status, ierr)
-    call MPI_Wait(request, send_status, ierr)
+    call MPI_ISSEND(old(1,1), 1, HALO_V, n_left, 0, cartcomm, request, ierr)
+    call MPI_RECV(old(MP+1,1), 1, HALO_V, n_right, 0, cartcomm, recv_status, ierr)
+    call MPI_WAIT(request, send_status, ierr)
 
-    call MPI_Issend(old(1,1), 1, HALO_H, n_down, 0, cartcomm, request, ierr)
-    call MPI_recv(old(1,NP+1), 1, HALO_H, n_up , 0, cartcomm, recv_status, ierr)  
-    call MPI_Wait(request, send_status, ierr)
+    call MPI_ISSEND(old(1,1), 1, HALO_H, n_down, 0, cartcomm, request, ierr)
+    call MPI_RECV(old(1,NP+1), 1, HALO_H, n_up , 0, cartcomm, recv_status, ierr)  
+    call MPI_WAIT(request, send_status, ierr)
 
 
-    call MPI_Issend(old(1,NP), 1, HALO_H, n_up, 0, cartcomm, request, ierr)
-    call MPI_recv(old(1,0),1, HALO_H, n_down, 0, cartcomm, recv_status, ierr)
-    call MPI_Wait(request, send_status, ierr)
+    call MPI_ISSEND(old(1,NP), 1, HALO_H, n_up, 0, cartcomm, request, ierr)
+    call MPI_RECV(old(1,0),1, HALO_H, n_down, 0, cartcomm, recv_status, ierr)
+    call MPI_WAIT(request, send_status, ierr)
     
   end subroutine par_swap_halos
 
@@ -222,7 +223,7 @@ contains
 
   end function par_calc_max_diff
 
-  real(kind=REALNUMBER) function par_calc_ave(new, num_pixels)
+    real(kind=REALNUMBER) function par_calc_ave(new, num_pixels)
 
     ! Calculate average the average pixel value by finding the local sum and ALLREDUCE
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
