@@ -21,7 +21,7 @@ program imagempi
   !  --------------- INITIALIZATION  -------------------------! 
   
   ! Get program parameter and load image
-  call getParameters(filename)
+  call get_params(filename)
   call pgmsize(filename, nx, ny)
 
   outfile = 'out.pgm'
@@ -91,13 +91,13 @@ program imagempi
 
 contains
 
-  subroutine getParameters(filename)
+  subroutine get_params(filename)
     character(MAXLEN), intent(out) :: filename
     integer :: num_args
 
     num_args = command_argument_count()
     call get_command_argument(1, filename)
-  end subroutine getParameters
+  end subroutine get_params
 
   subroutine check_allocation(allocation_status)
     integer, intent(in) :: allocation_status
