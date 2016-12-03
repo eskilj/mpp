@@ -11,7 +11,7 @@ SFC=pgf90
 PFC=mpif90
 CFLAGS=-O3
 MPIEXEC=mpirun
-NCF=-module
+INCF=-module
 # -- END CIRRUS -- #
 
 #Preprocessing
