@@ -18,6 +18,12 @@ MODULE serial
   subroutine par_init()
   end subroutine par_init
 
+  subroutine par_abort(message)
+    character(*), intent(in) :: message
+    write(*,*) "Error in process 0 (serial code) :", message
+    stop -1
+  end subroutine par_abort
+
   subroutine par_decompose(nx,ny,npx,npy)
     integer, intent(in) :: nx, ny
     integer, intent(out) :: npx, npy
@@ -66,12 +72,6 @@ MODULE serial
   end subroutine
 
 
-   ! -----------------------------------------------------!
-   ! Set of helper routines which are not related to the  !
-   ! message passing model but they depent on the num of  !
-   ! processors and/or the existence of the MPI library.  !
-   ! -----------------------------------------------------!
- 
   type(timetype) function get_time()
     call system_clock(get_time%value)
     return
@@ -85,20 +85,9 @@ MODULE serial
     return
   end function time_diff
 
-  subroutine par_abort(message)
-    character(*), intent(in) :: message
-    write(*,*) "Error in process 0 (serial code) :", message
-    stop -1
-  end subroutine par_abort
-
-  subroutine print_once(message)
+  subroutine par_print(message)
     character(*), intent(in) :: message
     write(*,*) message
-  end subroutine print_once
-
-  subroutine print_all(message)
-    character(*), intent(in) :: message
-    write(*,*) "Process 0 (serial code): ", message
-  end subroutine print_all
+  end subroutine par_print
 
 END MODULE serial

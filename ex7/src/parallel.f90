@@ -64,7 +64,6 @@ contains
 
     integer, intent(in) :: nx, ny
     integer, intent(out) :: npx, npy
-    integer :: y_dir, x_dir, disp
     character(len=100) :: message
     logical, dimension(N_DIMS) :: periods
     logical :: reorder
@@ -74,19 +73,12 @@ contains
     periods(:) = .false.
     reorder = .true.
 
+    ! Find a well balanced procesor distribution, create the topology and get the rank in cartcomm
     call MPI_DIMS_CREATE(size, N_DIMS, dims, ierr)
     call MPI_CART_CREATE(comm, N_DIMS, (/dims(2), dims(1) /), periods, reorder, cartcomm, ierr)
     call MPI_COMM_RANK(cartcomm, rank, ierr)
 
-    ! Get neighbours using shift in x and y direction
-    y_dir = 0
-    x_dir = 1
-    disp = 1
-
-    call MPI_CART_SHIFT(cartcomm, y_dir, disp, n_down, n_up, ierr)
-    call MPI_CART_SHIFT(cartcomm, x_dir, disp, n_left, n_right, ierr)
-
-    ! Check if decomposition is valid, and calculate new dimentions
+    ! Check if decomposition is valid, and calculate the pixel distribution
     if ((mod(nx, dims(1)) .ne. 0) .or. (mod(ny, dims(2)) .ne. 0)) then
         write(message,*) nx," is not divisible in ",dims(1)," parts"
         call par_abort("Could not decompose domain!"//message)
@@ -107,15 +99,22 @@ contains
     end if
 
     ! Create the derived datatypes
+    call get_neighbours()
     call create_types()
   end subroutine par_decompose
 
-  subroutine create_types()
+  subroutine get_neighbours()
+    ! Get neighbours using cart_shift in x and y
+    integer :: y_dir, x_dir, disp
+    y_dir = 0
+    x_dir = 1
+    disp = 1
 
-    ! X X X X   = = = =
-    ! X X X X   | - - |
-    ! X X X X   | - - |
-    ! X X X X   = = = =
+    call MPI_CART_SHIFT(cartcomm, y_dir, disp, n_down, n_up, ierr)
+    call MPI_CART_SHIFT(cartcomm, x_dir, disp, n_left, n_right, ierr)
+  end subroutine get_neighbours
+
+  subroutine create_types()
 
     ! Create all the derived datatypes used in the program, they are:
     ! Block type, master block type, vertical halo and horitzontal halo
@@ -131,7 +130,7 @@ contains
              MPI_ORDER_FORTRAN, MPI_REALNUMBER, INNER_WINDOW, ierr)
     
     ! Master block type: distribution unit from master to working
-    ! processes, needs a extent resize and the proper send_counts and
+    ! processes, needs an extent resize and the proper send_counts and
     ! displacements in order to be accessed iteratively.
     sizes    = (/ MP*dims(1), NP*dims(2) /)
     subsizes = (/ MP, NP /)
@@ -145,7 +144,7 @@ contains
     call MPI_TYPE_CREATE_RESIZED(LONG_INNER_WINDOW, start, extent, &
              FULL_WINDOW,ierr)
   
-    allocate(send_counts(size), displacements(size), STAT=AllocateStatus)
+    allocate(send_counts(size), displacements(size), STAT=allocateStatus)
     if(allocateStatus .ne. 0) call par_abort("*** NOT enough memory ***")
     
     base = 1
@@ -173,15 +172,13 @@ contains
   subroutine par_scatter(source, dest)
     real(kind=REALNUMBER), dimension(:,:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
-    call MPI_Scatterv(source, send_counts, displacements, FULL_WINDOW, &
-                      dest, MP*NP, MPI_REALNUMBER, 0, cartcomm,ierr)
+    call MPI_Scatterv(source, send_counts, displacements, FULL_WINDOW, dest, MP*NP, MPI_REALNUMBER, 0, cartcomm,ierr)
   end subroutine par_scatter
 
   subroutine par_gather(source, dest)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
-    call MPI_GATHERV(source, 1, INNER_WINDOW, dest, send_counts, displacements, &
-                     FULL_WINDOW, 0, cartcomm, ierr)
+    call MPI_GATHERV(source, 1, INNER_WINDOW, dest, send_counts, displacements, FULL_WINDOW, 0, cartcomm, ierr)
   end subroutine par_gather
 
 
@@ -234,12 +231,7 @@ contains
     par_calc_ave = totalsum / num_pixels
   end function par_calc_ave
 
-
-  ! -----------------------------------------------------!
-  ! Set of helper routines which are not related to the  !
-  ! message passing model but they depent on the num of  !
-  ! processors and/or the MPI library.                   !
-  ! -----------------------------------------------------!
+  !  --------------- ADDITIONAL METHODS -------------------------!
 
   type(timetype) function get_time()
     get_time%value = MPI_WTIME()
