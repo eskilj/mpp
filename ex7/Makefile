@@ -28,13 +28,9 @@ SERIALOBJ=$(patsubst src/%.f90,build_serial/%.o,$(SERIALSRC))
 PARALLELOBJ=$(patsubst src/%.f90,build/%.o,$(PARALLELSRC))
 INC=mod
 
-# COMPILATION RULES
-# by default create mpi version
+# Parallel as default version 
 all: parallel 
 
-# Files which needs preprocessing (C-style preprocessor used)
-# precisiondef must be always compiled to create the correct .mod
-# when changing between serial and parallel
 .PHONY: build/precision.o build_serial/precision.o
 
 build/precision.o: src/precision.f90
@@ -67,16 +63,7 @@ parallel: build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile
 
 
 # OTHER ACTIONS (WITHOUT DEPENDENCIES)
-.PHONY: test mpirun run clean
-
-test:
-		./test/correctness/ctest.sh build/imagempi test/inputs test/morarserial
-
-runmpi:
-		$(MPIEXEC) -n 8 ./build/$(EXECUTABLE) test/inputs/edge768x768.pgm 100 10
-
-runserial:
-		./build_serial/$(EXECUTABLE) test/inputs/edge768x768.pgm 100 10
+.PHONY: clean
 
 clean:
 		rm -rf build/*.o build/*.f90 build_serial/*.f90 build_serial/*.o mod/*.mod build/$(EXECUTABLE) build_serial/$(EXECUTABLE)
