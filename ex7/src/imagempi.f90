@@ -97,7 +97,6 @@ contains
 
   subroutine get_params(filename)
     character(MAXLEN), intent(out) :: filename
-    filename = 'input/edge.pgm' !Set default input file
     call get_command_argument(1, filename)
   end subroutine get_params
 
