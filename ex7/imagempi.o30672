@@ -1,0 +1,859 @@
+ Domain decomposed in:
+  ->  Grid of size:  1 x  1 with each block of3200 x 2400                       
+                                         
+     Iter:    50 ==> Average px v 254.8                                         
+                      
+     Iter:   100 ==> Average px v 254.7                                         
+                      
+     Iter:   150 ==> Average px v 254.6                                         
+                      
+     Iter:   200 ==> Average px v 254.5                                         
+                      
+     Iter:   250 ==> Average px v 254.4                                         
+                      
+     Iter:   300 ==> Average px v 254.4                                         
+                      
+     Iter:   350 ==> Average px v 254.3                                         
+                      
+     Iter:   400 ==> Average px v 254.3                                         
+                      
+     Iter:   450 ==> Average px v 254.2                                         
+                      
+     Iter:   500 ==> Average px v 254.2                                         
+                      
+     Iter:   550 ==> Average px v 254.2                                         
+                      
+     Iter:   600 ==> Average px v 254.1                                         
+                      
+     Iter:   650 ==> Average px v 254.1                                         
+                      
+     Iter:   700 ==> Average px v 254.0                                         
+                      
+     Iter:   750 ==> Average px v 254.0                                         
+                      
+     Iter:   800 ==> Average px v 254.0                                         
+                      
+     Iter:   850 ==> Average px v 253.9                                         
+                      
+     Iter:   900 ==> Average px v 253.9                                         
+                      
+     Iter:   950 ==> Average px v 253.9                                         
+                      
+     Iter:  1000 ==> Average px v 253.9                                         
+                      
+     Iter:  1050 ==> Average px v 253.8                                         
+                      
+     Iter:  1100 ==> Average px v 253.8                                         
+                      
+     Iter:  1150 ==> Average px v 253.8                                         
+                      
+     Iter:  1200 ==> Average px v 253.7                                         
+                      
+     Iter:  1250 ==> Average px v 253.7                                         
+                      
+     Iter:  1300 ==> Average px v 253.7                                         
+                      
+     Iter:  1350 ==> Average px v 253.7                                         
+                      
+     Iter:  1400 ==> Average px v 253.6                                         
+                      
+     Iter:  1450 ==> Average px v 253.6                                         
+                      
+     Iter:  1500 ==> Average px v 253.6                                         
+                      
+     Iter:  1550 ==> Average px v 253.6                                         
+                      
+     Iter:  1600 ==> Average px v 253.6                                         
+                      
+     Iter:  1650 ==> Average px v 253.5                                         
+                      
+     Iter:  1700 ==> Average px v 253.5                                         
+                      
+     Iter:  1750 ==> Average px v 253.5                                         
+                      
+     Iter:  1800 ==> Average px v 253.5                                         
+                      
+     Iter:  1850 ==> Average px v 253.4                                         
+                      
+     Iter:  1900 ==> Average px v 253.4                                         
+                      
+     Iter:  1950 ==> Average px v 253.4                                         
+                      
+     Iter:  2000 ==> Average px v 253.4                                         
+                      
+     Iter:  2050 ==> Average px v 253.4                                         
+                      
+     Iter:  2100 ==> Average px v 253.4                                         
+                      
+     Iter:  2150 ==> Average px v 253.3                                         
+                      
+     Iter:  2200 ==> Average px v 253.3                                         
+                      
+     Iter:  2250 ==> Average px v 253.3                                         
+                      
+     Iter:  2300 ==> Average px v 253.3                                         
+                      
+     Iter:  2350 ==> Average px v 253.3                                         
+                      
+     Iter:  2400 ==> Average px v 253.2                                         
+                      
+     Iter:  2450 ==> Average px v 253.2                                         
+                      
+     Iter:  2500 ==> Average px v 253.2                                         
+                      
+ Finished  2500 iterations. Ex  39.957 seconds                                  
+                      
+ Domain decomposed in:
+  ->  Grid of size:  2 x  1 with each block of1600 x 2400                       
+                                         
+     Iter:    50 ==> Average px v 254.8                                         
+                      
+     Iter:   100 ==> Average px v 254.7                                         
+                      
+     Iter:   150 ==> Average px v 254.6                                         
+                      
+     Iter:   200 ==> Average px v 254.5                                         
+                      
+     Iter:   250 ==> Average px v 254.4                                         
+                      
+     Iter:   300 ==> Average px v 254.4                                         
+                      
+     Iter:   350 ==> Average px v 254.3                                         
+                      
+     Iter:   400 ==> Average px v 254.3                                         
+                      
+     Iter:   450 ==> Average px v 254.2                                         
+                      
+     Iter:   500 ==> Average px v 254.2                                         
+                      
+     Iter:   550 ==> Average px v 254.2                                         
+                      
+     Iter:   600 ==> Average px v 254.1                                         
+                      
+     Iter:   650 ==> Average px v 254.1                                         
+                      
+     Iter:   700 ==> Average px v 254.0                                         
+                      
+     Iter:   750 ==> Average px v 254.0                                         
+                      
+     Iter:   800 ==> Average px v 254.0                                         
+                      
+     Iter:   850 ==> Average px v 253.9                                         
+                      
+     Iter:   900 ==> Average px v 253.9                                         
+                      
+     Iter:   950 ==> Average px v 253.9                                         
+                      
+     Iter:  1000 ==> Average px v 253.9                                         
+                      
+     Iter:  1050 ==> Average px v 253.8                                         
+                      
+     Iter:  1100 ==> Average px v 253.8                                         
+                      
+     Iter:  1150 ==> Average px v 253.8                                         
+                      
+     Iter:  1200 ==> Average px v 253.7                                         
+                      
+     Iter:  1250 ==> Average px v 253.7                                         
+                      
+     Iter:  1300 ==> Average px v 253.7                                         
+                      
+     Iter:  1350 ==> Average px v 253.7                                         
+                      
+     Iter:  1400 ==> Average px v 253.6                                         
+                      
+     Iter:  1450 ==> Average px v 253.6                                         
+                      
+     Iter:  1500 ==> Average px v 253.6                                         
+                      
+     Iter:  1550 ==> Average px v 253.6                                         
+                      
+     Iter:  1600 ==> Average px v 253.6                                         
+                      
+     Iter:  1650 ==> Average px v 253.5                                         
+                      
+     Iter:  1700 ==> Average px v 253.5                                         
+                      
+     Iter:  1750 ==> Average px v 253.5                                         
+                      
+     Iter:  1800 ==> Average px v 253.5                                         
+                      
+     Iter:  1850 ==> Average px v 253.4                                         
+                      
+     Iter:  1900 ==> Average px v 253.4                                         
+                      
+     Iter:  1950 ==> Average px v 253.4                                         
+                      
+     Iter:  2000 ==> Average px v 253.4                                         
+                      
+     Iter:  2050 ==> Average px v 253.4                                         
+                      
+     Iter:  2100 ==> Average px v 253.4                                         
+                      
+     Iter:  2150 ==> Average px v 253.3                                         
+                      
+     Iter:  2200 ==> Average px v 253.3                                         
+                      
+     Iter:  2250 ==> Average px v 253.3                                         
+                      
+     Iter:  2300 ==> Average px v 253.3                                         
+                      
+     Iter:  2350 ==> Average px v 253.3                                         
+                      
+     Iter:  2400 ==> Average px v 253.2                                         
+                      
+     Iter:  2450 ==> Average px v 253.2                                         
+                      
+     Iter:  2500 ==> Average px v 253.2                                         
+                      
+ Finished  2500 iterations. Ex  20.251 seconds                                  
+                      
+ Domain decomposed in:
+  ->  Grid of size:  2 x  2 with each block of1600 x 1200                       
+                                         
+     Iter:    50 ==> Average px v 254.8                                         
+                      
+     Iter:   100 ==> Average px v 254.7                                         
+                      
+     Iter:   150 ==> Average px v 254.6                                         
+                      
+     Iter:   200 ==> Average px v 254.5                                         
+                      
+     Iter:   250 ==> Average px v 254.4                                         
+                      
+     Iter:   300 ==> Average px v 254.4                                         
+                      
+     Iter:   350 ==> Average px v 254.3                                         
+                      
+     Iter:   400 ==> Average px v 254.3                                         
+                      
+     Iter:   450 ==> Average px v 254.2                                         
+                      
+     Iter:   500 ==> Average px v 254.2                                         
+                      
+     Iter:   550 ==> Average px v 254.2                                         
+                      
+     Iter:   600 ==> Average px v 254.1                                         
+                      
+     Iter:   650 ==> Average px v 254.1                                         
+                      
+     Iter:   700 ==> Average px v 254.0                                         
+                      
+     Iter:   750 ==> Average px v 254.0                                         
+                      
+     Iter:   800 ==> Average px v 254.0                                         
+                      
+     Iter:   850 ==> Average px v 253.9                                         
+                      
+     Iter:   900 ==> Average px v 253.9                                         
+                      
+     Iter:   950 ==> Average px v 253.9                                         
+                      
+     Iter:  1000 ==> Average px v 253.9                                         
+                      
+     Iter:  1050 ==> Average px v 253.8                                         
+                      
+     Iter:  1100 ==> Average px v 253.8                                         
+                      
+     Iter:  1150 ==> Average px v 253.8                                         
+                      
+     Iter:  1200 ==> Average px v 253.7                                         
+                      
+     Iter:  1250 ==> Average px v 253.7                                         
+                      
+     Iter:  1300 ==> Average px v 253.7                                         
+                      
+     Iter:  1350 ==> Average px v 253.7                                         
+                      
+     Iter:  1400 ==> Average px v 253.6                                         
+                      
+     Iter:  1450 ==> Average px v 253.6                                         
+                      
+     Iter:  1500 ==> Average px v 253.6                                         
+                      
+     Iter:  1550 ==> Average px v 253.6                                         
+                      
+     Iter:  1600 ==> Average px v 253.6                                         
+                      
+     Iter:  1650 ==> Average px v 253.5                                         
+                      
+     Iter:  1700 ==> Average px v 253.5                                         
+                      
+     Iter:  1750 ==> Average px v 253.5                                         
+                      
+     Iter:  1800 ==> Average px v 253.5                                         
+                      
+     Iter:  1850 ==> Average px v 253.4                                         
+                      
+     Iter:  1900 ==> Average px v 253.4                                         
+                      
+     Iter:  1950 ==> Average px v 253.4                                         
+                      
+     Iter:  2000 ==> Average px v 253.4                                         
+                      
+     Iter:  2050 ==> Average px v 253.4                                         
+                      
+     Iter:  2100 ==> Average px v 253.4                                         
+                      
+     Iter:  2150 ==> Average px v 253.3                                         
+                      
+     Iter:  2200 ==> Average px v 253.3                                         
+                      
+     Iter:  2250 ==> Average px v 253.3                                         
+                      
+     Iter:  2300 ==> Average px v 253.3                                         
+                      
+     Iter:  2350 ==> Average px v 253.3                                         
+                      
+     Iter:  2400 ==> Average px v 253.2                                         
+                      
+     Iter:  2450 ==> Average px v 253.2                                         
+                      
+     Iter:  2500 ==> Average px v 253.2                                         
+                      
+ Finished  2500 iterations. Ex  11.510 seconds                                  
+                      
+ Domain decomposed in:
+  ->  Grid of size:  4 x  2 with each block of 800 x 1200                       
+                                         
+     Iter:    50 ==> Average px v 254.8                                         
+                      
+     Iter:   100 ==> Average px v 254.7                                         
+                      
+     Iter:   150 ==> Average px v 254.6                                         
+                      
+     Iter:   200 ==> Average px v 254.5                                         
+                      
+     Iter:   250 ==> Average px v 254.4                                         
+                      
+     Iter:   300 ==> Average px v 254.4                                         
+                      
+     Iter:   350 ==> Average px v 254.3                                         
+                      
+     Iter:   400 ==> Average px v 254.3                                         
+                      
+     Iter:   450 ==> Average px v 254.2                                         
+                      
+     Iter:   500 ==> Average px v 254.2                                         
+                      
+     Iter:   550 ==> Average px v 254.2                                         
+                      
+     Iter:   600 ==> Average px v 254.1                                         
+                      
+     Iter:   650 ==> Average px v 254.1                                         
+                      
+     Iter:   700 ==> Average px v 254.0                                         
+                      
+     Iter:   750 ==> Average px v 254.0                                         
+                      
+     Iter:   800 ==> Average px v 254.0                                         
+                      
+     Iter:   850 ==> Average px v 253.9                                         
+                      
+     Iter:   900 ==> Average px v 253.9                                         
+                      
+     Iter:   950 ==> Average px v 253.9                                         
+                      
+     Iter:  1000 ==> Average px v 253.9                                         
+                      
+     Iter:  1050 ==> Average px v 253.8                                         
+                      
+     Iter:  1100 ==> Average px v 253.8                                         
+                      
+     Iter:  1150 ==> Average px v 253.8                                         
+                      
+     Iter:  1200 ==> Average px v 253.7                                         
+                      
+     Iter:  1250 ==> Average px v 253.7                                         
+                      
+     Iter:  1300 ==> Average px v 253.7                                         
+                      
+     Iter:  1350 ==> Average px v 253.7                                         
+                      
+     Iter:  1400 ==> Average px v 253.6                                         
+                      
+     Iter:  1450 ==> Average px v 253.6                                         
+                      
+     Iter:  1500 ==> Average px v 253.6                                         
+                      
+     Iter:  1550 ==> Average px v 253.6                                         
+                      
+     Iter:  1600 ==> Average px v 253.6                                         
+                      
+     Iter:  1650 ==> Average px v 253.5                                         
+                      
+     Iter:  1700 ==> Average px v 253.5                                         
+                      
+     Iter:  1750 ==> Average px v 253.5                                         
+                      
+     Iter:  1800 ==> Average px v 253.5                                         
+                      
+     Iter:  1850 ==> Average px v 253.4                                         
+                      
+     Iter:  1900 ==> Average px v 253.4                                         
+                      
+     Iter:  1950 ==> Average px v 253.4                                         
+                      
+     Iter:  2000 ==> Average px v 253.4                                         
+                      
+     Iter:  2050 ==> Average px v 253.4                                         
+                      
+     Iter:  2100 ==> Average px v 253.4                                         
+                      
+     Iter:  2150 ==> Average px v 253.3                                         
+                      
+     Iter:  2200 ==> Average px v 253.3                                         
+                      
+     Iter:  2250 ==> Average px v 253.3                                         
+                      
+     Iter:  2300 ==> Average px v 253.3                                         
+                      
+     Iter:  2350 ==> Average px v 253.3                                         
+                      
+     Iter:  2400 ==> Average px v 253.2                                         
+                      
+     Iter:  2450 ==> Average px v 253.2                                         
+                      
+     Iter:  2500 ==> Average px v 253.2                                         
+                      
+ Finished  2500 iterations. Ex   8.767 seconds                                  
+                      
+ Domain decomposed in:
+  ->  Grid of size:  4 x  4 with each block of 800 x  600                       
+                                         
+     Iter:    50 ==> Average px v 254.8                                         
+                      
+     Iter:   100 ==> Average px v 254.7                                         
+                      
+     Iter:   150 ==> Average px v 254.6                                         
+                      
+     Iter:   200 ==> Average px v 254.5                                         
+                      
+     Iter:   250 ==> Average px v 254.4                                         
+                      
+     Iter:   300 ==> Average px v 254.4                                         
+                      
+     Iter:   350 ==> Average px v 254.3                                         
+                      
+     Iter:   400 ==> Average px v 254.3                                         
+                      
+     Iter:   450 ==> Average px v 254.2                                         
+                      
+     Iter:   500 ==> Average px v 254.2                                         
+                      
+     Iter:   550 ==> Average px v 254.2                                         
+                      
+     Iter:   600 ==> Average px v 254.1                                         
+                      
+     Iter:   650 ==> Average px v 254.1                                         
+                      
+     Iter:   700 ==> Average px v 254.0                                         
+                      
+     Iter:   750 ==> Average px v 254.0                                         
+                      
+     Iter:   800 ==> Average px v 254.0                                         
+                      
+     Iter:   850 ==> Average px v 253.9                                         
+                      
+     Iter:   900 ==> Average px v 253.9                                         
+                      
+     Iter:   950 ==> Average px v 253.9                                         
+                      
+     Iter:  1000 ==> Average px v 253.9                                         
+                      
+     Iter:  1050 ==> Average px v 253.8                                         
+                      
+     Iter:  1100 ==> Average px v 253.8                                         
+                      
+     Iter:  1150 ==> Average px v 253.8                                         
+                      
+     Iter:  1200 ==> Average px v 253.7                                         
+                      
+     Iter:  1250 ==> Average px v 253.7                                         
+                      
+     Iter:  1300 ==> Average px v 253.7                                         
+                      
+     Iter:  1350 ==> Average px v 253.7                                         
+                      
+     Iter:  1400 ==> Average px v 253.6                                         
+                      
+     Iter:  1450 ==> Average px v 253.6                                         
+                      
+     Iter:  1500 ==> Average px v 253.6                                         
+                      
+     Iter:  1550 ==> Average px v 253.6                                         
+                      
+     Iter:  1600 ==> Average px v 253.6                                         
+                      
+     Iter:  1650 ==> Average px v 253.5                                         
+                      
+     Iter:  1700 ==> Average px v 253.5                                         
+                      
+     Iter:  1750 ==> Average px v 253.5                                         
+                      
+     Iter:  1800 ==> Average px v 253.5                                         
+                      
+     Iter:  1850 ==> Average px v 253.4                                         
+                      
+     Iter:  1900 ==> Average px v 253.4                                         
+                      
+     Iter:  1950 ==> Average px v 253.4                                         
+                      
+     Iter:  2000 ==> Average px v 253.4                                         
+                      
+     Iter:  2050 ==> Average px v 253.4                                         
+                      
+     Iter:  2100 ==> Average px v 253.4                                         
+                      
+     Iter:  2150 ==> Average px v 253.3                                         
+                      
+     Iter:  2200 ==> Average px v 253.3                                         
+                      
+     Iter:  2250 ==> Average px v 253.3                                         
+                      
+     Iter:  2300 ==> Average px v 253.3                                         
+                      
+     Iter:  2350 ==> Average px v 253.3                                         
+                      
+     Iter:  2400 ==> Average px v 253.2                                         
+                      
+     Iter:  2450 ==> Average px v 253.2                                         
+                      
+     Iter:  2500 ==> Average px v 253.2                                         
+                      
+ Finished  2500 iterations. Ex   7.941 seconds                                  
+                      
+ Domain decomposed in:
+  ->  Grid of size:  8 x  4 with each block of 400 x  600                       
+                                         
+     Iter:    50 ==> Average px v 254.8                                         
+                      
+     Iter:   100 ==> Average px v 254.7                                         
+                      
+     Iter:   150 ==> Average px v 254.6                                         
+                      
+     Iter:   200 ==> Average px v 254.5                                         
+                      
+     Iter:   250 ==> Average px v 254.4                                         
+                      
+     Iter:   300 ==> Average px v 254.4                                         
+                      
+     Iter:   350 ==> Average px v 254.3                                         
+                      
+     Iter:   400 ==> Average px v 254.3                                         
+                      
+     Iter:   450 ==> Average px v 254.2                                         
+                      
+     Iter:   500 ==> Average px v 254.2                                         
+                      
+     Iter:   550 ==> Average px v 254.2                                         
+                      
+     Iter:   600 ==> Average px v 254.1                                         
+                      
+     Iter:   650 ==> Average px v 254.1                                         
+                      
+     Iter:   700 ==> Average px v 254.0                                         
+                      
+     Iter:   750 ==> Average px v 254.0                                         
+                      
+     Iter:   800 ==> Average px v 254.0                                         
+                      
+     Iter:   850 ==> Average px v 253.9                                         
+                      
+     Iter:   900 ==> Average px v 253.9                                         
+                      
+     Iter:   950 ==> Average px v 253.9                                         
+                      
+     Iter:  1000 ==> Average px v 253.9                                         
+                      
+     Iter:  1050 ==> Average px v 253.8                                         
+                      
+     Iter:  1100 ==> Average px v 253.8                                         
+                      
+     Iter:  1150 ==> Average px v 253.8                                         
+                      
+     Iter:  1200 ==> Average px v 253.7                                         
+                      
+     Iter:  1250 ==> Average px v 253.7                                         
+                      
+     Iter:  1300 ==> Average px v 253.7                                         
+                      
+     Iter:  1350 ==> Average px v 253.7                                         
+                      
+     Iter:  1400 ==> Average px v 253.6                                         
+                      
+     Iter:  1450 ==> Average px v 253.6                                         
+                      
+     Iter:  1500 ==> Average px v 253.6                                         
+                      
+     Iter:  1550 ==> Average px v 253.6                                         
+                      
+     Iter:  1600 ==> Average px v 253.6                                         
+                      
+     Iter:  1650 ==> Average px v 253.5                                         
+                      
+     Iter:  1700 ==> Average px v 253.5                                         
+                      
+     Iter:  1750 ==> Average px v 253.5                                         
+                      
+     Iter:  1800 ==> Average px v 253.5                                         
+                      
+     Iter:  1850 ==> Average px v 253.4                                         
+                      
+     Iter:  1900 ==> Average px v 253.4                                         
+                      
+     Iter:  1950 ==> Average px v 253.4                                         
+                      
+     Iter:  2000 ==> Average px v 253.4                                         
+                      
+     Iter:  2050 ==> Average px v 253.4                                         
+                      
+     Iter:  2100 ==> Average px v 253.4                                         
+                      
+     Iter:  2150 ==> Average px v 253.3                                         
+                      
+     Iter:  2200 ==> Average px v 253.3                                         
+                      
+     Iter:  2250 ==> Average px v 253.3                                         
+                      
+     Iter:  2300 ==> Average px v 253.3                                         
+                      
+     Iter:  2350 ==> Average px v 253.3                                         
+                      
+     Iter:  2400 ==> Average px v 253.2                                         
+                      
+     Iter:  2450 ==> Average px v 253.2                                         
+                      
+     Iter:  2500 ==> Average px v 253.2                                         
+                      
+ Finished  2500 iterations. Ex   1.479 seconds                                  
+                      
+ Domain decomposed in:
+  ->  Grid of size:  2 x  2 with each block of  96 x   64                       
+                                         
+     Iter:    50 ==> Average px v 254.0                                         
+                      
+     Iter:   100 ==> Average px v 253.5                                         
+                      
+     Iter:   150 ==> Average px v 253.1                                         
+                      
+     Iter:   200 ==> Average px v 252.8                                         
+                      
+     Iter:   250 ==> Average px v 252.5                                         
+                      
+     Iter:   300 ==> Average px v 252.2                                         
+                      
+     Iter:   350 ==> Average px v 251.9                                         
+                      
+     Iter:   400 ==> Average px v 251.7                                         
+                      
+     Iter:   450 ==> Average px v 251.5                                         
+                      
+     Iter:   500 ==> Average px v 251.3                                         
+                      
+     Iter:   550 ==> Average px v 251.1                                         
+                      
+     Iter:   600 ==> Average px v 250.9                                         
+                      
+     Iter:   650 ==> Average px v 250.7                                         
+                      
+     Iter:   700 ==> Average px v 250.6                                         
+                      
+     Iter:   750 ==> Average px v 250.4                                         
+                      
+     Iter:   800 ==> Average px v 250.3                                         
+                      
+     Iter:   850 ==> Average px v 250.2                                         
+                      
+     Iter:   900 ==> Average px v 250.0                                         
+                      
+     Iter:   950 ==> Average px v 249.9                                         
+                      
+     Iter:  1000 ==> Average px v 249.8                                         
+                      
+     Iter:  1050 ==> Average px v 249.7                                         
+                      
+     Iter:  1100 ==> Average px v 249.6                                         
+                      
+     Iter:  1150 ==> Average px v 249.5                                         
+                      
+ Finished  1150 iterations. Ex   0.028 seconds                                  
+                      
+ Domain decomposed in:
+  ->  Grid of size:  2 x  2 with each block of 128 x   96                       
+                                         
+     Iter:    50 ==> Average px v 252.1                                         
+                      
+     Iter:   100 ==> Average px v 251.3                                         
+                      
+     Iter:   150 ==> Average px v 250.8                                         
+                      
+     Iter:   200 ==> Average px v 250.5                                         
+                      
+     Iter:   250 ==> Average px v 250.3                                         
+                      
+     Iter:   300 ==> Average px v 250.2                                         
+                      
+     Iter:   350 ==> Average px v 250.1                                         
+                      
+     Iter:   400 ==> Average px v 250.1                                         
+                      
+     Iter:   450 ==> Average px v 250.1                                         
+                      
+     Iter:   500 ==> Average px v 250.1                                         
+                      
+     Iter:   550 ==> Average px v 250.2                                         
+                      
+     Iter:   600 ==> Average px v 250.2                                         
+                      
+ Finished   600 iterations. Ex   0.017 seconds                                  
+                      
+ Domain decomposed in:
+  ->  Grid of size:  2 x  2 with each block of 256 x  192                       
+                                         
+     Iter:    50 ==> Average px v 256.4                                         
+                      
+     Iter:   100 ==> Average px v 257.0                                         
+                      
+     Iter:   150 ==> Average px v 257.5                                         
+                      
+     Iter:   200 ==> Average px v 257.9                                         
+                      
+     Iter:   250 ==> Average px v 258.3                                         
+                      
+     Iter:   300 ==> Average px v 258.6                                         
+                      
+     Iter:   350 ==> Average px v 258.9                                         
+                      
+     Iter:   400 ==> Average px v 259.1                                         
+                      
+     Iter:   450 ==> Average px v 259.4                                         
+                      
+     Iter:   500 ==> Average px v 259.6                                         
+                      
+     Iter:   550 ==> Average px v 259.8                                         
+                      
+     Iter:   600 ==> Average px v 260.0                                         
+                      
+     Iter:   650 ==> Average px v 260.2                                         
+                      
+     Iter:   700 ==> Average px v 260.4                                         
+                      
+     Iter:   750 ==> Average px v 260.5                                         
+                      
+     Iter:   800 ==> Average px v 260.7                                         
+                      
+     Iter:   850 ==> Average px v 260.8                                         
+                      
+     Iter:   900 ==> Average px v 261.0                                         
+                      
+     Iter:   950 ==> Average px v 261.1                                         
+                      
+     Iter:  1000 ==> Average px v 261.3                                         
+                      
+     Iter:  1050 ==> Average px v 261.4                                         
+                      
+     Iter:  1100 ==> Average px v 261.5                                         
+                      
+     Iter:  1150 ==> Average px v 261.7                                         
+                      
+     Iter:  1200 ==> Average px v 261.8                                         
+                      
+     Iter:  1250 ==> Average px v 261.9                                         
+                      
+     Iter:  1300 ==> Average px v 262.0                                         
+                      
+     Iter:  1350 ==> Average px v 262.1                                         
+                      
+     Iter:  1400 ==> Average px v 262.2                                         
+                      
+     Iter:  1450 ==> Average px v 262.3                                         
+                      
+ Finished  1450 iterations. Ex   0.096 seconds                                  
+                      
+ Domain decomposed in:
+  ->  Grid of size:  2 x  2 with each block of 384 x  384                       
+                                         
+     Iter:    50 ==> Average px v 255.4                                         
+                      
+     Iter:   100 ==> Average px v 255.6                                         
+                      
+     Iter:   150 ==> Average px v 255.7                                         
+                      
+     Iter:   200 ==> Average px v 255.8                                         
+                      
+     Iter:   250 ==> Average px v 255.9                                         
+                      
+     Iter:   300 ==> Average px v 256.0                                         
+                      
+     Iter:   350 ==> Average px v 256.1                                         
+                      
+     Iter:   400 ==> Average px v 256.2                                         
+                      
+     Iter:   450 ==> Average px v 256.3                                         
+                      
+     Iter:   500 ==> Average px v 256.3                                         
+                      
+     Iter:   550 ==> Average px v 256.4                                         
+                      
+     Iter:   600 ==> Average px v 256.5                                         
+                      
+     Iter:   650 ==> Average px v 256.5                                         
+                      
+     Iter:   700 ==> Average px v 256.6                                         
+                      
+     Iter:   750 ==> Average px v 256.6                                         
+                      
+     Iter:   800 ==> Average px v 256.7                                         
+                      
+     Iter:   850 ==> Average px v 256.7                                         
+                      
+     Iter:   900 ==> Average px v 256.8                                         
+                      
+     Iter:   950 ==> Average px v 256.8                                         
+                      
+     Iter:  1000 ==> Average px v 256.9                                         
+                      
+     Iter:  1050 ==> Average px v 256.9                                         
+                      
+     Iter:  1100 ==> Average px v 257.0                                         
+                      
+     Iter:  1150 ==> Average px v 257.0                                         
+                      
+     Iter:  1200 ==> Average px v 257.0                                         
+                      
+     Iter:  1250 ==> Average px v 257.1                                         
+                      
+ Finished  1250 iterations. Ex   0.221 seconds                                  
+                      
+ Domain decomposed in:
+  ->  Grid of size:  2 x  2 with each block of 576 x  768                       
+                                         
+     Iter:    50 ==> Average px v 255.4                                         
+                      
+     Iter:   100 ==> Average px v 255.6                                         
+                      
+     Iter:   150 ==> Average px v 255.7                                         
+                      
+     Iter:   200 ==> Average px v 255.9                                         
+                      
+     Iter:   250 ==> Average px v 256.0                                         
+                      
+     Iter:   300 ==> Average px v 256.1                                         
+                      
+     Iter:   350 ==> Average px v 256.2                                         
+                      
+     Iter:   400 ==> Average px v 256.2                                         
+                      
+     Iter:   450 ==> Average px v 256.3                                         
+                      
+     Iter:   500 ==> Average px v 256.4                                         
+                      
+     Iter:   550 ==> Average px v 256.5                                         
+                      
+     Iter:   600 ==> Average px v 256.5                                         
+                      
+     Iter:   650 ==> Average px v 256.6                                         
+                      
+ Finished   650 iterations. Ex   0.318 seconds                                  
+                      
