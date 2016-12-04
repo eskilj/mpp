@@ -20,7 +20,7 @@ program imagempi
   
   !  --------------- INITIALIZATION  -------------------------! 
 
-  write *, "Begin Program Execution"
+  write (*,*) "Begin Program Execution"
   
   ! Get program parameter and load image
   call get_params(filename)
