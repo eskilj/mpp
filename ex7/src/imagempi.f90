@@ -24,7 +24,7 @@ program imagempi
   call get_params(filename)
   call pgmsize(filename, nx, ny)
 
-  outfile = 'output/out'//filename
+  outfile = 'output/out_'//filename
 
   ! Initialize MPI and virtual topologies
   call par_init()

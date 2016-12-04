@@ -7,7 +7,7 @@
 # -- END macOS -#
 
 # -- CIRRUS -- #
-SFC=pgf90
+SFC=gfortran
 PFC=mpif90
 CFLAGS=-O3
 MPIEXEC=mpirun
@@ -25,7 +25,7 @@ SERIALSRC=src/pgmio.f90 src/serial.f90
 PARALLELSRC= src/pgmio.f90 src/parallel.f90
 SERIALOBJ=$(patsubst src/%.f90,binserial/%.o,$(SERIALSRC))
 PARALLELOBJ=$(patsubst src/%.f90,bin/%.o,$(PARALLELSRC))
-INC=include
+INC=mod
 
 # COMPILATION RULES
 # by default create mpi version
@@ -78,4 +78,4 @@ runserial:
 		./binserial/$(EXECUTABLE) test/inputs/edge768x768.pgm 100 10
 
 clean:
-		rm -rf bin/*.o bin/*.f90 binserial/*.f90 binserial/*.o include/*.mod bin/$(EXECUTABLE) binserial/$(EXECUTABLE)
+		rm -rf bin/*.o bin/*.f90 binserial/*.f90 binserial/*.o mod/*.mod bin/$(EXECUTABLE) binserial/$(EXECUTABLE)
