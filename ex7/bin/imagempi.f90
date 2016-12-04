@@ -13,7 +13,7 @@ program imagempi
   implicit none
 
   integer :: i, j, nx, ny, npx, npy, array_status, iter = 0
-  integer, parameter :: MAXLEN = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 100
+  integer, parameter :: MAXLEN = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 50
   character(MAXLEN) :: filename, outfile,  message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: master, edge, old, new
   real(kind=REALNUMBER), parameter :: DIFF_THRESHOLD = 0.1
@@ -23,10 +23,8 @@ program imagempi
   !  --------------- INITIALIZATION  -------------------------! 
   
   ! Get program parameter and load image
-  call get_params(filename)
+  call get_params(filename, outfile)
   call pgmsize(filename, nx, ny)
-
-  outfile = 'output/out_'//filename
 
   ! Initialize MPI and virtual topologies
   call par_init()
@@ -47,7 +45,7 @@ program imagempi
 
   do while ((iter .lt. MAX_ITER) .and. (max_diff .gt. DIFF_THRESHOLD))
     
-    ! Cange the halos between surrounding processors if such exist
+    ! Swap halos
     call par_swap_halos(old)
     
     ! Compute the local new values not dependent to halos
@@ -57,7 +55,7 @@ program imagempi
       end do
     end do
 
-    ! Perform the necessary reductions every PROGRESS_INTERVAL
+    ! Calc average pixel values and max_diff
     iter = iter + 1
     if (mod(iter, PROGRESS_INTERVAL) == 0) then
 
@@ -65,7 +63,7 @@ program imagempi
       average = par_calc_ave(new, nx*ny)
       
       if (par_isroot()) then 
-        write(message,'(A10,I5,A17,F6.1)') "Iter: ", iter, " ==> Average Pixel Value: ", average
+        write(message,'(A10,I5,A17,F6.1)') "Iter: ", iter, " ==> Average px value: ", average
         call par_print(message)
       end if
     end if
@@ -97,12 +95,10 @@ contains
     if (allocation_status .ne. 0) call par_abort("Memory Allocation unsuccessful.")
   end subroutine
 
-  subroutine get_params(filename)
-    character(MAXLEN), intent(out) :: filename
-    integer :: num_args
-
-    num_args = command_argument_count()
+  subroutine get_params(filename, outfile)
+    character(MAXLEN), intent(out) :: filename, outfile
     call get_command_argument(1, filename)
+    call get_command_argument(2, outfile)
   end subroutine get_params
 
 end program imagempi
