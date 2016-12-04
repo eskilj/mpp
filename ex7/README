@@ -1,0 +1,28 @@
+
+ MPP Coursework: Reverse edge-detection algorithm
+ ------------------------------------------------------------------------------
+
+!--- Parallel Program ---!
+
+  1. Compiling
+  $ make
+
+  2. Running
+  $ mpirun -n NUM_PROC ./bin/imagempi IN_FILENAME OUT_FILENAME 
+
+
+
+
+!--- Serial Program ---!
+
+  1. Compiling
+  $ make serial
+
+  2. Running:
+  ./binserial/imagempi IN_FILENAME OUT_FILENAME 
+
+
+ 
+ where:
+   - IN_FILENAME:   Name of input edge file (e.g input/edge.pgm)
+   - OUT_FILENAME:  Name of output file (e.g output/out_edge.pgm)

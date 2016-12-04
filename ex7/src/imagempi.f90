@@ -61,7 +61,7 @@ program imagempi
       average = par_calc_ave(new, nx*ny)
       
       if (par_isroot()) then 
-        write(message,'(A10,I5,A17,F6.1)') "Iter: ", iter, " ==> Average Pixel Value: ", average
+        write(message,'(A10,I5,A17,F6.1)') "Iter: ", iter, " ==> Average px value: ", average
         call par_print(message)
       end if
     end if

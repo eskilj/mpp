@@ -30,11 +30,11 @@ INC=mod
 
 # COMPILATION RULES
 # by default create mpi version
-all: mpiversion 
+all: parallel 
 
 # Files which needs preprocessing (C-style preprocessor used)
 # precisiondef must be always compiled to create the correct .mod
-# when changing between serialversion and mpiversion
+# when changing between serial and parallel
 .PHONY: bin/precision.o binserial/precision.o
 
 bin/precision.o: src/precision.f90
@@ -59,10 +59,10 @@ binserial/%.o: src/%.f90 Makefile
 		$(SFC) $(CFLAGS) $(INCF) $(INC) $< -c -o $@
 
 # create executables
-serialversion: binserial/imagempi.f90 binserial/precision.o $(SERIALOBJ) Makefile
+serial: binserial/imagempi.f90 binserial/precision.o $(SERIALOBJ) Makefile
 		$(SFC) binserial/precision.o $(SERIALOBJ) $< $(CFLAGS) $(INCF) $(INC) -o binserial/$(EXECUTABLE)
 
-mpiversion: bin/imagempi.f90 bin/precision.o $(PARALLELOBJ) Makefile
+parallel: bin/imagempi.f90 bin/precision.o $(PARALLELOBJ) Makefile
 		$(PFC) bin/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o bin/$(EXECUTABLE)
 
 
