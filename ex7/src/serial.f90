@@ -57,7 +57,7 @@ MODULE serial
   
   real(kind=REALNUMBER) function par_calc_ave(new, num_pixels)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
-    real(kind=REALNUMBER), intent(in) :: num_pixels
+    integer, intent(in) :: num_pixels
     real(kind=8) :: pixel_sum
     
     pixel_sum = sum(real(new(1:M,1:N),kind=8))
