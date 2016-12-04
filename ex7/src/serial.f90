@@ -50,19 +50,18 @@ MODULE serial
     old = old   !to avoid unused warnings
   end subroutine par_swap_halos
   
-  real(kind=REALNUMBER) function par_calc_max_diff(new, old, maxchange)
+  real(kind=REALNUMBER) function par_calc_max_diff(new, old)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new, old
-    real(kind=REALNUMBER), intent(in) :: maxchange
     par_calc_max_diff = maxval(abs(new(1:M,1:N)-old(1:M,1:N)))
   end function par_calc_max_diff
   
-  real(kind=REALNUMBER) function par_calc_ave(new, average)
+  real(kind=REALNUMBER) function par_calc_ave(new, num_pixels)
     real(kind=REALNUMBER), dimension(0:,0:), intent(in) :: new
-    real(kind=REALNUMBER), intent(in) :: average
-    real(kind=8) :: accumulate
+    real(kind=REALNUMBER), intent(in) :: num_pixels
+    real(kind=8) :: pixel_sum
     
-    accumulate = sum(real(new(1:M,1:N),kind=8))
-    par_calc_ave = real(accumulate,kind=REALNUMBER) / (M*N)
+    pixel_sum = sum(real(new(1:M,1:N),kind=8))
+    par_calc_ave = real(pixel_sum, kind=REALNUMBER) / (num_pixels)
   end function par_calc_ave
 
   subroutine par_finalize()
