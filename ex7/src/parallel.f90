@@ -5,26 +5,26 @@ MODULE parallel
 
   implicit none
 
-  ! Define time datatye
   type timetype
       real(kind=8) :: value
   end type timetype
   
-  ! Constants
-  integer, parameter :: ROOT = 0
+  ! Global MPI constants
   integer, parameter :: N_DIMS = 2 !Num of dimentions
+  integer, parameter :: ROOT = 0
 
-  ! MPI VARIABLES
+  ! MPI vars
   integer :: comm, size, cartcomm, rank, ierr, errorcode
   integer :: n_left, n_right, n_up, n_down !process neighbours
+
+  ! MPI NEW DATATYPES
+  integer :: FULL_WINDOW, INNER_WINDOW, HALO_V, HALO_H
+  integer, dimension(:), allocatable :: send_counts, displacements
   
   ! Problem parameters
   integer, dimension(N_DIMS) :: dims
   integer :: MP, NP ! Local array sizes
 
-  ! MPI NEW DATATYPES
-  integer :: FULL_WINDOW, INNER_WINDOW, HALO_V, HALO_H
-  integer, dimension(:), allocatable :: send_counts, displacements
 
 contains
 
@@ -38,7 +38,7 @@ contains
   end subroutine par_init
 
   subroutine par_finalize()
-    ! Free the used resources, finalize MPI
+    ! Free resources and finalize MPI
     call MPI_TYPE_FREE(FULL_WINDOW, ierr)
     call MPI_TYPE_FREE(INNER_WINDOW, ierr)
     call MPI_TYPE_FREE(HALO_H, ierr)
@@ -74,7 +74,7 @@ contains
 
     ! Find a well balanced procesor distribution, create the topology and get the rank in cartcomm
     call MPI_DIMS_CREATE(size, N_DIMS, dims, ierr)
-    call MPI_CART_CREATE(comm, N_DIMS, (/dims(1), dims(2) /), periods, reorder, cartcomm, ierr)
+    call MPI_CART_CREATE(comm, N_DIMS, (/dims(2), dims(1) /), periods, reorder, cartcomm, ierr)
     call MPI_COMM_RANK(cartcomm, rank, ierr)
 
     ! Check if decomposition is valid, and calculate the pixel distribution
@@ -115,22 +115,19 @@ contains
 
   subroutine par_create_derived()
 
-    ! Create all the derived datatypes used in the program, they are:
-    ! Block type, master block type, vertical halo and horitzontal halo
+    ! Create all the derived datatypes used in the program
     integer, dimension(N_DIMS) :: sizes, subsizes, starts
     integer(kind=mpi_address_kind) :: start, extent, lb, realextent
     integer :: AllocateStatus, i, base, LONG_INNER_WINDOW
     
-    ! Block type: space in local arrays, inside halos
+    ! INNER_WINDOW: Inside the halos
     sizes    = (/ MP+2, NP+2 /)
     subsizes = (/ MP , NP /)
     starts(:)   = 1
     call MPI_TYPE_CREATE_SUBARRAY(N_DIMS, sizes, subsizes, starts, &
              MPI_ORDER_FORTRAN, MPI_REALNUMBER, INNER_WINDOW, ierr)
     
-    ! Master block type: distribution unit from master to working
-    ! processes, needs an extent resize and the proper send_counts and
-    ! displacements in order to be accessed iteratively.
+    ! FULL_WINDOW - Used for communication between the iterative image processing and the virtual topology
     sizes    = (/ MP*dims(1), NP*dims(2) /)
     subsizes = (/ MP, NP /)
     starts(:)   = 0
@@ -156,9 +153,7 @@ contains
         if(mod(i,dims(1))==0) base = base + NP * dims(1)
     end do
 
-    ! HALO VECTORS (HALO-HALO INTERSECTIONS ARE NOT NEDDED)
-    ! Horitzontal halo data is contiguous, defined to maintain
-    ! code cohesion in all halo swaps.
+    ! Commit Halo vectors to MPI
     call MPI_TYPE_VECTOR(NP, 1 , MP+2, MPI_REALNUMBER, HALO_V, ierr)
     call MPI_TYPE_VECTOR(1 , MP, MP  , MPI_REALNUMBER, HALO_H, ierr)
     
