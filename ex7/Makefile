@@ -7,7 +7,7 @@
 # -- END macOS -#
 
 # -- CIRRUS -- #
-SFC=gfortran
+SFC=pgf90
 PFC=mpif90
 CFLAGS=-O3
 MPIEXEC=mpirun
