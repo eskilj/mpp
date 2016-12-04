@@ -9,7 +9,8 @@
   2. Running
   $ mpirun -n NUM_PROC ./build/imagempi IN_FILENAME OUT_FILENAME 
 
-
+  Run in batch mode:
+  $ qsub imagempi.pbs
 
 
 
