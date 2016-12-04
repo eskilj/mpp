@@ -24,8 +24,8 @@ PREP=-cpp -E -P -o
 EXECUTABLE=imagempi
 SERIALSRC=src/pgmio.f90 src/serial.f90
 PARALLELSRC= src/pgmio.f90 src/parallel.f90
-SERIALOBJ=$(patsubst src/%.f90,binserial/%.o,$(SERIALSRC))
-PARALLELOBJ=$(patsubst src/%.f90,bin/%.o,$(PARALLELSRC))
+SERIALOBJ=$(patsubst src/%.f90,build_serial/%.o,$(SERIALSRC))
+PARALLELOBJ=$(patsubst src/%.f90,build/%.o,$(PARALLELSRC))
 INC=mod
 
 # COMPILATION RULES
@@ -35,48 +35,48 @@ all: parallel
 # Files which needs preprocessing (C-style preprocessor used)
 # precisiondef must be always compiled to create the correct .mod
 # when changing between serial and parallel
-.PHONY: bin/precision.o binserial/precision.o
+.PHONY: build/precision.o build_serial/precision.o
 
-bin/precision.o: src/precision.f90
-		$(CC) $< $(PREP) bin/precision.f90
-		$(PFC) bin/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
+build/precision.o: src/precision.f90
+		$(CC) $< $(PREP) build/precision.f90
+		$(PFC) build/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
 
-bin/imagempi.f90: src/imagempi.f90
+build/imagempi.f90: src/imagempi.f90
 		$(CC) $< $(PREP) $@
 
-binserial/precision.o: src/precision.f90
-		$(CC) $(DEFINESERIAL) $< $(PREP) binserial/precision.f90
-		$(SFC)  binserial/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
+build_serial/precision.o: src/precision.f90
+		$(CC) $(DEFINESERIAL) $< $(PREP) build_serial/precision.f90
+		$(SFC)  build_serial/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
 
-binserial/imagempi.f90: src/imagempi.f90
+build_serial/imagempi.f90: src/imagempi.f90
 		$(CC) $(DEFINESERIAL) $< $(PREP) $@
 
 # compile other objects
-bin/%.o: src/%.f90 Makefile
+build/%.o: src/%.f90 Makefile
 		$(PFC) $(CFLAGS) $(INCF) $(INC) $< -c -o $@
 
-binserial/%.o: src/%.f90 Makefile
+build_serial/%.o: src/%.f90 Makefile
 		$(SFC) $(CFLAGS) $(INCF) $(INC) $< -c -o $@
 
 # create executables
-serial: binserial/imagempi.f90 binserial/precision.o $(SERIALOBJ) Makefile
-		$(SFC) binserial/precision.o $(SERIALOBJ) $< $(CFLAGS) $(INCF) $(INC) -o binserial/$(EXECUTABLE)
+serial: build_serial/imagempi.f90 build_serial/precision.o $(SERIALOBJ) Makefile
+		$(SFC) build_serial/precision.o $(SERIALOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build_serial/$(EXECUTABLE)
 
-parallel: bin/imagempi.f90 bin/precision.o $(PARALLELOBJ) Makefile
-		$(PFC) bin/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o bin/$(EXECUTABLE)
+parallel: build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile
+		$(PFC) build/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build/$(EXECUTABLE)
 
 
 # OTHER ACTIONS (WITHOUT DEPENDENCIES)
 .PHONY: test mpirun run clean
 
 test:
-		./test/correctness/ctest.sh bin/imagempi test/inputs test/morarserial
+		./test/correctness/ctest.sh build/imagempi test/inputs test/morarserial
 
 runmpi:
-		$(MPIEXEC) -n 8 ./bin/$(EXECUTABLE) test/inputs/edge768x768.pgm 100 10
+		$(MPIEXEC) -n 8 ./build/$(EXECUTABLE) test/inputs/edge768x768.pgm 100 10
 
 runserial:
-		./binserial/$(EXECUTABLE) test/inputs/edge768x768.pgm 100 10
+		./build_serial/$(EXECUTABLE) test/inputs/edge768x768.pgm 100 10
 
 clean:
-		rm -rf bin/*.o bin/*.f90 binserial/*.f90 binserial/*.o mod/*.mod bin/$(EXECUTABLE) binserial/$(EXECUTABLE)
+		rm -rf build/*.o build/*.f90 build_serial/*.f90 build_serial/*.o mod/*.mod build/$(EXECUTABLE) build_serial/$(EXECUTABLE)

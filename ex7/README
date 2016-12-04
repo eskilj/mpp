@@ -1,6 +1,5 @@
 
- MPP Coursework: Reverse edge-detection algorithm
- ------------------------------------------------------------------------------
+ 
 
 !--- Parallel Program ---!
 
@@ -8,7 +7,8 @@
   $ make
 
   2. Running
-  $ mpirun -n NUM_PROC ./bin/imagempi IN_FILENAME OUT_FILENAME 
+  $ mpirun -n NUM_PROC ./build/imagempi IN_FILENAME OUT_FILENAME 
+
 
 
 
@@ -19,7 +19,7 @@
   $ make serial
 
   2. Running:
-  ./binserial/imagempi IN_FILENAME OUT_FILENAME 
+  ./build_serial/imagempi IN_FILENAME OUT_FILENAME 
 
 
  
