@@ -39,7 +39,9 @@ all: parallel
 
 .PHONY: build/precision.o build_serial/precision.o
 
-build/precision.o: src/precision.f90
+build/precision.o: 
+		if [ ! -d build ] ; then mkdir build ; fi
+		src/precision.f90
 		$(CC) $< $(PREP) build/precision.f90
 		$(PFC) build/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
 
