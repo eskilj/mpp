@@ -19,8 +19,6 @@ program imagempi
   type(timetype) :: time_start, time_finish
   
   !  --------------- INITIALIZATION  -------------------------! 
-
-  write (*,*) "Begin Program Execution"
   
   ! Get program parameter and load image
   call get_params(filename)
@@ -99,9 +97,7 @@ contains
 
   subroutine get_params(filename)
     character(MAXLEN), intent(out) :: filename
-    integer :: num_args
-
-    num_args = command_argument_count()
+    filename = 'input/edge.pgm' !Set default input file
     call get_command_argument(1, filename)
   end subroutine get_params
 

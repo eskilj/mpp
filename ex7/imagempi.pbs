@@ -17,15 +17,6 @@ module load intel-compilers-16
 
 # Launch the parallel jobs                                                      
 
-mpirun -n  4 ./bin/imagempi edge.pgm
-#mpirun -n  8 ./bin/imagempi edge.pgm
-#mpirun -n 16 ./bin/imagempi edge.pgm
-
-
-#./test/correctness/ctest.sh bin/invertedges test/inputs test/morarserial
-
-#./test/performance/reductions.sh bin/invertedges test/inputs/edge768x768.pgm 8
-
-#./test/performance/image_size.sh bin/invertedges 8 test/inputs/syntheticimages/synthetic
-
-#./test/performance/scalability.sh bin/invertedges test/inputs/edge768x768.pgm
+mpirun -n  4 ./bin/imagempi input/edge.pgm
+mpirun -n  8 ./bin/imagempi input/edge.pgm
+mpirun -n 16 ./bin/imagempi input/edge.pgm
