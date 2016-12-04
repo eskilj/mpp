@@ -28,6 +28,12 @@ SERIALOBJ=$(patsubst src/%.f90,build_serial/%.o,$(SERIALSRC))
 PARALLELOBJ=$(patsubst src/%.f90,build/%.o,$(PARALLELSRC))
 INC=mod
 
+info :
+              @echo "The following are possible:"
+              @echo "  make parallel"
+              @echo "  make serial"
+              @echo "  make clean"
+
 # Parallel as default version 
 all: parallel 
 
