@@ -17,16 +17,17 @@ module load intel-compilers-16
 
 # Launch the parallel jobs                                                      
 # Different number of processes
-mpirun -n  1 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_1.pgm
-mpirun -n  2 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_2.pgm
-mpirun -n  4 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_4.pgm
-mpirun -n  8 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_8.pgm
-mpirun -n 16 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_16.pgm
 mpirun -n 32 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_32.pgm
+# mpirun -n  1 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_1.pgm
+# mpirun -n  2 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_2.pgm
+# mpirun -n  4 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_4.pgm
+# mpirun -n  8 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_8.pgm
+# mpirun -n 16 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_16.pgm
+# mpirun -n 32 ./build/imagempi input/mb_edge.pgm output/out_mb_edge_32.pgm
 
 # Different Sizes
-mpirun -n 4 ./build/imagempi input/edge192x128.pgm output/out_edge192x128_4.pgm
-mpirun -n 4 ./build/imagempi input/edge256x192.pgm output/out_edge256x192_4.pgm
-mpirun -n 4 ./build/imagempi input/edge512x384.pgm output/out_edge512x384_4.pgm
-mpirun -n 4 ./build/imagempi input/edge768x768.pgm output/out_edge768x768_4.pgm
-mpirun -n 4 ./build/imagempi input/edge1152x1536.pgm output/out_edge1152x1536_4.pgm
+# mpirun -n 4 ./build/imagempi input/edge192x128.pgm output/out_edge192x128_4.pgm
+# mpirun -n 4 ./build/imagempi input/edge256x192.pgm output/out_edge256x192_4.pgm
+# mpirun -n 4 ./build/imagempi input/edge512x384.pgm output/out_edge512x384_4.pgm
+# mpirun -n 4 ./build/imagempi input/edge768x768.pgm output/out_edge768x768_4.pgm
+# mpirun -n 4 ./build/imagempi input/edge1152x1536.pgm output/out_edge1152x1536_4.pgm
