@@ -21,11 +21,10 @@ program imagempi
   !  --------------- INITIALIZATION  -------------------------! 
   
   ! Get program parameter and load image
-  write(*,*) "Loading edge file: ", filename
   call get_params(filename)
   call pgmsize(filename, nx, ny)
 
-  outfile = 'out.pgm'
+  outfile = 'output/out'//filename
 
   ! Initialize MPI and virtual topologies
   call par_init()
