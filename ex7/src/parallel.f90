@@ -74,7 +74,7 @@ contains
 
     ! Find a well balanced procesor distribution, create the topology and get the rank in cartcomm
     call MPI_DIMS_CREATE(size, N_DIMS, dims, ierr)
-    call MPI_CART_CREATE(comm, N_DIMS, (/dims(2), dims(1) /), periods, reorder, cartcomm, ierr)
+    call MPI_CART_CREATE(comm, N_DIMS, (/dims(1), dims(2) /), periods, reorder, cartcomm, ierr)
     call MPI_COMM_RANK(cartcomm, rank, ierr)
 
     ! Check if decomposition is valid, and calculate the pixel distribution
