@@ -17,6 +17,6 @@ module load intel-compilers-16
 
 # Launch the parallel jobs                                                      
 
-mpirun -n  4 ./bin/imagempi input/edge.pgm
-mpirun -n  8 ./bin/imagempi input/edge.pgm
-mpirun -n 16 ./bin/imagempi input/edge.pgm
+mpirun -n  4 ./bin/imagempi input/edge.pgm output/out_edge_4.pgm
+mpirun -n  8 ./bin/imagempi input/edge.pgm output/out_edge_8.pgm
+mpirun -n 16 ./bin/imagempi input/edge.pgm output/out_edge_16.pgm

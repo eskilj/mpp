@@ -21,10 +21,8 @@ program imagempi
   !  --------------- INITIALIZATION  -------------------------! 
   
   ! Get program parameter and load image
-  call get_params(filename)
+  call get_params(filename, outfile)
   call pgmsize(filename, nx, ny)
-
-  outfile = 'output/out_'//filename
 
   ! Initialize MPI and virtual topologies
   call par_init()
@@ -95,9 +93,10 @@ contains
     if (allocation_status .ne. 0) call par_abort("Memory Allocation unsuccessful.")
   end subroutine
 
-  subroutine get_params(filename)
-    character(MAXLEN), intent(out) :: filename
+  subroutine get_params(filename, outfile)
+    character(MAXLEN), intent(out) :: filename, outfile
     call get_command_argument(1, filename)
+    call get_command_argument(2, outfile)
   end subroutine get_params
 
 end program imagempi
