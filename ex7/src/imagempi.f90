@@ -11,7 +11,7 @@ program imagempi
   implicit none
 
   integer :: i, j, nx, ny, npx, npy, array_status, iter = 0
-  integer, parameter :: MAXLEN = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 10
+  integer, parameter :: MAXLEN = 100, MAX_ITER = 2500, PROGRESS_INTERVAL = 50
   character(MAXLEN) :: filename, outfile,  message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: master, edge, old, new
   real(kind=REALNUMBER), parameter :: DIFF_THRESHOLD = 0.1
@@ -19,6 +19,8 @@ program imagempi
   type(timetype) :: time_start, time_finish
   
   !  --------------- INITIALIZATION  -------------------------! 
+
+  write *, "Begin Program Execution"
   
   ! Get program parameter and load image
   call get_params(filename)
@@ -45,7 +47,7 @@ program imagempi
 
   do while ((iter .lt. MAX_ITER) .and. (max_diff .gt. DIFF_THRESHOLD))
     
-    ! Cange the halos between surrounding processors if such exist
+    ! Swap halos
     call par_swap_halos(old)
     
     ! Compute the local new values not dependent to halos
@@ -55,7 +57,7 @@ program imagempi
       end do
     end do
 
-    ! Perform the necessary reductions every PROGRESS_INTERVAL
+    ! Calc average pixel values and max_diff
     iter = iter + 1
     if (mod(iter, PROGRESS_INTERVAL) == 0) then
 

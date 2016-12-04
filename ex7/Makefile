@@ -1,10 +1,12 @@
+#SFC: Serial Fortran Compiler
+#PFC: Parallel Fortran Compiler
+
 # --- macOS --- #
 #SFC=gfortran
 #PFC=mpif90
 #CFLAGS=-O3
 #MPIEXEC=mpirun
 #INCF=-J
-# -- END macOS -#
 
 # -- CIRRUS -- #
 SFC=ifort
@@ -12,7 +14,6 @@ PFC=mpif90
 CFLAGS=-O3
 MPIEXEC=mpirun
 INCF=-module
-# -- END CIRRUS -- #
 
 #Preprocessing
 CC=gcc

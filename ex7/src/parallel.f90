@@ -172,7 +172,7 @@ contains
   subroutine par_scatter(source, dest)
     real(kind=REALNUMBER), dimension(:,:), intent(in) :: source
     real(kind=REALNUMBER), dimension(:,:), intent(out) :: dest
-    call MPI_Scatterv(source, send_counts, displacements, FULL_WINDOW, dest, MP*NP, MPI_REALNUMBER, 0, cartcomm, ierr)
+    call MPI_SCATTERV(source, send_counts, displacements, FULL_WINDOW, dest, MP*NP, MPI_REALNUMBER, 0, cartcomm, ierr)
   end subroutine par_scatter
 
   subroutine par_gather(source, dest)
