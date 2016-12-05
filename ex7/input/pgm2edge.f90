@@ -164,7 +164,8 @@ program pgm2edge
   do j = 1,ny
     do i = 1, nx
 
-      edge(i,j) = image(i+1,j) + image(i-1,j) + image(i,j+1) + image(i,j-1) &
+      edge(i,j) = image(i+1,j) + image(i-1,j) + image(i,j+1) +
+image(i,j-1) &
                   - 4.0*image(i,j)
 
     end do
