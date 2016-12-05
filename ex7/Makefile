@@ -70,7 +70,7 @@ serial: build_serial/imagempi.f90 build_serial/precision.o $(SERIALOBJ) Makefile
 
 parallel: 
 	@echo "Creating build directory: "
-	@if test ! -d $(BUILD_DIRS); then mkdir $(BUILD_DIRS); fi
+	@if [ ! -d $(BUILD_DIRS) ]; then mkdir $(BUILD_DIRS); fi
 	build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile $(PFC) build/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build/$(EXECUTABLE)
 
 # OTHER ACTIONS (WITHOUT DEPENDENCIES)
