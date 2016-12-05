@@ -20,10 +20,13 @@ CC=gcc
 DEFINESERIAL= -D SERIAL
 PREP=-cpp -E -P -o
 
+
+VPATH=src
+
 # PROJECT VARIABLES
 EXECUTABLE=imagempi
 SERIALSRC=src/pgmio.f90 src/serial.f90
-PARALLELSRC= src/pgmio.f90 src/parallel.f90
+PARALLELSRC= $(VPATH)/pgmio.f90 src/parallel.f90
 SERIALOBJ=$(patsubst src/%.f90,build_serial/%.o,$(SERIALSRC))
 PARALLELOBJ=$(patsubst src/%.f90,build/%.o,$(PARALLELSRC))
 INC=mod
