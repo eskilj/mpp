@@ -141,7 +141,8 @@ contains
              FULL_WINDOW,ierr)
   
     allocate(send_counts(size), displacements(size), STAT=allocateStatus)
-    if(allocateStatus .ne. 0) call par_abort("*** NOT enough memory ***")
+    if(allocateStatus .ne. 0) call par_abort("Array allocation failed.")
+    
     
     call MPI_TYPE_COMMIT(FULL_WINDOW, ierr)
     call MPI_TYPE_COMMIT(INNER_WINDOW,  ierr)
