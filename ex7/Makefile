@@ -20,7 +20,6 @@ CC=gcc
 DEFINESERIAL= -D SERIAL
 PREP=-cpp -E -P -o
 
-
 VPATH=src
 BUILD_DIRS = build
 
@@ -38,16 +37,13 @@ info :
 	@echo "  make serial"
 	@echo "  make clean"
 
-# Parallel as default version 
-all: parallel 
-
 .PHONY: build/precision.o build_serial/precision.o
 
 build/precision.o: src/precision.f90
 		$(CC) $< $(PREP) build/precision.f90
 		$(PFC) build/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
 
-build/imagempi.f90: src/imagempi.f90
+$(BUILD_DIR)/imagempi.f90: src/imagempi.f90
 		$(CC) $< $(PREP) $@
 
 build_serial/precision.o: src/precision.f90
@@ -57,21 +53,22 @@ build_serial/precision.o: src/precision.f90
 build_serial/imagempi.f90: src/imagempi.f90
 		$(CC) $(DEFINESERIAL) $< $(PREP) $@
 
-# compile other objects
-build/%.o: src/%.f90 Makefile
+# Compile
+$(BUILD_DIR)/%.o: src/%.f90 Makefile
 		$(PFC) $(CFLAGS) $(INCF) $(INC) $< -c -o $@
 
 build_serial/%.o: src/%.f90 Makefile
 		$(SFC) $(CFLAGS) $(INCF) $(INC) $< -c -o $@
 
-# create executables
+# Make the programs
 serial: build_serial/imagempi.f90 build_serial/precision.o $(SERIALOBJ) Makefile
 		$(SFC) build_serial/precision.o $(SERIALOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build_serial/$(EXECUTABLE)
 
 parallel: 
-	@echo "Creating build directory: "
-	@if [ ! -d $(BUILD_DIRS) ]; then mkdir $(BUILD_DIRS); fi
-	build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile $(PFC) build/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build/$(EXECUTABLE)
+	build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile $(PFC) build/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build/$(EXECUTABLE) | $(BUILD_DIR)
+
+$(BUILD_DIR):
+	mkdir $(BUILD_DIR)
 
 # OTHER ACTIONS (WITHOUT DEPENDENCIES)
 .PHONY: clean
