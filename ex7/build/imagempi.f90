@@ -13,10 +13,10 @@ program imagempi
   implicit none
 
   integer :: i, j, nx, ny, npx, npy, array_status, iter = 0
-  integer, parameter :: MAXLEN = 100, MAX_ITER = 5000, PROGRESS_INTERVAL = 100
+  integer, parameter :: MAXLEN = 100, MAX_ITER = 10000, PROGRESS_INTERVAL = 100
   character(MAXLEN) :: filename, outfile,  message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: master, edge, old, new
-  real(kind=REALNUMBER), parameter :: DIFF_THRESHOLD = 0.1
+  real(kind=REALNUMBER), parameter :: DIFF_THRESHOLD = 0000.1
   real(kind=REALNUMBER) :: average, max_diff = 1
   type(timetype) :: time_start, time_finish
   
@@ -43,7 +43,7 @@ program imagempi
 
   time_start = get_time()
 
-  do while ((iter .lt. MAX_ITER) .and. (max_diff .gt. DIFF_THRESHOLD))
+  do while ((iter .lt. MAX_ITER))
     
     ! Swap halos
     call par_swap_halos(old)

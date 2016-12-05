@@ -41,7 +41,7 @@ program imagempi
 
   time_start = get_time()
 
-  do while ((iter .lt. MAX_ITER) .and. (max_diff .gt. DIFF_THRESHOLD))
+  do while ((iter .lt. MAX_ITER))
     
     ! Swap halos
     call par_swap_halos(old)
