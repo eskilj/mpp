@@ -11,7 +11,7 @@ program imagempi
   implicit none
 
   integer :: i, j, nx, ny, npx, npy, array_status, iter = 0
-  integer, parameter :: MAXLEN = 100, MAX_ITER = 1000, PROGRESS_INTERVAL = 100
+  integer, parameter :: MAXLEN = 100, MAX_ITER = 5000, PROGRESS_INTERVAL = 100
   character(MAXLEN) :: filename, outfile,  message
   real(kind=REALNUMBER), dimension(:,:), allocatable :: master, edge, old, new
   real(kind=REALNUMBER), parameter :: DIFF_THRESHOLD = 0.1

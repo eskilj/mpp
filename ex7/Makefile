@@ -15,13 +15,12 @@ CFLAGS=-O3
 MPIEXEC=mpirun
 INCF=-module
 
-#Preprocessing
+VPATH=src
+BUILD_DIR = build
+
 CC=gcc
 DEFINESERIAL= -D SERIAL
 PREP=-cpp -E -P -o
-
-VPATH=src
-BUILD_DIR = build
 
 # PROJECT VARIABLES
 EXECUTABLE=imagempi
@@ -32,7 +31,7 @@ PARALLELOBJ=$(patsubst src/%.f90,build/%.o,$(PARALLELSRC))
 INC=mod
 
 info :
-	@echo "The following are possible:"
+	@echo "The following options are available:"
 	@echo "  make parallel"
 	@echo "  make serial"
 	@echo "  make clean"
@@ -41,7 +40,7 @@ info :
 
 $(BUILD_DIR)/precision.o: src/precision.f90
 		$(CC) $< $(PREP) $(BUILD_DIR)/precision.f90
-		$(PFC) $(BUILD_DIR)/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@ | $(BUILD_DIR)
+		$(PFC) $(BUILD_DIR)/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
 
 $(BUILD_DIR)/imagempi.f90: src/imagempi.f90
 		$(CC) $< $(PREP) $@
@@ -67,10 +66,7 @@ serial: build_serial/imagempi.f90 build_serial/precision.o $(SERIALOBJ) Makefile
 parallel: $(BUILD_DIR)/imagempi.f90 $(BUILD_DIR)/precision.o $(PARALLELOBJ) Makefile
 		$(PFC) $(BUILD_DIR)/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o $(BUILD_DIR)/$(EXECUTABLE)
 
-$(BUILD_DIR):
-	mkdir $(BUILD_DIR)
-
-# OTHER ACTIONS (WITHOUT DEPENDENCIES)
+# make clean: Remove built files
 .PHONY: clean
 
 clean:

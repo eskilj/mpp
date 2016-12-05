@@ -4,15 +4,13 @@
 !--- Parallel Program ---!
 
   1. Compiling
-  $ make
+  $ make parallel
 
   2. Running
   $ mpirun -n NUM_PROC ./build/imagempi IN_FILENAME OUT_FILENAME 
 
   Run in batch mode:
   $ qsub imagempi.pbs
-
-  
 
 
 !--- Serial Program ---!
