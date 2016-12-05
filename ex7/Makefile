@@ -64,8 +64,8 @@ build_serial/%.o: src/%.f90 Makefile
 serial: build_serial/imagempi.f90 build_serial/precision.o $(SERIALOBJ) Makefile
 		$(SFC) build_serial/precision.o $(SERIALOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build_serial/$(EXECUTABLE)
 
-parallel: 
-	build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile $(PFC) build/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build/$(EXECUTABLE)
+parallel: build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile
+		$(PFC) build/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build/$(EXECUTABLE)
 
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
