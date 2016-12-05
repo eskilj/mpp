@@ -21,7 +21,7 @@ DEFINESERIAL= -D SERIAL
 PREP=-cpp -E -P -o
 
 VPATH=src
-BUILD_DIRS = build
+BUILD_DIR = build
 
 # PROJECT VARIABLES
 EXECUTABLE=imagempi
@@ -37,11 +37,11 @@ info :
 	@echo "  make serial"
 	@echo "  make clean"
 
-.PHONY: build/precision.o build_serial/precision.o
+.PHONY: $(BUILD_DIR)/precision.o build_serial/precision.o
 
-build/precision.o: src/precision.f90
-		$(CC) $< $(PREP) build/precision.f90
-		$(PFC) build/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
+$(BUILD_DIR)/precision.o: src/precision.f90
+		$(CC) $< $(PREP) $(BUILD_DIR)/precision.f90
+		$(PFC) $(BUILD_DIR)/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
 
 $(BUILD_DIR)/imagempi.f90: src/imagempi.f90
 		$(CC) $< $(PREP) $@
@@ -64,8 +64,8 @@ build_serial/%.o: src/%.f90 Makefile
 serial: build_serial/imagempi.f90 build_serial/precision.o $(SERIALOBJ) Makefile
 		$(SFC) build_serial/precision.o $(SERIALOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build_serial/$(EXECUTABLE)
 
-parallel: build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile
-		$(PFC) build/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build/$(EXECUTABLE)
+parallel: $(BUILD_DIR)/imagempi.f90 $(BUILD_DIR)/precision.o $(PARALLELOBJ) Makefile
+		$(PFC) $(BUILD_DIR)/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o $(BUILD_DIR)/$(EXECUTABLE)
 
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
@@ -74,4 +74,4 @@ $(BUILD_DIR):
 .PHONY: clean
 
 clean:
-		rm -rf build/*.o build/*.f90 build_serial/*.f90 build_serial/*.o mod/*.mod build/$(EXECUTABLE) build_serial/$(EXECUTABLE)
+		rm -rf $(BUILD_DIR)/*.o $(BUILD_DIR)/*.f90 build_serial/*.f90 build_serial/*.o mod/*.mod build/$(EXECUTABLE) build_serial/$(EXECUTABLE)
