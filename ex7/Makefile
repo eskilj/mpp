@@ -41,11 +41,7 @@ info :
 # Parallel as default version 
 all: parallel 
 
-.PHONY: build/precision.o build_serial/precision.o directory
-
-directory: 
-	@echo "Creating build directory: "
-	@if test ! -d $(BUILD_DIRS); then mkdir $(BUILD_DIRS); fi
+.PHONY: build/precision.o build_serial/precision.o
 
 build/precision.o: src/precision.f90
 		$(CC) $< $(PREP) build/precision.f90
@@ -72,9 +68,10 @@ build_serial/%.o: src/%.f90 Makefile
 serial: build_serial/imagempi.f90 build_serial/precision.o $(SERIALOBJ) Makefile
 		$(SFC) build_serial/precision.o $(SERIALOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build_serial/$(EXECUTABLE)
 
-parallel: directory build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile
-		$(PFC) build/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build/$(EXECUTABLE)
-
+parallel: 
+	@echo "Creating build directory: "
+	@if test ! -d $(BUILD_DIRS); then mkdir $(BUILD_DIRS); fi
+	build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile $(PFC) build/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build/$(EXECUTABLE)
 
 # OTHER ACTIONS (WITHOUT DEPENDENCIES)
 .PHONY: clean
