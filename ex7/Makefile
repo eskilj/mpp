@@ -40,7 +40,9 @@ info :
 # Parallel as default version 
 all: parallel 
 
-.PHONY: build/precision.o build_serial/precision.o
+.PHONY: build/precision.o build_serial/precision.o directory
+
+directory: if [ ! -d build ] ; then mkdir build ; fi
 
 build/precision.o: src/precision.f90
 		$(CC) $< $(PREP) build/precision.f90
@@ -67,8 +69,7 @@ build_serial/%.o: src/%.f90 Makefile
 serial: build_serial/imagempi.f90 build_serial/precision.o $(SERIALOBJ) Makefile
 		$(SFC) build_serial/precision.o $(SERIALOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build_serial/$(EXECUTABLE)
 
-parallel: if [ ! -d build ] ; then mkdir build ; fi
-		build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile
+parallel: build/imagempi.f90 build/precision.o $(PARALLELOBJ) Makefile
 		$(PFC) build/precision.o $(PARALLELOBJ) $< $(CFLAGS) $(INCF) $(INC) -o build/$(EXECUTABLE)
 
 
