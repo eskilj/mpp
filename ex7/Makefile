@@ -41,10 +41,10 @@ info :
 
 $(BUILD_DIR)/precision.o: src/precision.f90
 		$(CC) $< $(PREP) $(BUILD_DIR)/precision.f90
-		$(PFC) $(BUILD_DIR)/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@
+		$(PFC) $(BUILD_DIR)/precision.f90 $(CFLAGS) $(INCF) $(INC) -c -o $@ | $(BUILD_DIR)
 
 $(BUILD_DIR)/imagempi.f90: src/imagempi.f90
-		$(CC) $< $(PREP) $@ | $(BUILD_DIR)
+		$(CC) $< $(PREP) $@
 
 build_serial/precision.o: src/precision.f90
 		$(CC) $(DEFINESERIAL) $< $(PREP) build_serial/precision.f90
