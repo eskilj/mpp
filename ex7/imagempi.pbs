@@ -5,7 +5,8 @@
 #PBS -l place=excl                                                              
 #PBS -l select=288                                                              
 #PBS -l walltime=00:05:00                                                       
-#PBS -o output/batch/
+#PBS -o output/batch/<jobname>.o<job ID>
+#PBS -e output/batch/
 # Change to the directory that the job was submitted from                       
 
 cd $PBS_O_WORKDIR
