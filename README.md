@@ -1,29 +1,16 @@
-# README #
+# Message-Passing Programming #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This repository contains the coded attempts at the MPP course practicals, as well as the coursework. The course is a component of the [High Performance Computing](http://www.ed.ac.uk/studying/postgraduate/degrees/index.php?r=site/view&id=187) MSC programme at [The University of Edinburgh](http://www.ed.ac.uk/).
 
-### What is this repository for? ###
+Course Practicals:
+---
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+2. Parallel Calculation of Pi
+3. Ping Pong
+4. Rotating information around a ring
+5. Collective communications
+6. Rotating information using a Cartesian topology
+7. Derived Datatypes
+8. Global Summation Using a Hypercube Algorithm
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+**Coursework**: Reverse edge-detection 

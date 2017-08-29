@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0ca4702e-01b7-4ea0-9dcf-59020d96cc06" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Exercises.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/mpp.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/5. Collective/Makefile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/5. Collective/collcomms.f90" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/5. Collective/scriptfile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/6. Cartesian Topology/Makefile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/6. Cartesian Topology/Makefile-scan" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/6. Cartesian Topology/rotate.f90" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/6. Cartesian Topology/scan.f90" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/6. Cartesian Topology/scriptfile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/6. Cartesian Topology/scriptfile-scan" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/_CW/imagempi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/_CW/imagempi.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/_CW/pgmio.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/case/imagempi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/case/imagempi.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/case/pgmio.mod" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/case/pgmio.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/#pi.pbs#" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/pi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/pi.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex2/sums.mod" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping.pbs.o2069" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping.pbs.o2070" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping.pbs.o2071" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping.pbs.o2072" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping.pbs.o2073" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping.pbs.o2074" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping.pbs.o2075" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping.pbs.o2076" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping.pbs.o2077" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex3/ping.pbs.o2078" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/build/imagempi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/build/imagempi.f90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/build/parallel.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/build/pgmio.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/build/precision.f90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/build/precision.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/input/edge.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/input/edge1152x1536.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/input/image5120x3200.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/input/ipgmio.mod" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/input/mb_edge.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/mod/parallel.mod" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/mod/pgmio.mod" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/mod/precision.mod" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/output/batch/image.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/output/out_mb_edge_1.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/output/out_mb_edge_12.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/output/out_mb_edge_16.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/output/out_mb_edge_2.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/output/out_mb_edge_32.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/output/out_mb_edge_33.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/output/out_mb_edge_4.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/output/out_mb_edge_64.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ex7/output/out_mb_edge_8.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/.idea/mpp.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/.idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/bin/iempi.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/bin/invertedges.f90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/bin/pgmio.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/bin/precisiondef.f90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/bin/precisiondef.o" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/binserial/invertedges.f90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/include/iempi.mod" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/include/pgmio.mod" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/include/precisiondef.mod" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/report/main.out" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/src/edge.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1600x1600.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1700x1700.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1800x1800.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1900x1900.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic2000x2000.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic2100x2100.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic2200x2200.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic2400x2400.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic2500x2500.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic2800x2800.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/Makefile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/README" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/bin/invertedges.f90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/bin/precisiondef.f90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/mpibatch.sge" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/complete.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/completemodif.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/datatypes.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/detailhiden.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/detailnothiden.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/main.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/main.out" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/main.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/main.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/main.toc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/imagesize.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/imagesize.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/pefficiency.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/plot_hiding.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/plot_imagesize.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/plot_pefficiency.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/plot_reductions.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/plot_scalability.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/reductions.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/reductions.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/scalability.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/scalability.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/scalability_hiding.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/report/plots/scalability_nohiding.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/src/edge.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/src/iempi.f90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/src/ieserial.f90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/src/invertedges.F90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/src/pgmio.f90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/src/precisiondef.F90" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/correctness/ctest.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/edge192x128.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/edge256x192.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/edge4x4.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/edge512x384.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/edge768x1152.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/edge768x768.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic100.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1000x1000.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic100x100.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1100.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1100x1100.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1200x1200.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1300.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1300x1300.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1400x1400.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1500.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1500x1500.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1600x1600.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1700.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1700x1700.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1800x1800.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1900.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic1900x1900.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic2000x2000.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic200x200.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic2100.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic2100x2100.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic2200x2200.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic2300.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic2300x2300.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic2400x2400.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic2500x2500.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic2800x2800.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic300.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic300x300.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic400x400.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic500.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic500x500.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic600x600.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic700.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic700x700.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic768x768.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic800x800.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic900.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/inputs/syntheticimages/synthetic900x900.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/laptopserial/edge192x128.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/laptopserial/edge192x128.pgm.averages" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/laptopserial/edge768x768.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/laptopserial/edge768x768.pgm.averages" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/morarserial/edge192x128.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/morarserial/edge192x128.pgm.averages" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/morarserial/edge768x768.pgm" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/morarserial/edge768x768.pgm.averages" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/performance/generatepgm.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/performance/image_size.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/performance/reductions.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/rev/test/performance/scalability.sh" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/case/Makefile" afterPath="$PROJECT_DIR$/00. Case Study/Makefile" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/case/edge192x128.pgm" afterPath="$PROJECT_DIR$/00. Case Study/edge192x128.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/case/image192x128.pgm" afterPath="$PROJECT_DIR$/00. Case Study/image192x128.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/case/imagempi.f90" afterPath="$PROJECT_DIR$/00. Case Study/imagempi.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/case/pgmio.f90" afterPath="$PROJECT_DIR$/00. Case Study/pgmio.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex2/Makefile_f90" afterPath="$PROJECT_DIR$/2. Pi/Makefile" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex2/README" afterPath="$PROJECT_DIR$/2. Pi/README" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex2/pi.f90" afterPath="$PROJECT_DIR$/2. Pi/pi.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex2/pi.pbs" afterPath="$PROJECT_DIR$/2. Pi/pi.pbs" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex3/Makefile" afterPath="$PROJECT_DIR$/3. Ping Pong/Makefile" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex3/ping.f90" afterPath="$PROJECT_DIR$/3. Ping Pong/ping.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex3/ping.pbs" afterPath="$PROJECT_DIR$/3. Ping Pong/ping.pbs" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex4/Makefile" afterPath="$PROJECT_DIR$/4. Ring/Makefile" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex4/ring.f90" afterPath="$PROJECT_DIR$/4. Ring/ring.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex4/ring.pbs" afterPath="$PROJECT_DIR$/4. Ring/ring.pbs" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/Makefile" afterPath="$PROJECT_DIR$/7. Derived Types/Makefile" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/README" afterPath="$PROJECT_DIR$/7. Derived Types/README" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/compare.py" afterPath="$PROJECT_DIR$/7. Derived Types/compare.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/imagempi.pbs" afterPath="$PROJECT_DIR$/7. Derived Types/imagempi.pbs" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/input/edge192x128.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/input/edge192x128.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/input/edge256x192.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/input/edge256x192.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/input/edge512x384.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/input/edge512x384.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/input/edge768x768.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/input/edge768x768.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/input/pgm2edge.f90" afterPath="$PROJECT_DIR$/7. Derived Types/input/pgm2edge.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32325.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32325.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32326.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32326.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32327.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32327.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32327.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32327.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32328.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32328.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32328.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32328.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32329.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32329.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32329.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32329.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32330.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32330.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32330.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32330.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32331.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32331.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32331.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32331.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32332.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32332.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32332.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32332.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32333.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32333.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32333.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32333.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32334.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32334.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32334.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32334.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32335.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32335.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32335.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32335.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32336.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32336.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32336.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32336.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32337.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32337.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32337.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32337.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32338.indy2-login0.ER" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32338.indy2-login0.ER" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/32338.indy2-login0.OU" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/32338.indy2-login0.OU" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/batch/imagempi.pbs" afterPath="$PROJECT_DIR$/7. Derived Types/output/batch/imagempi.pbs" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/out_edge1152x1536_1.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/out_edge1152x1536_1.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/out_edge1152x1536_12.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/out_edge1152x1536_12.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/out_edge1152x1536_16.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/out_edge1152x1536_16.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/out_edge1152x1536_2.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/out_edge1152x1536_2.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/out_edge1152x1536_32.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/out_edge1152x1536_32.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/out_edge1152x1536_4.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/out_edge1152x1536_4.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/out_edge1152x1536_64.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/out_edge1152x1536_64.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/out_edge1152x1536_8.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/out_edge1152x1536_8.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/out_edge192x128_4.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/out_edge192x128_4.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/ser_out_edge192x128.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/ser_out_edge192x128.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/ser_out_edge192x128_4.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/ser_out_edge192x128_4.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/output/ser_out_mb_edge.pgm" afterPath="$PROJECT_DIR$/7. Derived Types/output/ser_out_mb_edge.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/src/imagempi.f90" afterPath="$PROJECT_DIR$/7. Derived Types/src/imagempi.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/src/parallel.f90" afterPath="$PROJECT_DIR$/7. Derived Types/src/parallel.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/src/pgmio.f90" afterPath="$PROJECT_DIR$/00. Coursework/src/pgmio.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/src/precision.f90" afterPath="$PROJECT_DIR$/7. Derived Types/src/precision.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ex7/src/serial.f90" afterPath="$PROJECT_DIR$/7. Derived Types/src/serial.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/Makefile" afterPath="$PROJECT_DIR$/00. Coursework/Makefile" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/README" afterPath="$PROJECT_DIR$/00. Coursework/README.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/bin/invertedges" afterPath="$PROJECT_DIR$/00. Coursework/bin/invertedges" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/edge" afterPath="$PROJECT_DIR$/00. Coursework/edge" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/edge.pgm" afterPath="$PROJECT_DIR$/00. Coursework/edge.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/mpibatch.sge" afterPath="$PROJECT_DIR$/00. Coursework/mpibatch.sge" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/out.pgm" afterPath="$PROJECT_DIR$/00. Coursework/out.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/output.pgm" afterPath="$PROJECT_DIR$/00. Coursework/output.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/complete.png" afterPath="$PROJECT_DIR$/00. Coursework/report/complete.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/completemodif.png" afterPath="$PROJECT_DIR$/00. Coursework/report/completemodif.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/datatypes.png" afterPath="$PROJECT_DIR$/00. Coursework/report/datatypes.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/detailhiden.png" afterPath="$PROJECT_DIR$/00. Coursework/report/detailhiden.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/detailnothiden.png" afterPath="$PROJECT_DIR$/00. Coursework/report/detailnothiden.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/main.aux" afterPath="$PROJECT_DIR$/00. Coursework/report/main.aux" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/main.pdf" afterPath="$PROJECT_DIR$/00. Coursework/report/main.pdf" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/main.tex" afterPath="$PROJECT_DIR$/00. Coursework/report/main.tex" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/main.toc" afterPath="$PROJECT_DIR$/00. Coursework/report/main.toc" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/imagesize.dat" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/imagesize.dat" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/imagesize.png" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/imagesize.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/pefficiency.png" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/pefficiency.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/plot_hiding.sh" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/plot_hiding.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/plot_imagesize.sh" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/plot_imagesize.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/plot_pefficiency.sh" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/plot_pefficiency.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/plot_reductions.sh" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/plot_reductions.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/plot_scalability.sh" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/plot_scalability.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/reductions.dat" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/reductions.dat" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/reductions.png" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/reductions.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/scalability.dat" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/scalability.dat" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/scalability.png" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/scalability.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/scalability_hiding.dat" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/scalability_hiding.dat" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/report/plots/scalability_nohiding.dat" afterPath="$PROJECT_DIR$/00. Coursework/report/plots/scalability_nohiding.dat" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/src/Makefile" afterPath="$PROJECT_DIR$/00. Coursework/src/Makefile" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/src/iempi.f90" afterPath="$PROJECT_DIR$/00. Coursework/src/iempi.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/src/ieserial.f90" afterPath="$PROJECT_DIR$/00. Coursework/src/ieserial.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/src/invertedges.F90" afterPath="$PROJECT_DIR$/00. Coursework/src/invertedges.F90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/src/pgmio.f90" afterPath="$PROJECT_DIR$/7. Derived Types/src/pgmio.f90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/src/precisiondef.F90" afterPath="$PROJECT_DIR$/00. Coursework/src/precisiondef.F90" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/correctness/ctest.sh" afterPath="$PROJECT_DIR$/00. Coursework/test/correctness/ctest.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/edge192x128.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/edge192x128.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/edge256x192.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/edge256x192.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/edge4x4.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/edge4x4.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/edge512x384.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/edge512x384.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/edge768x1152.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/edge768x1152.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/edge768x768.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/edge768x768.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic100.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic100.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1000x1000.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic1000x1000.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic100x100.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic100x100.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1100.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic1100.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1100x1100.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic1100x1100.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1200x1200.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic1200x1200.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1300.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic1300.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1300x1300.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic1300x1300.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1400x1400.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic1400x1400.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1500.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic1500.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1500x1500.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic1500x1500.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1700.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic1700.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic1900.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic1900.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic200x200.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic200x200.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic2100.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic2100.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic2300.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic2300.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic2300x2300.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic2300x2300.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic300.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic300.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic300x300.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic300x300.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic400x400.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic400x400.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic500.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic500.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic500x500.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic500x500.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic600x600.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic600x600.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic700.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic700.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic700x700.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic700x700.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic768x768.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic768x768.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic800x800.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic800x800.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic900.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic900.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/inputs/syntheticimages/synthetic900x900.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/inputs/syntheticimages/synthetic900x900.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/laptopserial/edge192x128.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/laptopserial/edge192x128.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/laptopserial/edge192x128.pgm.averages" afterPath="$PROJECT_DIR$/00. Coursework/test/laptopserial/edge192x128.pgm.averages" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/laptopserial/edge768x768.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/laptopserial/edge768x768.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/laptopserial/edge768x768.pgm.averages" afterPath="$PROJECT_DIR$/00. Coursework/test/laptopserial/edge768x768.pgm.averages" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/morarserial/edge192x128.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/morarserial/edge192x128.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/morarserial/edge192x128.pgm.averages" afterPath="$PROJECT_DIR$/00. Coursework/test/morarserial/edge192x128.pgm.averages" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/morarserial/edge768x768.pgm" afterPath="$PROJECT_DIR$/00. Coursework/test/morarserial/edge768x768.pgm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/morarserial/edge768x768.pgm.averages" afterPath="$PROJECT_DIR$/00. Coursework/test/morarserial/edge768x768.pgm.averages" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/performance/generatepgm.py" afterPath="$PROJECT_DIR$/00. Coursework/test/performance/generatepgm.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/performance/image_size.sh" afterPath="$PROJECT_DIR$/00. Coursework/test/performance/image_size.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/performance/reductions.sh" afterPath="$PROJECT_DIR$/00. Coursework/test/performance/reductions.sh" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mpp/test/performance/scalability.sh" afterPath="$PROJECT_DIR$/00. Coursework/test/performance/scalability.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+    </list>
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileColors">
+    <fileColor scope="Non-Project Files (Material Default)" color="2E3C43" />
+    <fileColor scope="Non-Project Files (Material Darker)" color="323232" />
+    <fileColor scope="Non-Project Files (Material Lighter)" color="eae8e8" />
+    <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="390">
+                <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="86" column="9" lean-forward="true" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/ex2/Makefile" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="-1920" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mpp" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="mpp" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Build All">
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+      <envs />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0ca4702e-01b7-4ea0-9dcf-59020d96cc06" name="Default" comment="" />
+      <created>1504033528264</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1504033528264</updated>
+      <workItem from="1504033531391" duration="1901000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1901000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1920" y="0" width="1920" height="1080" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2342918" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3148335" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rev/README">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="6" column="34" lean-forward="true" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_CW/pgmio.f90">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/00. Case Study/imagempi.f90">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/00. Case Study/pgmio.mod">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/00. Case Study/pgmio.f90">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3. Ping Pong/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2. Pi/pi.f90">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2158">
+          <caret line="83" column="22" lean-forward="false" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2. Pi/README">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/6. Cartesian Topology/scriptfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/6. Cartesian Topology/scan.f90">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/6. Cartesian Topology/rotate.f90">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2. Pi/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_CW/imagempi.f90">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/00. Coursework/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="208">
+            <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="19" column="21" lean-forward="false" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="390">
+            <caret line="15" column="4" lean-forward="false" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="86" column="9" lean-forward="true" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
